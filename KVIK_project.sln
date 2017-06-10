@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KVIK_project", "KVIK_projec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfService\WcfService.csproj", "{6ED401AB-6C55-4DCB-A5DE-3C8E8FDEF13B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KvikLibrary", "KvikLibrary\KvikLibrary.csproj", "{CEAEB8F0-BD56-4D39-8F5A-F72343208199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostConsole", "HostConsole\HostConsole.csproj", "{3DC4F6A9-8369-4812-A0A4-78768F28BF3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6ED401AB-6C55-4DCB-A5DE-3C8E8FDEF13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ED401AB-6C55-4DCB-A5DE-3C8E8FDEF13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ED401AB-6C55-4DCB-A5DE-3C8E8FDEF13B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAEB8F0-BD56-4D39-8F5A-F72343208199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAEB8F0-BD56-4D39-8F5A-F72343208199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAEB8F0-BD56-4D39-8F5A-F72343208199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEAEB8F0-BD56-4D39-8F5A-F72343208199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC4F6A9-8369-4812-A0A4-78768F28BF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC4F6A9-8369-4812-A0A4-78768F28BF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC4F6A9-8369-4812-A0A4-78768F28BF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC4F6A9-8369-4812-A0A4-78768F28BF3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

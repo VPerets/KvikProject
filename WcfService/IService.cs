@@ -12,6 +12,7 @@ namespace WcfService
     public interface IService
     {
         [OperationContract]
-        void addGoodsToDB(string name, string code, string fig, double buy, double sold);
+        void addGoodsToDB(string name, string code, string fig, double buy);
+
     }
 }
