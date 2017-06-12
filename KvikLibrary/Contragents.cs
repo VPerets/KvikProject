@@ -14,6 +14,10 @@ namespace KvikLibrary
         public int ID { get; set; }
         [Column]
         public string Name { get; set; }
+        public override string ToString()
+        {
+            return string.Format($"{Name}");
+        }
     }
 }
 

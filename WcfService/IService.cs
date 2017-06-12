@@ -24,7 +24,12 @@ namespace WcfService
         void addQuantityLeftInGoods(int q, string number, int idGood);
         [OperationContract]
         int addQuantityLeftInGoods1(int q, string number, int idGood);
-       
+        [OperationContract]
+        bool AddContract(string num, int idContr, DateTime dt);
+        [OperationContract]
+        bool AddContragent(string name);
+        [OperationContract]
+        List<Contragents> GetAllContragents();
     }
 
     [DataContract]

@@ -113,6 +113,12 @@ namespace WcfService
                    select c).ToList();
         }
 
+        public List<Contragents> GetAllContragents()
+        {
+            return (from co in datacontext.GetTable<Contragents>()
+                   select co).ToList();
+        }
+
         public List<Contragents> GetContragents()
         {
             return (from c in datacontext.GetTable<Contracts>()
@@ -120,6 +126,33 @@ namespace WcfService
                     where c.Contragent == co.ID
                     select co).Distinct().ToList();
 
+        }
+
+        public bool AddContract(string num, int idContr, DateTime dt)
+        {
+            var contract = from c in datacontext.GetTable<Contracts>()
+                           where c.Number == num
+                           select c;
+            if (contract.Count() > 0) return false;
+
+            var newConract = new Contracts { Contragent = idContr, Data = dt.Date, Number = num };
+            datacontext.GetTable<Contracts>().InsertOnSubmit(newConract);
+            datacontext.SubmitChanges();
+            return true;
+        }
+
+        public bool AddContragent(string name)
+        {
+            var contrag = from c in datacontext.GetTable<Contragents>()
+                          where c.Name == name
+                          select c;
+            if (contrag.Count() > 0) return false;
+
+            var newContrag = new Contragents { Name = name };
+            datacontext.GetTable<Contragents>().InsertOnSubmit(newContrag);
+            datacontext.SubmitChanges(); 
+
+            return true;
         }
     }
 }

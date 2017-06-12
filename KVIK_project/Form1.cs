@@ -19,9 +19,10 @@ namespace KVIK_project
         private int rowNeed = 0;
         private IService service = null;
         private List<Contragents> contragents = new List<Contragents>();
+        private Contragents SelectedContr;
         private List<Contracts> contracts = new List<Contracts>();
-
-
+        private List<Contragents> contragentsTemp = new List<Contragents>();
+        public List<Contragents> AllContragents = new List<Contragents>();
         public Form1()
         {
             InitializeComponent();
@@ -37,20 +38,54 @@ namespace KVIK_project
             }
         }
 
-        private void FillDataGrid()
+        private void FillComboContragents()
+        {         
+            if (this.comboBox1.Items.Count != 0) this.comboBox1.Items.Clear();
+            this.comboBox1.Items.Add("Все");
+            this.comboBox1.Items.AddRange(this.contragents.ToArray());
+            this.comboBox1.SelectedIndex = 0;
+        }
+
+        private void UpdateForFill()
+        {          
+            if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
+            if (this.contragentsTemp.Count != 0) this.contragentsTemp.Clear();
+        }
+
+        private void UpdateAllAll()
         {
+            if (dataGridView1.Rows.Count!=0) this.dataGridView1.Rows.Clear();
             this.contragents = service.GetContragents();
+            this.AllContragents = service.GetAllContragents();
+            FillComboContragents();
+            if (this.comboBoxContragents.Items.Count != 0) this.comboBoxContragents.Items.Clear();
+            this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
+        }
+
+        private void FillDataGrid(int temp = 0)
+        {
+            if (temp != 1)
+            {
+                UpdateForFill();
+                this.contragentsTemp.AddRange(this.contragents.ToArray());
+            }
+            else
+            {
+                UpdateForFill();
+                this.contragentsTemp.Add(SelectedContr);
+            }
+
             int rowsCount = 0;
-            for (int i = 0; i < contragents.Count; i++)
+            for (int i = 0; i < contragentsTemp.Count; i++)
             {
                 this.dataGridView1.Rows.Add(new DataGridViewRow());
-                this.dataGridView1.Rows[rowsCount].Cells[0].Value = contragents[i].Name;
+                this.dataGridView1.Rows[rowsCount].Cells[0].Value = contragentsTemp[i].Name;
                 for (int c = 0; c < this.dataGridView1.Rows[0].Cells.Count; c++)
                 {
                     this.dataGridView1.Rows[rowsCount].Cells[c].Style.BackColor = Color.Blue;
                 }
                 rowsCount++;
-                contracts = service.GetContractsByContragent(contragents[i].ID);
+                contracts = service.GetContractsByContragent(contragentsTemp[i].ID);
                 for (int j = 0; j < contracts.Count; j++)
                 {
                     this.dataGridView1.Rows.Add(new DataGridViewRow());
@@ -88,17 +123,15 @@ namespace KVIK_project
             var myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
+            this.UpdateAllAll();
             FillDataGrid();
         }
 
         private void btnAddGood_Click(object sender, EventArgs e)
         {
-            AddGood addGoodForm = new AddGood();
-            DialogResult dr = addGoodForm.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-
-            }
+            AddGood addGoodForm = new AddGood(this.service);
+             addGoodForm.Show();
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -114,9 +147,40 @@ namespace KVIK_project
                     Int32.Parse(row.Cells[2].Tag.ToString()));
            
             row.Cells[4].Value = Int32.Parse(row.Cells[4].Value.ToString()) - quant;
-          
-
             row.Cells[5].Value = null;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBox1.SelectedIndex == 0)
+            {
+                FillDataGrid();
+                return;
+            }
+                ComboBox comb = sender as ComboBox;
+             SelectedContr = comb.SelectedItem as Contragents;
+            this.FillDataGrid(1);           
+        }
+
+        private void buttonAddContract_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAddContragent_Click(object sender, EventArgs e)
+        {
+            if (this.textBoxContrags.Text == "") return;
+            bool b = service.AddContragent(this.textBoxContrags.Text);
+            if
+                (!b)
+                MessageBox.Show("С таким именем уже существует");
+            else
+            {
+                this.textBoxContrags.Text = "";
+                this.AllContragents = service.GetAllContragents();
+                if (comboBoxContragents.Items.Count!=0) this.comboBoxContragents.Items.Clear();
+                this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
+            }
         }
     }
 }
