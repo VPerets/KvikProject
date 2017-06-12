@@ -7,8 +7,11 @@ using System.Data.Linq.Mapping;
 
 namespace KvikLibrary
 {
+    [Table()]
     public class GoodsInContract
     {
+        [Column (IsDbGenerated = true, IsPrimaryKey = true)]
+        public int id { get; set; }
         [Column]
         public int IdGood { get; set; }
         [Column]

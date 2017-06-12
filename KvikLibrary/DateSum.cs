@@ -10,9 +10,18 @@ namespace KvikLibrary
     [Table()]
     public class DateSum
     {
+        [Column (IsDbGenerated = true, IsPrimaryKey = true)]
+        public int id { get; set; }
         [Column]
-        public DateTime Data { get; set; }
+        public Nullable<System.DateTime> Data { get; set;  }
+    //    public DateTime Data { get; set; }
         [Column]
-        public double Summa { get; set; } 
+        public double Summa { get; set; }
+        [Column]
+        public int idGood { get; set; }
+        [Column]
+        public int quant  { get; set; }
+        [Column]
+        public string contract { get; set; }
     }
 }
