@@ -22,5 +22,7 @@ namespace KvikLibrary
         public int QuantityLeft { get; set; }
         [Column]
         public double PriceSold { get; set; }
+        [Column]
+        public string commentary { get; set; }
     }
 }

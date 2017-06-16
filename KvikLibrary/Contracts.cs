@@ -16,5 +16,13 @@ namespace KvikLibrary
         public DateTime Data { get; set; }
         [Column]
         public int Contragent { get; set; }
+        [Column]
+        public int owner { get; set; }
+        [Column]
+        public Nullable<System.DateTime> DeadLine { get; set; }
+        public override string ToString()
+        {
+            return String.Format($"{Number}");
+        }
     }
 }

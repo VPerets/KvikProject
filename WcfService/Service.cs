@@ -27,6 +27,11 @@ namespace WcfService
             datacontext = new DataContext(cn);
         }
 
+        public List<string> getAllContracts()
+        {
+            return (from c in datacontext.GetTable<Contracts>()
+                   select c.Number).ToList();
+        }
         public bool addGoodsToDB(string name, string code, string fig, double buy)
         {
             var NameTemp = from g in datacontext.GetTable<Goods>()
@@ -41,22 +46,30 @@ namespace WcfService
             return true;
         }
 
-        public void addQuantityLeftInGoods(int q, string number, int idGood)
+        public void addCommentary(int GinC, string comm)
         {
             var goodIn = (from g in datacontext.GetTable<GoodsInContract>()
-                         where g.NumberContract == number && g.IdGood == idGood
-                         select g).First();
+                          where g.id == GinC
+                          select g).First();
+            goodIn.commentary = comm;
+            datacontext.SubmitChanges();
+        }
+
+        public void addQuantityLeftInGoods(int q,int GinC)
+        {
+            var goodIn = (from g in datacontext.GetTable<GoodsInContract>()
+                          where g.id == GinC select g).First();
             goodIn.QuantityLeft = goodIn.QuantityLeft - q;
            // datacontext.SubmitChanges();
             double priceBuy = (from g in datacontext.GetTable<Goods>()
-                               where g.ID == idGood
+                               where g.ID == goodIn.IdGood
                                select g.PriceBuy).First();
             double summ = priceBuy * q;
             var otgruzka = new DateSum
             {
-                contract = number,
+                contract = goodIn.NumberContract,
                 Data = DateTime.Now.Date,
-                idGood = idGood,
+                idGood = goodIn.IdGood,
                 quant = q,
                 Summa = summ
             };
@@ -82,35 +95,75 @@ namespace WcfService
             datacontext.GetTable<DateSum>().InsertOnSubmit(otgruzka);
             datacontext.SubmitChanges();
         }
-        public int addQuantityLeftInGoods1(int q, string number, int idGood)
+
+        public List<classsAboutGoodsInContract> getGoodsByContract(string num)
         {
-            var goodIn = (from g in datacontext.GetTable<GoodsInContract>()
-                          where g.NumberContract == number && g.IdGood == idGood
-                          select g).First();
-            goodIn.QuantityLeft = goodIn.QuantityLeft - q;
-            datacontext.SubmitChanges();
-            return goodIn.QuantityLeft;
+            var col = from g in datacontext.GetTable<GoodsInContract>()
+                   from go in datacontext.GetTable<Goods>()
+                   where g.IdGood == go.ID && g.NumberContract == num
+                   select new classsAboutGoodsInContract
+                   {
+                       countAll = g.Quantity,
+                       countLeft = g.QuantityLeft,
+                       name = go.Name,
+                       PriceSold = g.PriceSold
+                   };
+            return col.ToList();
         }
+
+        public void addToGinC(string num, int q, double price, int idGood)
+        {
+
+            var ginc = new GoodsInContract
+            {
+                IdGood = idGood,
+                NumberContract = num,
+                PriceSold = price,
+                Quantity = q,
+                QuantityLeft = q
+            };
+            datacontext.GetTable<GoodsInContract>().InsertOnSubmit(ginc);
+            datacontext.SubmitChanges();
+        
+        }
+        public List<Goods> getAllGoods()
+        {
+            return (from g in datacontext.GetTable<Goods>()
+                   select g).ToList();
+        }
+        public List<owners> getAllOwners()
+        {
+            return (from o in datacontext.GetTable<owners>()
+                   select o).ToList();
+        }
+       
         public List<NewClassForDataGrid> GetClassByContractNumber(string number)
         {
             var coll = from g in datacontext.GetTable<Goods>()
+                       from c in datacontext.GetTable<Contracts>()
+                       from o in datacontext.GetTable<owners>()
                        from ginc in datacontext.GetTable<GoodsInContract>()
                        where ginc.NumberContract == number && g.ID == ginc.IdGood
+                       && c.Number == ginc.NumberContract && c.owner == o.ID
                        select new NewClassForDataGrid
                        {
                            countAll = ginc.Quantity,
-                           CountLeft = ginc.QuantityLeft,
+                           countLeft = ginc.QuantityLeft,
+                           deadLine = c.DeadLine.Value,
                            name = g.Name,
-                           idGood = g.ID  
+                           commentary = ginc.commentary,
+                            idGinC = ginc.id,
+                             owner = o.Name
                        };
+
             return coll.ToList();
         }
 
-        public List<Contracts> GetContractsByContragent(int id)
+        public List<string> GetContractsByContragent(int id)
         {
             return (from c in datacontext.GetTable<Contracts>()
                    where c.Contragent == id
-                   select c).ToList();
+                   select c.Number).ToList();
         }
 
         public List<Contragents> GetAllContragents()
@@ -128,14 +181,15 @@ namespace WcfService
 
         }
 
-        public bool AddContract(string num, int idContr, DateTime dt)
+        public bool AddContract(string num, int idContr, DateTime dt, DateTime dline, int owner )
         {
             var contract = from c in datacontext.GetTable<Contracts>()
                            where c.Number == num
                            select c;
             if (contract.Count() > 0) return false;
 
-            var newConract = new Contracts { Contragent = idContr, Data = dt.Date, Number = num };
+            var newConract = new Contracts { Contragent = idContr, Data = dt.Date, Number = num ,
+            DeadLine = dline, owner = owner};
             datacontext.GetTable<Contracts>().InsertOnSubmit(newConract);
             datacontext.SubmitChanges();
             return true;
