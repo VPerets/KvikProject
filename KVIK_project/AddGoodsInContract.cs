@@ -17,6 +17,9 @@ namespace KVIK_project
     public partial class AddGoodsInContract : Form
     {
         public IService service = null;
+        public bool added = false;
+        public string number;
+        public ChannelFactory<IService> myChannelFactory = null;
         public AddGoodsInContract()
         {
             InitializeComponent();
@@ -26,7 +29,7 @@ namespace KVIK_project
 
         private void AddGoodsInContract_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+            myChannelFactory.Close();
         }
 
         private void AddGoodsInContract_Load(object sender, EventArgs e)
@@ -34,7 +37,8 @@ namespace KVIK_project
             var myBinding = new BasicHttpBinding();
             var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
             var myEndpoint = new EndpointAddress(Uri);
-            var myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+
+            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
             this.listView1.View = View.List;
@@ -43,9 +47,8 @@ namespace KVIK_project
         }
 
         private void comboBoxContracts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-          
-            string number = comboBoxContracts.SelectedItem as string;
+        {          
+            number = (comboBoxContracts.SelectedItem as contract_).number;
             updateList(number);
         }
 
@@ -63,17 +66,16 @@ namespace KVIK_project
             if (this.comboBoxContracts.SelectedIndex == -1 || this.comboGoods.SelectedIndex == -1
                 || this.tbKol.Text == "" || this.tbPrice.Text == "")
                 return;
-
-            string num = this.comboBoxContracts.SelectedItem as string;
+            
             Goods g = this.comboGoods.SelectedItem as Goods;
             int q = Int32.Parse(this.tbKol.Text);
             double pr = Double.Parse(this.tbPrice.Text);
-            service.addToGinC(num, q, pr, g.ID);
-            MessageBox.Show("добавлен!");
+            service.addToGinC(number, q, pr, g.ID);
             this.tbPrice.Text = "";
             this.tbKol.Text = "";
             this.comboGoods.SelectedIndex = -1;
-            updateList(num);
+            added = true;
+            updateList(number);
         }
                     
     }

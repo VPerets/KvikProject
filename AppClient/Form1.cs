@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WcfService;
 using KvikLibrary;
 using System.ServiceModel;
 using System.Configuration;
 
-namespace KVIK_project
+namespace AppClient
 {
     public partial class Form1 : Form
     {
-        private IService service = null;
+        private IServiceUser service = null;
         private List<Contragents> contragents = new List<Contragents>();
         private Contragents SelectedContr;
         private List<Contragents> contragentsTemp = new List<Contragents>();
         private List<Contragents> AllContragents = new List<Contragents>();
-        private List<owners> allOwners = new List<owners>();
-        private List<Goods> allGoods = new List<Goods>();
         private string textCommTemp = "";
         private bool loading = true;
 
@@ -39,9 +32,6 @@ namespace KVIK_project
             this.comboBox1.Items.Add("Все");
             this.comboBox1.Items.AddRange(this.contragents.ToArray());
             this.comboBox1.SelectedIndex = 0;
-            this.AllContragents = service.GetAllContragents();
-            if (this.comboBoxContragents.Items.Count != 0) this.comboBoxContragents.Items.Clear();
-            this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
         }
 
         private void updateAfterEditPrice()
@@ -53,13 +43,7 @@ namespace KVIK_project
                 this.lvGoodsPrices.Items.Add(goodPrice[i]);
             }
         }
-
-        private void updateComboTabOwner()
-        {
-            this.allOwners = service.getAllOwners();
-            if (this.comboBoxOwners.Items.Count != 0) this.comboBoxOwners.Items.Clear();
-            this.comboBoxOwners.Items.AddRange(this.allOwners.ToArray());
-        }
+     
         private void UpdateForFill()
         {
             if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
@@ -69,9 +53,6 @@ namespace KVIK_project
         private void UpdateAllAll()
         {
             UpdateComboContragents();
-            updateComboTabOwner();
-
-   //         if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
             FillDataGrid();
         }
 
@@ -106,13 +87,14 @@ namespace KVIK_project
                 for (int j = 0; j < contracts.Count; j++)
                 {
                     this.dataGridView1.Rows.Add(new DataGridViewRow());
+
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Value =
-                            "Договор № " + contracts[j].number;
+                        "Договор № " + contracts[j].number;
                     this.dataGridView1.Rows[rowsCount].Cells["name"].Value = contracts[j].name;
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Style.Font
                     = new Font("Arial", 12);
                     this.dataGridView1.Rows[rowsCount].Cells["name"].Style.Font
-                  = new Font("Arial", 10);
+                  = new Font("Arial", 12);
                     for (int c1 = 0; c1 < this.dataGridView1.Rows[0].Cells.Count; c1++)
                     {
                         this.dataGridView1.Rows[rowsCount].Cells[c1].Style.BackColor = Color.FromArgb(83, 242, 51);
@@ -133,7 +115,6 @@ namespace KVIK_project
                         this.dataGridView1.Rows[rowsCount].Cells["Total"].Value = goods_[k].countAll;
                         this.dataGridView1.Rows[rowsCount].Cells["left"].Value = goods_[k].countLeft;
                         this.dataGridView1.Rows[rowsCount].Cells["commentary"].Value = goods_[k].commentary;
-                        this.dataGridView1.Rows[rowsCount].Cells["deadLine"].Value = goods_[k].deadLine;
                         this.dataGridView1.Rows[rowsCount].Cells["code"].Value = goods_[k].code;
                         this.dataGridView1.Rows[rowsCount].Cells["figure"].Value = goods_[k].figure;
                         rowsCount++;
@@ -147,31 +128,18 @@ namespace KVIK_project
             var myBinding = new BasicHttpBinding();
             var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
             var myEndpoint = new EndpointAddress(Uri);
-            var myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            var myChannelFactory = new ChannelFactory<IServiceUser>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
             this.UpdateAllAll();
-            this.allGoods = service.getAllGoods();
             updateAfterEditPrice();
             loading = false;
-            this.labelSum.Text = service.getTotalSum().ToString();
-            this.labelOtgr.Text = service.getLeftSum().ToString();
-        }
-
-        private void btnAddGood_Click(object sender, EventArgs e)
-        {
-            AddGood addGoodForm = new AddGood(this.service);
-            addGoodForm.Show();
-            if (addGoodForm.added)
-            {
-                this.allGoods = service.getAllGoods();
-            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             if (e.ColumnIndex != 6 || row.Tag == null || row.Cells["send"].Value == null) return;
             int quant;
             bool b =
@@ -183,8 +151,6 @@ namespace KVIK_project
 
             row.Cells["left"].Value = Int32.Parse(row.Cells["left"].Value.ToString()) - quant;
             row.Cells["send"].Value = null;
-            this.labelSum.Text = service.getTotalSum().ToString();
-            this.labelOtgr.Text = service.getLeftSum().ToString();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,53 +163,6 @@ namespace KVIK_project
             ComboBox comb = sender as ComboBox;
             SelectedContr = comb.SelectedItem as Contragents;
             this.FillDataGrid(1);
-        }
-
-        private void buttonAddContract_Click(object sender, EventArgs e)
-        {
-            if (this.textBoxТNumberContract.Text == "" || this.comboBoxContragents.SelectedIndex == -1
-                || this.comboBoxOwners.SelectedIndex == -1)
-                return;
-            int idContr = (this.comboBoxContragents.SelectedItem as Contragents).ID;
-            int idOwner = (this.comboBoxOwners.SelectedItem as owners).ID;
-            bool b = service.AddContract(textBoxТNumberContract.Text, idContr, dtFromContr.Value.Date,
-              dtDeadLine.Value.Date, idOwner, tbCommContract.Text);
-            if (b == true)
-            {
-                MessageBox.Show("Договор добавлен");
-                this.textBoxТNumberContract.Text = "";
-                this.tbCommContract.Text = "";
-                this.comboBoxContragents.SelectedIndex = -1;
-                this.comboBoxOwners.SelectedIndex = -1;
-            }
-            else
-                MessageBox.Show("Возможно такой номер дрговора уже существуетЭ.Попробуйте еще");
-        }
-
-        private void buttonAddContragent_Click(object sender, EventArgs e)
-        {
-            if (this.textBoxContrags.Text == "") return;
-            bool b = service.AddContragent(this.textBoxContrags.Text);
-            if
-                (!b)
-                MessageBox.Show("С таким именем уже существует");
-            else
-            {
-                this.textBoxContrags.Text = "";
-                UpdateComboContragents();
-                FillDataGrid();
-            }
-        }
-
-        private void buttonAddGoodsInContract_Click(object sender, EventArgs e)
-        {
-            AddGoodsInContract form = new AddGoodsInContract();
-            form.ShowDialog();
-            if (form.added == true)
-            {
-                UpdateComboContragents();
-                this.FillDataGrid();
-            }
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)

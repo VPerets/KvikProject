@@ -8,29 +8,54 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using KvikLibrary;
+using System.Net.Mail;
+using System.Net;
+using System.Threading;
 
 namespace WcfService
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде и файле конфигурации.
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple,
-       InstanceContextMode = InstanceContextMode.Single,
-       IncludeExceptionDetailInFaults = true)]
 
-    public class Service : IService
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple,
+        InstanceContextMode = InstanceContextMode.Single,
+        IncludeExceptionDetailInFaults = true)]
+
+    public class Service : IService, IServiceUser
     {
-        DataContext datacontext; 
+        DataContext datacontext;
+        DateTime date;
+        DateTime datePlus7;
+        Timer timer;
 
         public Service()
         {
             DbConnection cn = new System.Data.SqlClient.SqlConnection();
             cn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             datacontext = new DataContext(cn);
+
+            timer = new Timer(forTimer, null, 0, 10000000);
+            //timer. += OnTimedEvent;
+            //timer.AutoReset = true;
+            //timer.Enabled = true;
+            date = DateTime.Now.Date;
+            datePlus7 = date.AddDays(7);
         }
 
-        public List<string> getAllContracts()
+        public void forTimer(object obj)
+        {
+            //if (date != datePlus7) return;
+            if (DateTime.Now.Date >= datePlus7.Date)
+            {
+                SendCodeByMail();
+                date = datePlus7;
+                datePlus7 = date.AddDays(7);
+            }
+        }
+
+        public List<contract_> getAllContracts()
         {
             return (from c in datacontext.GetTable<Contracts>()
-                   select c.Number).ToList();
+                   select new contract_ { number = c.Number, name = c.contract_Name }).ToList();
         }
         public bool addGoodsToDB(string name, string code, string fig, double buy)
         {
@@ -54,41 +79,81 @@ namespace WcfService
             goodIn.commentary = comm;
             datacontext.SubmitChanges();
         }
+        private double getSum()
+        {
+            var sum = (from gi in datacontext.GetTable<GoodsInContract>()
+                       select new { sum = gi.Quantity * gi.PriceSold }).Sum(s => s.sum);
+            return sum;
+        }
+
+        public double getTotalSum()
+        {
+            return getSum();
+        }
+
+        public double getLeftSum()
+        {
+            var sum = getSum();
+            var sumLeft = (from gi in datacontext.GetTable<GoodsInContract>()
+                           select new { sum = gi.QuantityLeft * gi.PriceSold }).Sum(s => s.sum);
+            return sum - sumLeft;
+        }
+
+        public List<goodPrice> getAllGoodPrice()
+        {
+            var col = from g in datacontext.GetTable<Goods>()
+                      select new goodPrice { name = g.Name, priceBuy = g.PriceBuy };
+            return col.ToList();
+        }
+
+        public void editPriceBuy(string name, double pr)
+        {
+            var good = (from g in datacontext.GetTable<Goods>()
+                        where g.Name == name
+                        select g).First();
+            good.PriceBuy = pr;
+            datacontext.SubmitChanges();
+        }
 
         public void addQuantityLeftInGoods(int q,int GinC)
         {
             var goodIn = (from g in datacontext.GetTable<GoodsInContract>()
                           where g.id == GinC select g).First();
+
             goodIn.QuantityLeft = goodIn.QuantityLeft - q;
-           // datacontext.SubmitChanges();
-            double priceBuy = (from g in datacontext.GetTable<Goods>()
+
+            var classTmp = (from g in datacontext.GetTable<Goods>()
                                where g.ID == goodIn.IdGood
-                               select g.PriceBuy).First();
-            double summ = priceBuy * q;
+                               select new { priceBuy = g.PriceBuy, Good = g.Name }).First();
+
+            double summ = classTmp.priceBuy * q;
+
             var otgruzka = new DateSum
             {
                 contract = goodIn.NumberContract,
                 Data = DateTime.Now.Date,
-                idGood = goodIn.IdGood,
+                good = classTmp.Good,
                 quant = q,
                 Summa = summ
             };
             datacontext.GetTable<DateSum>().InsertOnSubmit(otgruzka);
             datacontext.SubmitChanges();
             //  addToDateSumOtgruz(q, number, idGood);
+
+    //        SendCodeByMail();
         }
 
-        private void addToDateSumOtgruz(int q, string num, int idGood)
+        private void addToDateSumOtgruz(int q, string num, string good)
         {
             double priceBuy = (from g in datacontext.GetTable<Goods>()
-                               where g.ID == idGood
+                               where g.Name == ""
                                select g.PriceBuy).First();
             double summ = priceBuy * q;
             var otgruzka = new DateSum
             {
                 contract = num,
                 Data = DateTime.Now.Date,
-                idGood = idGood,
+                good = good,
                 quant = q,
                 Summa = summ
             };
@@ -113,7 +178,6 @@ namespace WcfService
 
         public void addToGinC(string num, int q, double price, int idGood)
         {
-
             var ginc = new GoodsInContract
             {
                 IdGood = idGood,
@@ -152,18 +216,19 @@ namespace WcfService
                            deadLine = c.DeadLine.Value,
                            name = g.Name,
                            commentary = ginc.commentary,
-                            idGinC = ginc.id,
-                             owner = o.Name
+                           idGinC = ginc.id,
+                           code = g.CodeUZP, 
+                            figure = g.Figure 
                        };
 
             return coll.ToList();
         }
 
-        public List<string> GetContractsByContragent(int id)
+        public List<contract_> GetContractsByContragent(int id)
         {
             return (from c in datacontext.GetTable<Contracts>()
                    where c.Contragent == id
-                   select c.Number).ToList();
+                   select new contract_{ number = c.Number, name = c.contract_Name}).ToList();
         }
 
         public List<Contragents> GetAllContragents()
@@ -181,7 +246,8 @@ namespace WcfService
 
         }
 
-        public bool AddContract(string num, int idContr, DateTime dt, DateTime dline, int owner )
+        public bool AddContract(string num, int idContr, DateTime dt, DateTime dline, int owner,
+            string comm)
         {
             var contract = from c in datacontext.GetTable<Contracts>()
                            where c.Number == num
@@ -189,7 +255,7 @@ namespace WcfService
             if (contract.Count() > 0) return false;
 
             var newConract = new Contracts { Contragent = idContr, Data = dt.Date, Number = num ,
-            DeadLine = dline, owner = owner};
+            DeadLine = dline, owner = owner, contract_Name = comm};
             datacontext.GetTable<Contracts>().InsertOnSubmit(newConract);
             datacontext.SubmitChanges();
             return true;
@@ -207,6 +273,55 @@ namespace WcfService
             datacontext.SubmitChanges(); 
 
             return true;
+        }
+
+        private StringBuilder  getSummForAWeek()
+        {
+            StringBuilder sb = new StringBuilder();
+            DateTime tmp = date.AddDays(-7);
+            var collection = from d in datacontext.GetTable<DateSum>()
+                      where d.Data >= tmp
+                      select d;
+            foreach (var item in collection)
+            {
+                sb.Append(item.Data.Value.ToShortDateString() + " " + item.good + " " 
+                    + item.quant + " " + item.Summa);
+                sb.Append("\n");
+            }
+            return sb;
+        }
+
+        private  bool SendCodeByMail()
+        {
+            // отправитель - устанавливаем адрес и отображаемое в письме имя
+            MailAddress from = new MailAddress("vitaliia.perets@gmail.com");
+            // кому отправляем
+            MailAddress to = new MailAddress("80501903813vs@gmail.com");
+            // создаем объект сообщения
+            MailMessage m = new MailMessage(from, to);
+            // тема письма
+            m.Subject = "Отгрузка на " + DateTime.Now.Date.ToShortDateString();
+            // текст письма
+            m.Body = getSummForAWeek().ToString();
+            // письмо представляет код html
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("vitaliia.perets@gmail.com", "Perets2233")
+            };
+
+            try
+            {
+                smtp.Send(m);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

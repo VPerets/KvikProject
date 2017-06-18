@@ -17,6 +17,8 @@ namespace KvikLibrary
         [Column]
         public int Contragent { get; set; }
         [Column]
+        public string contract_Name { get; set; }
+        [Column]
         public int owner { get; set; }
         [Column]
         public Nullable<System.DateTime> DeadLine { get; set; }

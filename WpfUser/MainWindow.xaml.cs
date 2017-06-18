@@ -50,8 +50,8 @@ namespace WpfUser
                         l2.Content = AllContractsContragent[j];
                         StackTab1.Children.Add(l2);
                         DataGrid dg = new DataGrid();
-                    dg.SelectedCellsChanged += Dg_SelectedCellsChanged;
-                        var c = service.GetClassByContractNumber(AllContractsContragent[j]);
+                        dg.SelectedCellsChanged += Dg_SelectedCellsChanged;
+                        var c = service.GetClassByContractNumber(AllContractsContragent[j].number);
                         dg.ItemsSource = c;
                         
                         //  System.Windows.Forms.MessageBox.Show(c.Count.ToString());

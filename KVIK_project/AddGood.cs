@@ -20,6 +20,7 @@ namespace KVIK_project
         public string figure;
         public double buy;
         public double sold;
+        public bool added = false;
         private IService service;
 
         public AddGood(IService service)
@@ -61,8 +62,8 @@ namespace KVIK_project
             {
                 MessageBox.Show("Продукт с таким чертежем уже существует");
                 return;
-            }          
-
+            }
+            added = true;
             this.tbName.Text = "";
             this.tbPriceBuy.Text = "";
             this.tbSold.Text = "";
