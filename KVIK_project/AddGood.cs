@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WcfService;
 using KvikLibrary;
 using System.ServiceModel;
+using System.Configuration;
 
 namespace KVIK_project
 {
@@ -19,15 +20,31 @@ namespace KVIK_project
         public string code;
         public string figure;
         public double buy;
-        public double sold;
+        private ChannelFactory<IService> myChannelFactory = null;
         public bool added = false;
         private IService service;
 
-        public AddGood(IService service)
+        public AddGood()
         {
             InitializeComponent();
             this.FormClosing += AddGood_FormClosing;
-            this.service = service;
+            this.Load += AddGood_Load;
+            this.FormClosing += AddGood_FormClosing1;
+        }
+
+        private void AddGood_FormClosing1(object sender, FormClosingEventArgs e)
+        {
+            myChannelFactory.Close();
+        }
+
+        private void AddGood_Load(object sender, EventArgs e)
+        {
+            var myBinding = new WSHttpBinding();
+            var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
+            var myEndpoint = new EndpointAddress(Uri);
+
+            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+
         }
 
         private void AddGood_FormClosing(object sender, FormClosingEventArgs e)
@@ -47,16 +64,8 @@ namespace KVIK_project
                 MessageBox.Show("Ввести корректное значение цены покупки");
                 return;
             }
-            if (Double.TryParse(this.tbSold.Text, out b))
-                buy = b;
-            else
-            {
-                MessageBox.Show("Ввести корректное значение цены продажи");
-                return;
-            }
 
             bool bool_ = service.addGoodsToDB(name, code, figure, buy);
-
 
             if (bool_ == false)
             {
@@ -66,7 +75,6 @@ namespace KVIK_project
             added = true;
             this.tbName.Text = "";
             this.tbPriceBuy.Text = "";
-            this.tbSold.Text = "";
             this.tbCode.Text = "";
             this.tbFigure.Text = "";
         }

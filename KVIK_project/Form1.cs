@@ -17,6 +17,7 @@ namespace KVIK_project
     public partial class Form1 : Form
     {
         private IService service = null;
+        private ChannelFactory<IService> myChannelFactory = null;
         private List<Contragents> contragents = new List<Contragents>();
         private Contragents SelectedContr;
         private List<Contragents> contragentsTemp = new List<Contragents>();
@@ -25,11 +26,22 @@ namespace KVIK_project
         private List<Goods> allGoods = new List<Goods>();
         private string textCommTemp = "";
         private bool loading = true;
+        private string login = "";
 
         public Form1()
         {
             InitializeComponent();
+            this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
+            this.FormClosing += Form1_FormClosing;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (service!=null)
+            service.close();
+            if (myChannelFactory != null)
+            this.myChannelFactory.Close();
         }
 
         private void UpdateComboContragents()
@@ -44,16 +56,7 @@ namespace KVIK_project
             this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
         }
 
-        private void updateAfterEditPrice()
-        {
-            var goodPrice = service.getAllGoodPrice();
-            if (lvGoodsPrices.Items.Count != 0) this.lvGoodsPrices.Items.Clear();
-            for (int i = 0; i < goodPrice.Count; i++)
-            {
-                this.lvGoodsPrices.Items.Add(goodPrice[i]);
-            }
-        }
-
+      
         private void updateComboTabOwner()
         {
             this.allOwners = service.getAllOwners();
@@ -70,23 +73,21 @@ namespace KVIK_project
         {
             UpdateComboContragents();
             updateComboTabOwner();
-
-   //         if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
             FillDataGrid();
         }
 
         private void FillDataGrid(int temp = 0)
         {
-            if (temp != 1)
-            {
-                UpdateForFill();
-                this.contragentsTemp.AddRange(this.contragents.ToArray());
-            }
-            else
-            {
-                UpdateForFill();
-                this.contragentsTemp.Add(SelectedContr);
-            }
+                if (temp != 1)
+                {
+                    UpdateForFill();
+                    this.contragentsTemp.AddRange(this.contragents.ToArray());
+                }
+                else
+                {
+                    UpdateForFill();
+                    this.contragentsTemp.Add(SelectedContr);
+                }
 
             int rowsCount = 0;
 
@@ -106,6 +107,7 @@ namespace KVIK_project
                 for (int j = 0; j < contracts.Count; j++)
                 {
                     this.dataGridView1.Rows.Add(new DataGridViewRow());
+                    this.dataGridView1.Rows[rowsCount].Tag = contracts[j].id;
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Value =
                             "Договор № " + contracts[j].number;
                     this.dataGridView1.Rows[rowsCount].Cells["name"].Value = contracts[j].name;
@@ -122,12 +124,11 @@ namespace KVIK_project
                     rowsCount++;
 
                     List<NewClassForDataGrid> goods_ =
-                        service.GetClassByContractNumber(contracts[j].number);
+                        service.GetClassByContractId(contracts[j].id);
 
                     for (int k = 0; k < goods_.Count; k++)
                     {
                         this.dataGridView1.Rows.Add(new DataGridViewRow());
-
                         this.dataGridView1.Rows[rowsCount].Tag = goods_[k].idGinC;
                         this.dataGridView1.Rows[rowsCount].Cells["Name"].Value = goods_[k].name;
                         this.dataGridView1.Rows[rowsCount].Cells["Total"].Value = goods_[k].countAll;
@@ -135,6 +136,7 @@ namespace KVIK_project
                         this.dataGridView1.Rows[rowsCount].Cells["commentary"].Value = goods_[k].commentary;
                         this.dataGridView1.Rows[rowsCount].Cells["deadLine"].Value = goods_[k].deadLine;
                         this.dataGridView1.Rows[rowsCount].Cells["code"].Value = goods_[k].code;
+                        this.dataGridView1.Rows[rowsCount].Cells["priceSold"].Value = goods_[k].priceSold;
                         this.dataGridView1.Rows[rowsCount].Cells["figure"].Value = goods_[k].figure;
                         rowsCount++;
                     }
@@ -144,23 +146,29 @@ namespace KVIK_project
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            loginForm form = new loginForm();
+            form.ShowDialog();
+            if (form.accept == false) this.Close();
+            this.login = form.login;
+
             var myBinding = new BasicHttpBinding();
             var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
             var myEndpoint = new EndpointAddress(Uri);
-            var myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
+
             this.UpdateAllAll();
             this.allGoods = service.getAllGoods();
-            updateAfterEditPrice();
             loading = false;
             this.labelSum.Text = service.getTotalSum().ToString();
             this.labelOtgr.Text = service.getLeftSum().ToString();
+            this.dtDeadLine.Value = new DateTime(2017, 12, 31).Date;
         }
 
         private void btnAddGood_Click(object sender, EventArgs e)
         {
-            AddGood addGoodForm = new AddGood(this.service);
+            AddGood addGoodForm = new AddGood();
             addGoodForm.Show();
             if (addGoodForm.added)
             {
@@ -176,14 +184,25 @@ namespace KVIK_project
             int quant;
             bool b =
                 Int32.TryParse(row.Cells["send"].Value.ToString(), out quant);
-            if (!b || quant > Int32.Parse(row.Cells["left"].Value.ToString())) return;
+            if (!b || quant > Int32.Parse(row.Cells["left"].Value.ToString()) ||
+               Int32.Parse(row.Cells["total"].Value.ToString()) < (quant - Int32.Parse(row.Cells["left"].Value.ToString())))
+               return;
+
             int id = (int)row.Tag;
 
-            service.addQuantityLeftInGoods(quant, id);
+            boolInt left = service.addQuantityLeftInGoods(quant, id, this.login);
 
-            row.Cells["left"].Value = Int32.Parse(row.Cells["left"].Value.ToString()) - quant;
+            if (left.b == false)
+            {
+                MessageBox.Show("Информация о оставшемся количестве товара обновлена!Введите количество заново");
+                row.Cells["left"].Value = left.q;
+                row.Cells["send"].Value = null;
+                this.labelOtgr.Text = service.getLeftSum().ToString();
+                return;
+            }
+
+            row.Cells["left"].Value = left.q;
             row.Cells["send"].Value = null;
-            this.labelSum.Text = service.getTotalSum().ToString();
             this.labelOtgr.Text = service.getLeftSum().ToString();
         }
 
@@ -243,34 +262,29 @@ namespace KVIK_project
             {
                 UpdateComboContragents();
                 this.FillDataGrid();
+                this.labelSum.Text = service.getTotalSum().ToString();
             }
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (loading == true || e.ColumnIndex != 7) return;
-            textCommTemp = dataGridView1.Rows[e.RowIndex].Cells["commentary"].Value.ToString();
+            if (dataGridView1.Rows[e.RowIndex].Cells["commentary"].Value == null)
+                textCommTemp = "";
+            else
+                textCommTemp = dataGridView1.Rows[e.RowIndex].Cells["commentary"].Value.ToString();
             int id = (int)dataGridView1.Rows[e.RowIndex].Tag;
             service.addCommentary(id, textCommTemp);
         }
 
 
-        private void buttoEditPrice_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            double pr;
-            bool b = Double.TryParse(this.textBox1.Text, out pr);
-            if (!b)
-            { MessageBox.Show("Неверно введена цена"); return; }
-
-            service.editPriceBuy(labelName.Text, pr);
-            updateAfterEditPrice();
-        }
-
-        private void lvGoodsPrices_SelectedValueChanged(object sender, EventArgs e)
-        {
-            var g = this.lvGoodsPrices.Items[lvGoodsPrices.SelectedIndex] as goodPrice;
-            this.textBox1.Text = g.priceBuy.ToString();
-            this.labelName.Text = g.name;
+            if (tbOwner.Text == "") return;
+            bool b = service.addOwner(tbOwner.Text);
+            if (b == false) { MessageBox.Show("Фирма с таким именем уже существует");}
+            tbOwner.Text = "";
+            updateComboTabOwner();        
         }
     }
 }

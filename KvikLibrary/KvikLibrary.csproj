@@ -50,6 +50,8 @@
     <Compile Include="GoodsInContract.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="staff.cs" />
+    <Compile Include="whoIs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,7 +10,9 @@ namespace KvikLibrary
     [Table()]
     public class Contracts
     {
-        [Column(IsPrimaryKey = true)]
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        public int id { get; set; }
+        [Column]
         public string Number { get; set; }
         [Column]
         public DateTime Data { get; set; }

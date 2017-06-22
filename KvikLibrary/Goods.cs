@@ -15,7 +15,7 @@ namespace KvikLibrary
         [Column]
         public string Name { get; set; }
         [Column]
-        public string CodeUZP { get; set; }
+        public string numberObl { get; set; }
         [Column]
         public string Figure { get; set; }
         [Column]

@@ -15,7 +15,7 @@ namespace KvikLibrary
         [Column]
         public int IdGood { get; set; }
         [Column]
-        public string NumberContract { get; set; }
+        public int idContract { get; set; }
         [Column]
         public int Quantity { get; set; }
         [Column]

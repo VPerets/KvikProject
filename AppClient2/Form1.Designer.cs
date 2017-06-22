@@ -1,4 +1,4 @@
-﻿namespace AppClient
+﻿namespace AppClient2
 {
     partial class Form1
     {
@@ -28,11 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabContract = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.figure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.left = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceSold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Commentary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPagePrice = new System.Windows.Forms.TabPage();
@@ -42,14 +50,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttoEditPrice = new System.Windows.Forms.Button();
             this.lvGoodsPrices = new System.Windows.Forms.ListBox();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.figure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.left = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.send = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Commentary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPageInfo = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelSum = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.labelOtgr = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -58,6 +66,9 @@
             this.tabPagePrice.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.tabPageInfo.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -82,6 +93,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabContract);
             this.tabControl.Controls.Add(this.tabPagePrice);
+            this.tabControl.Controls.Add(this.tabPageInfo);
             this.tabControl.Location = new System.Drawing.Point(3, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -136,8 +148,7 @@
             this.figure,
             this.Total,
             this.left,
-            this.send,
-            this.button,
+            this.priceSold,
             this.Commentary});
             this.tableLayoutPanel2.SetColumnSpan(this.dataGridView1, 5);
             this.dataGridView1.Location = new System.Drawing.Point(3, 41);
@@ -145,8 +156,59 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1015, 411);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            // 
+            // code
+            // 
+            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.code.HeaderText = "Код";
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            this.code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.code.Width = 32;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Название";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // figure
+            // 
+            this.figure.HeaderText = "Чертёж";
+            this.figure.Name = "figure";
+            this.figure.ReadOnly = true;
+            this.figure.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Всего(кол)";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // left
+            // 
+            this.left.HeaderText = "Осталось(кол)";
+            this.left.Name = "left";
+            this.left.ReadOnly = true;
+            this.left.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // priceSold
+            // 
+            this.priceSold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.priceSold.HeaderText = "Продажа";
+            this.priceSold.Name = "priceSold";
+            this.priceSold.ReadOnly = true;
+            this.priceSold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Commentary
+            // 
+            this.Commentary.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Commentary.HeaderText = "Комментарий";
+            this.Commentary.Name = "Commentary";
+            this.Commentary.ReadOnly = true;
+            this.Commentary.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // comboBox1
             // 
@@ -262,72 +324,100 @@
             this.lvGoodsPrices.TabIndex = 2;
             this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
             // 
-            // code
+            // tabPageInfo
             // 
-            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.code.FillWeight = 657.868F;
-            this.code.HeaderText = "Код";
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            this.code.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.code.Width = 32;
+            this.tabPageInfo.Controls.Add(this.tableLayoutPanel9);
+            this.tabPageInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabPageInfo.Name = "tabPageInfo";
+            this.tabPageInfo.Size = new System.Drawing.Size(1030, 464);
+            this.tabPageInfo.TabIndex = 3;
+            this.tabPageInfo.Text = "Инфо";
+            this.tabPageInfo.UseVisualStyleBackColor = true;
             // 
-            // name
+            // tableLayoutPanel9
             // 
-            this.name.FillWeight = 20.30457F;
-            this.name.HeaderText = "Название";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tableLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.21354F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.78646F));
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(32, 22);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 3;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.5641F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.4359F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 316F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(768, 395);
+            this.tableLayoutPanel9.TabIndex = 0;
             // 
-            // figure
+            // tableLayoutPanel3
             // 
-            this.figure.FillWeight = 20.30457F;
-            this.figure.HeaderText = "Чертёж";
-            this.figure.Name = "figure";
-            this.figure.ReadOnly = true;
-            this.figure.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.58192F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.41808F));
+            this.tableLayoutPanel3.Controls.Add(this.labelSum, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.labelOtgr, 1, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel9.SetRowSpan(this.tableLayoutPanel3, 2);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(202, 72);
+            this.tableLayoutPanel3.TabIndex = 4;
             // 
-            // Total
+            // labelSum
             // 
-            this.Total.FillWeight = 20.30457F;
-            this.Total.HeaderText = "Всего(кол)";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            this.Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.labelSum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSum.AutoSize = true;
+            this.labelSum.Location = new System.Drawing.Point(127, 36);
+            this.labelSum.Name = "labelSum";
+            this.labelSum.Size = new System.Drawing.Size(72, 36);
+            this.labelSum.TabIndex = 2;
             // 
-            // left
+            // label8
             // 
-            this.left.FillWeight = 20.30457F;
-            this.left.HeaderText = "Осталось(кол)";
-            this.left.Name = "left";
-            this.left.ReadOnly = true;
-            this.left.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 36);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(118, 36);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Всего на сумму";
             // 
-            // send
+            // label9
             // 
-            this.send.FillWeight = 20.30457F;
-            this.send.HeaderText = "Отгрузить(кол)";
-            this.send.Name = "send";
-            this.send.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(118, 36);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Отгрузили";
             // 
-            // button
+            // labelOtgr
             // 
-            this.button.FillWeight = 20.30457F;
-            this.button.HeaderText = "Подтвердить";
-            this.button.Name = "button";
-            this.button.Text = "Подтвердить";
-            this.button.ToolTipText = "Подтвердить";
-            this.button.UseColumnTextForButtonValue = true;
-            // 
-            // Commentary
-            // 
-            this.Commentary.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Commentary.FillWeight = 20.30457F;
-            this.Commentary.HeaderText = "Комментарий";
-            this.Commentary.Name = "Commentary";
-            this.Commentary.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.labelOtgr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelOtgr.AutoSize = true;
+            this.labelOtgr.Location = new System.Drawing.Point(127, 0);
+            this.labelOtgr.Name = "labelOtgr";
+            this.labelOtgr.Size = new System.Drawing.Size(72, 36);
+            this.labelOtgr.TabIndex = 3;
             // 
             // Form1
             // 
@@ -347,6 +437,10 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            this.tabPageInfo.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,6 +454,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabPage tabPagePrice;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
@@ -367,13 +462,19 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttoEditPrice;
         private System.Windows.Forms.ListBox lvGoodsPrices;
+        private System.Windows.Forms.TabPage tabPageInfo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.Label labelSum;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelOtgr;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn figure;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn left;
-        private System.Windows.Forms.DataGridViewTextBoxColumn send;
-        private System.Windows.Forms.DataGridViewButtonColumn button;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceSold;
         private System.Windows.Forms.DataGridViewTextBoxColumn Commentary;
     }
 }

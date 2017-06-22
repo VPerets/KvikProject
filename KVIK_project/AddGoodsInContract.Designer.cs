@@ -186,7 +186,7 @@
             this.buttonAddGoodsToContract.Name = "buttonAddGoodsToContract";
             this.buttonAddGoodsToContract.Size = new System.Drawing.Size(268, 257);
             this.buttonAddGoodsToContract.TabIndex = 3;
-            this.buttonAddGoodsToContract.Text = "button1";
+            this.buttonAddGoodsToContract.Text = "Добавить!";
             this.buttonAddGoodsToContract.UseVisualStyleBackColor = true;
             this.buttonAddGoodsToContract.Click += new System.EventHandler(this.buttonAddGoodsToContract_Click);
             // 

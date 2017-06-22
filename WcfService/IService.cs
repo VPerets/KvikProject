@@ -13,6 +13,15 @@ namespace WcfService
     public interface IService
     {
         [OperationContract]
+        int getCount();
+
+        [OperationContract ]
+        bool checkLoginPass(string l, string p);
+
+        [OperationContract]
+        void close();
+
+        [OperationContract]
         bool addGoodsToDB(string name, string code, string fig, double buy);
 
         [OperationContract]
@@ -22,16 +31,22 @@ namespace WcfService
         List<contract_> GetContractsByContragent(int id);
 
         [OperationContract]
-        List<NewClassForDataGrid> GetClassByContractNumber(string number);
+        bool addOwner(string name);
 
         [OperationContract]
-        void addQuantityLeftInGoods(int q, int GinC);
+        List<NewClassForDataGrid> GetClassByContractId(int id);
+
+        [OperationContract]
+        List<NewClassForDataGrid2> GetClassByContractId2(int id);
+
+        [OperationContract]
+        boolInt addQuantityLeftInGoods(int q, int GinC, string log);
 
         [OperationContract]
         List<contract_> getAllContracts();
 
         [OperationContract]
-        void addToGinC(string num, int q, double price, int idGood);
+        void addToGinC(int id, int q, double price, int idGood);
 
         [OperationContract]
         bool AddContract(string num, int idContr, DateTime dt, DateTime dl ,int owner, string comm);
@@ -49,7 +64,7 @@ namespace WcfService
         List<Goods> getAllGoods();
 
         [OperationContract]
-        List<classsAboutGoodsInContract> getGoodsByContract(string GinC);
+        List<classsAboutGoodsInContract> getGoodsByContract(int GinC);
 
         [OperationContract]
         void addCommentary(int ginc, string comm);
@@ -67,33 +82,34 @@ namespace WcfService
         double getLeftSum();
     }
 
-    public interface IServiceUser
-    {
+    //[ServiceContract]
+    //public interface IServiceUser
+    //{
 
-        [OperationContract]
-        List<Contragents> GetContragents();
+    //    [OperationContract]
+    //    List<Contragents> GetContragents();
 
-        [OperationContract]
-        List<contract_> GetContractsByContragent(int id);
+    //    [OperationContract]
+    //    List<contract_> GetContractsByContragent(int id);
 
-        [OperationContract]
-        List<NewClassForDataGrid> GetClassByContractNumber(string number);
+    //    [OperationContract]
+    //    List<NewClassForDataGrid> GetClassByContractNumber(string number);
 
-        [OperationContract]
-        void addQuantityLeftInGoods(int q, int GinC);
+    //    [OperationContract]
+    //    void addQuantityLeftInGoods(int q, int GinC);
 
-        [OperationContract]
-        List<contract_> getAllContracts();
+    //    [OperationContract]
+    //    List<contract_> getAllContracts();
 
-        [OperationContract]
-        void addCommentary(int ginc, string comm);
+    //    [OperationContract]
+    //    void addCommentary(int ginc, string comm);
 
-        [OperationContract]
-        List<goodPrice> getAllGoodPrice();
+    //    [OperationContract]
+    //    List<goodPrice> getAllGoodPrice();
 
-        [OperationContract]
-        void editPriceBuy(string name, double pr);
-    }
+    //    [OperationContract]
+    //    void editPriceBuy(string name, double pr);
+    //}
 
 
     [DataContract]
@@ -108,6 +124,16 @@ namespace WcfService
             return string.Format($"{name} {priceBuy}");
         }
     }
+
+    [DataContract]
+    public class boolInt
+    {
+        [DataMember]
+        public int q { get; set; }
+        [DataMember]
+        public bool b { get; set; }
+    }
+
     [DataContract]
     public class NewClassForDataGrid
     {
@@ -127,11 +153,37 @@ namespace WcfService
         public string code { get; set; }
         [DataMember]
         public string figure { get; set; }
+        [DataMember]
+        public double priceSold { get; set; }
         public override string ToString()
         {
             return string.Format($"{name} {countAll} {countLeft} {deadLine} {commentary}");
         }
     }
+
+    [DataContract]
+    public class NewClassForDataGrid2
+    {
+        [DataMember]
+        public string name { get; set; }
+        [DataMember]
+        public int countAll { get; set; }
+        [DataMember]
+        public int countLeft { get; set; }
+        [DataMember]
+        public string commentary { get; set; }
+        [DataMember]
+        public string code { get; set; }
+        [DataMember]
+        public string figure { get; set; }
+        [DataMember]
+        public double priceSold { get; set; }
+        public override string ToString()
+        {
+            return string.Format($"{name} {countAll} {countLeft} {commentary}");
+        }
+    }
+
     [DataContract]
     public class contract_
     {
@@ -139,6 +191,8 @@ namespace WcfService
         public string name { get; set; }
         [DataMember]
         public string number { get; set; }
+        [DataMember]
+        public int id { get; set; }
         public override string ToString()
         {
             return string.Format($"{number}");

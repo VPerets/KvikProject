@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbPriceBuy = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +37,6 @@
             this.tbFigure = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbSold = new System.Windows.Forms.TextBox();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +49,6 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.tbPriceBuy, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label3, 1, 2);
@@ -60,8 +57,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tbFigure, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbSold, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.BtnAdd, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.BtnAdd, 0, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -74,18 +70,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(810, 330);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(408, 146);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(399, 43);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Продажа";
             // 
             // label4
             // 
@@ -175,20 +159,10 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Название\r\n";
             // 
-            // tbSold
-            // 
-            this.tbSold.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSold.Location = new System.Drawing.Point(3, 149);
-            this.tbSold.Name = "tbSold";
-            this.tbSold.Size = new System.Drawing.Size(399, 20);
-            this.tbSold.TabIndex = 7;
-            // 
             // BtnAdd
             // 
             this.BtnAdd.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.BtnAdd.Location = new System.Drawing.Point(3, 192);
+            this.BtnAdd.Location = new System.Drawing.Point(3, 149);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
             this.BtnAdd.TabIndex = 10;
@@ -213,7 +187,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
@@ -223,6 +196,5 @@
         public System.Windows.Forms.TextBox tbName;
         public System.Windows.Forms.TextBox tbCode;
         public System.Windows.Forms.TextBox tbFigure;
-        public System.Windows.Forms.TextBox tbSold;
     }
 }
