@@ -78,7 +78,6 @@ namespace KVIK_project
             bool b = Int32.TryParse(quantity, out q);
             double pr;
             bool b1 = Double.TryParse(price, out pr);
-            MessageBox.Show(pr.ToString());
             if (!b ) { MessageBox.Show("Ввести корректное значение количества");return; }
             if (!b1) { MessageBox.Show("Ввести корректное значение цены"); return; }
             service.addToGinC(id, q, pr, g.ID);

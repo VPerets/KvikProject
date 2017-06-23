@@ -61,6 +61,12 @@ namespace WcfService
                 SendCodeByMail();
             }            
         }
+        public List<DateSum> getForDataGrid1()
+        {
+            
+            return (from d in datacontext.GetTable<DateSum>()
+                    select d).ToList();
+        }
 
         public List<contract_> getAllContracts()
         {
@@ -145,11 +151,12 @@ namespace WcfService
             goodIn.QuantityLeft = goodIn.QuantityLeft - q;
             int quant = goodIn.QuantityLeft;
             var classTmp = (from g in datacontext.GetTable<Goods>()
-                               where g.ID == goodIn.IdGood
-                               select new { priceBuy = g.PriceBuy, Good = g.Name }).First();
+                            from gin in datacontext.GetTable<GoodsInContract>()
+                               where g.ID == goodIn.IdGood && gin.id == GinC && gin.IdGood == g.ID
+                               select new { priceBuy = g.PriceBuy, Good = g.Name, pricsSold = gin.PriceSold }).First();
 
             double summ = classTmp.priceBuy * q;
-
+            double summ2 = classTmp.pricsSold * q;
             var otgruzka = new DateSum
             {
                 contract = (from c in datacontext.GetTable<Contracts>()
@@ -159,6 +166,7 @@ namespace WcfService
                 good = classTmp.Good,
                 quant = q,
                 Summa = summ,
+                summSold = summ2,
                 whoIs = login  
             };
             datacontext.GetTable<DateSum>().InsertOnSubmit(otgruzka);

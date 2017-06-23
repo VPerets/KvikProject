@@ -151,27 +151,28 @@ namespace AppClient
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            if (e.ColumnIndex != 6 || row.Tag == null || row.Cells["send"].Value == null) return;
-            int quant;
-            bool b =
-                Int32.TryParse(row.Cells["send"].Value.ToString(), out quant);
-            if (!b || quant > Int32.Parse(row.Cells["left"].Value.ToString())) return;
+            return;
+            //    if (e.RowIndex < 0) return;
+            //    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            //    if (e.ColumnIndex != 6 || row.Tag == null || row.Cells["send"].Value == null) return;
+            //    int quant;
+            //    bool b =
+            //        Int32.TryParse(row.Cells["send"].Value.ToString(), out quant);
+            //    if (!b || quant > Int32.Parse(row.Cells["left"].Value.ToString())) return;
 
-            int id = (int)row.Tag;
+            //    int id = (int)row.Tag;
 
-            boolInt left = service.addQuantityLeftInGoods(quant, id, this.login);
-            if (left.b == false)
-            {
-                MessageBox.Show("Информация о оставшемся количестве товара обновлена!Введите количество заново");
-                row.Cells["left"].Value = left.q;
-                row.Cells["send"].Value = null;
-                return;
-            }
+            //    boolInt left = service.addQuantityLeftInGoods(quant, id, this.login);
+            //    if (left.b == false)
+            //    {
+            //        MessageBox.Show("Информация о оставшемся количестве товара обновлена!Введите количество заново");
+            //        row.Cells["left"].Value = left.q;
+            //        row.Cells["send"].Value = null;
+            //        return;
+            //    }
 
-            row.Cells["left"].Value = left.q;
-            row.Cells["send"].Value = null;
+            //    row.Cells["left"].Value = left.q;
+            //    row.Cells["send"].Value = null;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,7 +189,7 @@ namespace AppClient
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (loading == true || e.ColumnIndex != 7) return;
+            if (loading == true || e.ColumnIndex != 5) return;
             if (dataGridView1.Rows[e.RowIndex].Cells["commentary"].Value == null)
                 textCommTemp = "";
             else

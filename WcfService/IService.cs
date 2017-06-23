@@ -13,6 +13,9 @@ namespace WcfService
     public interface IService
     {
         [OperationContract]
+        List<DateSum> getForDataGrid1();
+
+        [OperationContract]
         int getCount();
 
         [OperationContract ]

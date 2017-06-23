@@ -18,6 +18,8 @@ namespace KvikLibrary
         [Column]
         public double Summa { get; set; }
         [Column]
+        public double summSold { get; set; }
+        [Column]
         public string good { get; set; }
         [Column]
         public int quant { get; set; }

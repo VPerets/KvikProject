@@ -74,6 +74,24 @@ namespace KVIK_project
             UpdateComboContragents();
             updateComboTabOwner();
             FillDataGrid();
+            fillDataGrid1();
+        }
+
+        private void fillDataGrid1()
+        {
+            if (this.dataGridView2.Rows.Count != 0) this.dataGridView2.Rows.Clear();
+            List<DateSum> coll = service.getForDataGrid1();
+            int rows = 0;
+            foreach (var item in coll)
+            {
+                this.dataGridView2.Rows.Add(new DataGridViewRow());
+                this.dataGridView2.Rows[rows].Cells["contract"].Value = item.contract;
+                this.dataGridView2.Rows[rows].Cells["date"].Value = item.Data;
+                this.dataGridView2.Rows[rows].Cells["good"].Value = item.good;
+                this.dataGridView2.Rows[rows].Cells["quant"].Value = item.quant;
+                this.dataGridView2.Rows[rows].Cells["sum"].Value = item.summSold;
+                rows++;
+            }
         }
 
         private void FillDataGrid(int temp = 0)
@@ -204,6 +222,7 @@ namespace KVIK_project
             row.Cells["left"].Value = left.q;
             row.Cells["send"].Value = null;
             this.labelOtgr.Text = service.getLeftSum().ToString();
+            fillDataGrid1();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

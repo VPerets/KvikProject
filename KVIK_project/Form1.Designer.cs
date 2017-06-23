@@ -79,6 +79,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.labelOtgr = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.good = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -92,6 +98,7 @@
             this.tableLayoutPanel10.SuspendLayout();
             this.tabPageInfo.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -643,20 +650,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel9.ColumnCount = 3;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.04651F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.95349F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 565F));
-            this.tableLayoutPanel9.Controls.Add(this.labelSum, 1, 0);
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 413F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.label9, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.dataGridView2, 2, 0);
             this.tableLayoutPanel9.Controls.Add(this.labelOtgr, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.labelSum, 1, 0);
             this.tableLayoutPanel9.Location = new System.Drawing.Point(32, 22);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 3;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.5641F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.4359F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 316F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(768, 395);
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.78947F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.21053F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 357F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(984, 395);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // labelSum
@@ -665,9 +675,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSum.AutoSize = true;
-            this.labelSum.Location = new System.Drawing.Point(96, 0);
+            this.labelSum.Location = new System.Drawing.Point(106, 0);
             this.labelSum.Name = "labelSum";
-            this.labelSum.Size = new System.Drawing.Size(103, 41);
+            this.labelSum.Size = new System.Drawing.Size(84, 25);
             this.labelSum.TabIndex = 2;
             // 
             // label8
@@ -678,7 +688,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 41);
+            this.label8.Size = new System.Drawing.Size(97, 25);
             this.label8.TabIndex = 0;
             this.label8.Text = "Всего на сумму";
             // 
@@ -688,9 +698,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 41);
+            this.label9.Location = new System.Drawing.Point(3, 25);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 37);
+            this.label9.Size = new System.Drawing.Size(97, 12);
             this.label9.TabIndex = 1;
             this.label9.Text = "Отгрузили";
             // 
@@ -700,10 +710,59 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelOtgr.AutoSize = true;
-            this.labelOtgr.Location = new System.Drawing.Point(96, 41);
+            this.labelOtgr.Location = new System.Drawing.Point(106, 25);
             this.labelOtgr.Name = "labelOtgr";
-            this.labelOtgr.Size = new System.Drawing.Size(103, 37);
+            this.labelOtgr.Size = new System.Drawing.Size(84, 12);
             this.labelOtgr.TabIndex = 3;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.contract,
+            this.date,
+            this.good,
+            this.Quant,
+            this.Sum});
+            this.dataGridView2.Location = new System.Drawing.Point(196, 3);
+            this.dataGridView2.Name = "dataGridView2";
+            this.tableLayoutPanel9.SetRowSpan(this.dataGridView2, 3);
+            this.dataGridView2.Size = new System.Drawing.Size(785, 389);
+            this.dataGridView2.TabIndex = 4;
+            // 
+            // contract
+            // 
+            this.contract.HeaderText = "Договор";
+            this.contract.Name = "contract";
+            this.contract.ReadOnly = true;
+            // 
+            // date
+            // 
+            this.date.HeaderText = "Дата";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            // 
+            // good
+            // 
+            this.good.HeaderText = "Продукт";
+            this.good.Name = "good";
+            this.good.ReadOnly = true;
+            // 
+            // Quant
+            // 
+            this.Quant.HeaderText = "Колтчество";
+            this.Quant.Name = "Quant";
+            this.Quant.ReadOnly = true;
+            // 
+            // Sum
+            // 
+            this.Sum.HeaderText = "Сумма";
+            this.Sum.Name = "Sum";
+            this.Sum.ReadOnly = true;
             // 
             // Form1
             // 
@@ -731,6 +790,7 @@
             this.tabPageInfo.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -787,6 +847,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Commentary;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceSold;
         private System.Windows.Forms.DataGridViewTextBoxColumn deadLine;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contract;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn good;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sum;
     }
 }
 
