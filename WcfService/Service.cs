@@ -17,15 +17,14 @@ namespace WcfService
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде и файле конфигурации.
 
     [ServiceBehavior(
-        InstanceContextMode = InstanceContextMode.Single,
+        InstanceContextMode = InstanceContextMode.Single,ConcurrencyMode = ConcurrencyMode.Single,
         IncludeExceptionDetailInFaults = true)]
-
     public class Service : IService
     {
         DataContext datacontext;
         static Timer timer;
         DbConnection cn;
-       // static int count = 0;
+        List<IClient> connections = new List<IClient>();
 
         public Service()
         {
@@ -46,12 +45,28 @@ namespace WcfService
             //timer.AutoReset = true;
             //timer.Enabled = true;            
         }
-        public int getCount() { return 0; }
 
+        public bool checkLoginPass(string l, string p)
+        {
+            var col = from s in datacontext.GetTable<staff>()
+                      where s.login == l && s.pass == p
+                      select s;
+            if (col.Count() == 0) return false;
+        
+            return true;
+        }
+        public void start()
+        {
+            IClient connection = OperationContext.Current.GetCallbackChannel<IClient>();
+            Console.WriteLine(connection.ToString());
+           // this.connections.Add(connection);
+            connection.update();
+        }
         public void close()
         {
-            //datacontext.Dispose();
-            //cn.Close();
+            var conn = OperationContext.Current.GetCallbackChannel<IClient>();
+            if (conn != null)
+            this.connections.Remove(conn);
         }
 
         public void forTimer(object obj)
@@ -130,14 +145,6 @@ namespace WcfService
             good.PriceBuy = pr;
             datacontext.SubmitChanges();
 
-        }
-        public bool checkLoginPass(string l, string p)
-        {
-            var col = from s in datacontext.GetTable<staff>()
-                      where s.login == l && s.pass == p
-                      select s;
-            if (col.Count() == 0) return false;
-            return true;
         }
 
         public boolInt addQuantityLeftInGoods(int q,int GinC, string login)

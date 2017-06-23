@@ -38,10 +38,10 @@ namespace KVIK_project
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (service!=null)
+           /* if (service!=null)
             service.close();
             if (myChannelFactory != null)
-            this.myChannelFactory.Close();
+            this.myChannelFactory.Close();*/
         }
 
         private void UpdateComboContragents()
@@ -92,6 +92,7 @@ namespace KVIK_project
                 this.dataGridView2.Rows[rows].Cells["sum"].Value = item.summSold;
                 rows++;
             }
+
         }
 
         private void FillDataGrid(int temp = 0)
@@ -160,21 +161,22 @@ namespace KVIK_project
                     }
                 }
             }
+      
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loginForm form = new loginForm();
-            form.ShowDialog();
-            if (form.accept == false) this.Close();
-            this.login = form.login;
-
-            var myBinding = new BasicHttpBinding();
+            var myBinding = new NetTcpBinding();
             var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
             var myEndpoint = new EndpointAddress(Uri);
-            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            myChannelFactory = new DuplexChannelFactory<IService>(new Client(), myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
+
+            loginForm form = new loginForm(service);
+            form.ShowDialog();
+            if (form.accept == false) this.Close();
+            this.login = form.login;  
 
             this.UpdateAllAll();
             this.allGoods = service.getAllGoods();
@@ -227,6 +229,7 @@ namespace KVIK_project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+         
             if (this.comboBox1.SelectedIndex == 0)
             {
                 FillDataGrid();
@@ -288,6 +291,7 @@ namespace KVIK_project
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (loading == true || e.ColumnIndex != 7) return;
+            service.start();
             if (dataGridView1.Rows[e.RowIndex].Cells["commentary"].Value == null)
                 textCommTemp = "";
             else
@@ -304,6 +308,14 @@ namespace KVIK_project
             if (b == false) { MessageBox.Show("Фирма с таким именем уже существует");}
             tbOwner.Text = "";
             updateComboTabOwner();        
+        }
+    }
+
+    public class Client : IClient
+    {
+        public void update()
+        {
+            Console.WriteLine();
         }
     }
 }

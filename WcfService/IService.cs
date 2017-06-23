@@ -8,15 +8,21 @@ using KvikLibrary;
 
 namespace WcfService
 {
-    // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени интерфейса "IService1" в коде и файле конфигурации.
-    [ServiceContract]
+
+    public interface IClient
+    {
+        [OperationContract(IsOneWay = true)]
+        void update();
+    }
+
+    [ServiceContract (CallbackContract = typeof(IClient))]
     public interface IService
     {
         [OperationContract]
-        List<DateSum> getForDataGrid1();
+        void start();
 
         [OperationContract]
-        int getCount();
+        List<DateSum> getForDataGrid1();
 
         [OperationContract ]
         bool checkLoginPass(string l, string p);
@@ -84,35 +90,6 @@ namespace WcfService
         [OperationContract]
         double getLeftSum();
     }
-
-    //[ServiceContract]
-    //public interface IServiceUser
-    //{
-
-    //    [OperationContract]
-    //    List<Contragents> GetContragents();
-
-    //    [OperationContract]
-    //    List<contract_> GetContractsByContragent(int id);
-
-    //    [OperationContract]
-    //    List<NewClassForDataGrid> GetClassByContractNumber(string number);
-
-    //    [OperationContract]
-    //    void addQuantityLeftInGoods(int q, int GinC);
-
-    //    [OperationContract]
-    //    List<contract_> getAllContracts();
-
-    //    [OperationContract]
-    //    void addCommentary(int ginc, string comm);
-
-    //    [OperationContract]
-    //    List<goodPrice> getAllGoodPrice();
-
-    //    [OperationContract]
-    //    void editPriceBuy(string name, double pr);
-    //}
 
 
     [DataContract]

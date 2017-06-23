@@ -19,9 +19,10 @@ namespace KVIK_project
         public bool accept;
         public string login = "";
         private ChannelFactory<IService> myChannelFactory = null;
-        public loginForm()
+        public loginForm(IService s)
         {
             InitializeComponent();
+            this.service = s;
             this.MaximumSize = this.Size;
             this.Load += LoginForm_Load;
             this.FormClosing += LoginForm_FormClosing;
@@ -29,17 +30,17 @@ namespace KVIK_project
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.myChannelFactory.Close();
+            //this.myChannelFactory.Close();
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-            var myBinding = new BasicHttpBinding();
-            var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
-            var myEndpoint = new EndpointAddress(Uri);
-            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+        private void LoginForm_Load(object sender, EventArgs e) { 
+        //{
+        //    var myBinding = new NetTcpBinding();
+        //    var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
+        //    var myEndpoint = new EndpointAddress(Uri);
+        //    myChannelFactory = new DuplexChannelFactory<IService>(new Client(),myBinding, myEndpoint);
 
-            service = myChannelFactory.CreateChannel();
+        //    service = myChannelFactory.CreateChannel();
         }
 
         private void btnLog_Click(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace KVIK_project
             {
                 login = textBoxLogin.Text;
                 this.Close();
-            }            
+            }
         }
     }
 }
