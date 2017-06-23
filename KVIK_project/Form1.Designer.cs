@@ -645,7 +645,7 @@
             this.tableLayoutPanel9.ColumnCount = 3;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.04651F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.95349F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 564F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 565F));
             this.tableLayoutPanel9.Controls.Add(this.labelSum, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.label9, 0, 1);
@@ -667,7 +667,7 @@
             this.labelSum.AutoSize = true;
             this.labelSum.Location = new System.Drawing.Point(96, 0);
             this.labelSum.Name = "labelSum";
-            this.labelSum.Size = new System.Drawing.Size(104, 41);
+            this.labelSum.Size = new System.Drawing.Size(103, 41);
             this.labelSum.TabIndex = 2;
             // 
             // label8
@@ -702,7 +702,7 @@
             this.labelOtgr.AutoSize = true;
             this.labelOtgr.Location = new System.Drawing.Point(96, 41);
             this.labelOtgr.Name = "labelOtgr";
-            this.labelOtgr.Size = new System.Drawing.Size(104, 37);
+            this.labelOtgr.Size = new System.Drawing.Size(103, 37);
             this.labelOtgr.TabIndex = 3;
             // 
             // Form1
