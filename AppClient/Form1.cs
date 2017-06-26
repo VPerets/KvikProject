@@ -18,6 +18,7 @@ namespace AppClient
         private List<Contragents> AllContragents = new List<Contragents>();
         private string textCommTemp = "";
         private bool loading = true;
+        private double oldPrice = 0;
         private string login = "";
         private ChannelFactory<IService> myChannelFactory = null;
 
@@ -44,7 +45,9 @@ namespace AppClient
 
         private void updateAfterEditPrice()
         {
-            var goodPrice = service.getAllGoodPrice();
+            List<goodPrice> goodPrice = service.getAllGoodPrice();
+            SortClass<goodPrice> sorting = new SortClass<WcfService.goodPrice>();
+            goodPrice.Sort(sorting);
             if (lvGoodsPrices.Items.Count != 0) this.lvGoodsPrices.Items.Clear();
             for (int i = 0; i < goodPrice.Count; i++)
             {
@@ -147,6 +150,7 @@ namespace AppClient
             this.UpdateAllAll();
             updateAfterEditPrice();
             loading = false;
+            this.lvGoodsPrices.Height = this.Height;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -206,7 +210,7 @@ namespace AppClient
             if (!b)
             { MessageBox.Show("Неверно введена цена"); return; }
 
-            service.editPriceBuy(labelName.Text, pr);
+            service.editPriceBuy(labelName.Text, pr, oldPrice);
             updateAfterEditPrice();
         }
 
@@ -215,6 +219,7 @@ namespace AppClient
             var g = this.lvGoodsPrices.Items[lvGoodsPrices.SelectedIndex] as goodPrice;
             this.textBox1.Text = g.priceBuy.ToString();
             this.labelName.Text = g.name;
+            oldPrice = g.priceBuy;
         }
     }
 }

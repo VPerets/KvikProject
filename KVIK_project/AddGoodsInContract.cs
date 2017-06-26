@@ -42,7 +42,10 @@ namespace KVIK_project
 
             this.service = myChannelFactory.CreateChannel();
             this.listView1.View = View.List;
-            this.comboGoods.Items.AddRange(service.getAllGoods().ToArray());
+            List<Goods> goods = service.getAllGoods().ToList();
+            sortClass<Goods> sort = new sortClass<Goods>();
+            goods.Sort(sort);
+            this.comboGoods.Items.AddRange(goods.ToArray<Goods>());
             this.comboBoxContracts.Items.AddRange(service.getAllContracts().ToArray());
         }
 

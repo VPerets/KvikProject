@@ -76,7 +76,7 @@ namespace WcfService
         List<goodPrice> getAllGoodPrice();
 
         [OperationContract]
-        void editPriceBuy(string name, double pr);
+        void editPriceBuy(string name, double newPr, double old);
 
         [OperationContract]
         double getTotalSum();
@@ -85,35 +85,14 @@ namespace WcfService
         double getLeftSum();
     }
 
-    //[ServiceContract]
-    //public interface IServiceUser
-    //{
-
-    //    [OperationContract]
-    //    List<Contragents> GetContragents();
-
-    //    [OperationContract]
-    //    List<contract_> GetContractsByContragent(int id);
-
-    //    [OperationContract]
-    //    List<NewClassForDataGrid> GetClassByContractNumber(string number);
-
-    //    [OperationContract]
-    //    void addQuantityLeftInGoods(int q, int GinC);
-
-    //    [OperationContract]
-    //    List<contract_> getAllContracts();
-
-    //    [OperationContract]
-    //    void addCommentary(int ginc, string comm);
-
-    //    [OperationContract]
-    //    List<goodPrice> getAllGoodPrice();
-
-    //    [OperationContract]
-    //    void editPriceBuy(string name, double pr);
-    //}
-
+    public class SortClass<T> : IComparer<T>
+    where T : goodPrice
+    {
+        public int Compare(T x, T y)
+        {
+            return x.name.CompareTo(y.name);
+        }
+    }
 
     [DataContract]
     public class goodPrice

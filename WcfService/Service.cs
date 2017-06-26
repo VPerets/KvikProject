@@ -36,7 +36,7 @@ namespace WcfService
             int hour = DateTime.Now.Hour;
         //    long ticks = (18- hour)*1000*60*60;
             long ticks = (10- hour) * 1000 * 60 * 60;
-            timer = new Timer(forTimer, null, 1000, 300000);
+            timer = new Timer(forTimer, null, 1000, 84000000);
             //if (count == 0)
             //{
             //    count++;
@@ -56,7 +56,7 @@ namespace WcfService
 
         public void forTimer(object obj)
         {
-            if (DateTime.Now.Date.DayOfWeek  == DayOfWeek.Thursday)
+            if (DateTime.Now.Date.DayOfWeek  == DayOfWeek.Friday)
             {
                 SendCodeByMail();
             }            
@@ -75,16 +75,20 @@ namespace WcfService
         }
         public bool addGoodsToDB(string name, string code, string fig, double buy)
         {
-            var NameTemp = from g in datacontext.GetTable<Goods>()
-                              where g.Figure == fig
-                              select g;
-            if (NameTemp.Count() > 0) return false;
+            try {
+                var NameTemp = from g in datacontext.GetTable<Goods>()
+                               where g.Figure == fig
+                               select g;
+                if (NameTemp.Count() > 0) return false;
 
-            Goods newGood = new Goods { numberObl = code, Figure = fig,
-                Name = name, PriceBuy = buy};
-            datacontext.GetTable<Goods>().InsertOnSubmit(newGood);
-            datacontext.SubmitChanges();
-            return true;
+                Goods newGood = new Goods { numberObl = code, Figure = fig,
+                    Name = name, PriceBuy = buy };
+                datacontext.GetTable<Goods>().InsertOnSubmit(newGood);
+                datacontext.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            return false;
         }
 
         public void addCommentary(int GinC, string comm)
@@ -122,13 +126,19 @@ namespace WcfService
             return col.ToList();
         }
 
-        public void editPriceBuy(string name, double pr)
+        public void editPriceBuy(string name, double New, double old)
         {
             var good = (from g in datacontext.GetTable<Goods>()
                         where g.Name == name
                         select g).First();
-            good.PriceBuy = pr;
+            good.PriceBuy = New;
+
+            var update = new UpdateGoodsPrice { data = DateTime.Now.Date, good = name, newPrice = New, oldPrice = old };
+            datacontext.GetTable<UpdateGoodsPrice>().InsertOnSubmit(update);
+
             datacontext.SubmitChanges();
+
+
 
         }
         public bool checkLoginPass(string l, string p)

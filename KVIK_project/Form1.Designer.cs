@@ -74,12 +74,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelSum = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.labelOtgr = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.labelOtgr = new System.Windows.Forms.Label();
+            this.labelSum = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.good = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -652,7 +652,7 @@
             this.tableLayoutPanel9.ColumnCount = 3;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 413F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 791F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.Controls.Add(this.label8, 0, 0);
@@ -669,17 +669,6 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(984, 395);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
-            // labelSum
-            // 
-            this.labelSum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSum.AutoSize = true;
-            this.labelSum.Location = new System.Drawing.Point(106, 0);
-            this.labelSum.Name = "labelSum";
-            this.labelSum.Size = new System.Drawing.Size(84, 25);
-            this.labelSum.TabIndex = 2;
-            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -688,7 +677,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 25);
+            this.label8.Size = new System.Drawing.Size(97, 24);
             this.label8.TabIndex = 0;
             this.label8.Text = "Всего на сумму";
             // 
@@ -698,22 +687,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 25);
+            this.label9.Location = new System.Drawing.Point(3, 24);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(97, 12);
+            this.label9.Size = new System.Drawing.Size(97, 13);
             this.label9.TabIndex = 1;
             this.label9.Text = "Отгрузили";
-            // 
-            // labelOtgr
-            // 
-            this.labelOtgr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelOtgr.AutoSize = true;
-            this.labelOtgr.Location = new System.Drawing.Point(106, 25);
-            this.labelOtgr.Name = "labelOtgr";
-            this.labelOtgr.Size = new System.Drawing.Size(84, 12);
-            this.labelOtgr.TabIndex = 3;
             // 
             // dataGridView2
             // 
@@ -733,6 +711,28 @@
             this.tableLayoutPanel9.SetRowSpan(this.dataGridView2, 3);
             this.dataGridView2.Size = new System.Drawing.Size(785, 389);
             this.dataGridView2.TabIndex = 4;
+            // 
+            // labelOtgr
+            // 
+            this.labelOtgr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelOtgr.AutoSize = true;
+            this.labelOtgr.Location = new System.Drawing.Point(106, 24);
+            this.labelOtgr.Name = "labelOtgr";
+            this.labelOtgr.Size = new System.Drawing.Size(84, 13);
+            this.labelOtgr.TabIndex = 3;
+            // 
+            // labelSum
+            // 
+            this.labelSum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSum.AutoSize = true;
+            this.labelSum.Location = new System.Drawing.Point(106, 0);
+            this.labelSum.Name = "labelSum";
+            this.labelSum.Size = new System.Drawing.Size(84, 24);
+            this.labelSum.TabIndex = 2;
             // 
             // contract
             // 
@@ -754,7 +754,7 @@
             // 
             // Quant
             // 
-            this.Quant.HeaderText = "Колтчество";
+            this.Quant.HeaderText = "Количество";
             this.Quant.Name = "Quant";
             this.Quant.ReadOnly = true;
             // 

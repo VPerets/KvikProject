@@ -39,11 +39,12 @@ namespace KVIK_project
 
         private void AddGood_Load(object sender, EventArgs e)
         {
-            var myBinding = new WSHttpBinding();
+            var myBinding = new BasicHttpBinding();
             var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
             var myEndpoint = new EndpointAddress(Uri);
 
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            service = myChannelFactory.CreateChannel();
 
         }
 
@@ -54,7 +55,10 @@ namespace KVIK_project
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             name = this.tbName.Text;
-            figure = this.tbFigure.Text;
+            if (this.tbFigure.Text == "")
+                figure = "";
+            else
+                figure = this.tbFigure.Text;
             code = this.tbCode.Text;
             double b;
             if (Double.TryParse(this.tbPriceBuy.Text, out b))
@@ -66,7 +70,6 @@ namespace KVIK_project
             }
 
             bool bool_ = service.addGoodsToDB(name, code, figure, buy);
-
             if (bool_ == false)
             {
                 MessageBox.Show("Продукт с таким чертежем уже существует");

@@ -24,6 +24,7 @@ namespace AppClient2
         private List<Goods> allGoods = new List<Goods>();
         private bool loading = true;
         private string login = "";
+        private double oldPrice = 0;
 
         public Form1()
         {
@@ -179,7 +180,7 @@ namespace AppClient2
             if (!b)
             { MessageBox.Show("Неверно введена цена"); return; }
 
-            service.editPriceBuy(labelName.Text, pr);
+            service.editPriceBuy(labelName.Text, pr, oldPrice);
             updateAfterEditPrice();
         }
 
@@ -188,6 +189,7 @@ namespace AppClient2
             var g = this.lvGoodsPrices.Items[lvGoodsPrices.SelectedIndex] as goodPrice;
             this.textBox1.Text = g.priceBuy.ToString();
             this.labelName.Text = g.name;
+            oldPrice = g.priceBuy;
         }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Owner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="staff.cs" />
+    <Compile Include="upadetGoodsPrice.cs" />
     <Compile Include="whoIs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

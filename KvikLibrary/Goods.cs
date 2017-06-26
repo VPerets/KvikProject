@@ -4,11 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Data.Linq.Mapping;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace KvikLibrary
 {
+
+   public class sortClass<T> : IComparer<T>
+        where T : Goods
+    {
+        public int Compare(T x, T y)
+        {
+            Goods g1 = x as Goods;
+            Goods g2 = y as Goods;
+
+            return (g1.Name.CompareTo(g2.Name));
+
+        }
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     [Table()]
-    public class Goods
+    public class Goods 
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         public int ID { get; set; }
