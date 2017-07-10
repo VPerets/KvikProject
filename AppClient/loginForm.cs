@@ -29,6 +29,7 @@ namespace AppClient
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
             this.myChannelFactory.Close();
         }
 
@@ -40,6 +41,7 @@ namespace AppClient
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
+            service.open();
         }
 
         private void btnLog_Click(object sender, EventArgs e)

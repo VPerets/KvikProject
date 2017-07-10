@@ -29,6 +29,7 @@ namespace AppClient2
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
             this.myChannelFactory.Close();
         }
 

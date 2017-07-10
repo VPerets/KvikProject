@@ -29,6 +29,7 @@ namespace KVIK_project
 
         private void AddGoodsInContract_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
             myChannelFactory.Close();         
         }
 
@@ -41,6 +42,7 @@ namespace KVIK_project
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             this.service = myChannelFactory.CreateChannel();
+            service.open();
             this.listView1.View = View.List;
             List<Goods> goods = service.getAllGoods().ToList();
             sortClass<Goods> sort = new sortClass<Goods>();

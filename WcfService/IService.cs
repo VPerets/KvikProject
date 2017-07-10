@@ -16,6 +16,9 @@ namespace WcfService
         List<DateSum> getForDataGrid1();
 
         [OperationContract]
+        void open();
+
+        [OperationContract]
         int getCount();
 
         [OperationContract ]

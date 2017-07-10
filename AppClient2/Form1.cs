@@ -36,6 +36,7 @@ namespace AppClient2
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
             if (myChannelFactory != null)
                 this.myChannelFactory.Close();
         }
@@ -151,7 +152,8 @@ namespace AppClient2
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
-
+            service.open();
+            MessageBox.Show(service.getCount().ToString());
             this.UpdateAllAll();
             this.allGoods = service.getAllGoods();
             updateAfterEditPrice();

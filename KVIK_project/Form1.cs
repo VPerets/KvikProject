@@ -175,7 +175,7 @@ namespace KVIK_project
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
-
+            service.open();
             this.UpdateAllAll();
             this.allGoods = service.getAllGoods();
             loading = false;

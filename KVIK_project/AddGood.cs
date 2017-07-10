@@ -34,6 +34,7 @@ namespace KVIK_project
 
         private void AddGood_FormClosing1(object sender, FormClosingEventArgs e)
         {
+            service.close();
             myChannelFactory.Close();
         }
 
@@ -45,7 +46,7 @@ namespace KVIK_project
 
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
             service = myChannelFactory.CreateChannel();
-
+            service.open();
         }
 
         private void AddGood_FormClosing(object sender, FormClosingEventArgs e)

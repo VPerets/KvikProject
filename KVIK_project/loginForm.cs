@@ -29,6 +29,7 @@ namespace KVIK_project
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
             this.myChannelFactory.Close();
         }
 
@@ -40,6 +41,8 @@ namespace KVIK_project
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
             service = myChannelFactory.CreateChannel();
+            service.open();
+            MessageBox.Show(service.getCount().ToString());
         }
 
         private void btnLog_Click(object sender, EventArgs e)

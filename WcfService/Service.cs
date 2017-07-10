@@ -25,7 +25,7 @@ namespace WcfService
         DataContext datacontext;
         static Timer timer;
         DbConnection cn;
-       // static int count = 0;
+        static int count;
 
         public Service()
         {
@@ -45,13 +45,20 @@ namespace WcfService
             //timer. += OnTimedEvent;
             //timer.AutoReset = true;
             //timer.Enabled = true;            
+            count = 0;
         }
-        public int getCount() { return 0; }
+        public int getCount() { return count; }
 
+        public void open() {
+            count++;
+        }
         public void close()
         {
-            //datacontext.Dispose();
-            //cn.Close();
+            count--;
+            if (count == 0) {
+                datacontext.Dispose();
+                datacontext = new DataContext(cn);
+            }
         }
 
         public void forTimer(object obj)

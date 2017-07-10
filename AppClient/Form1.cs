@@ -31,6 +31,7 @@ namespace AppClient
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
             if (this.myChannelFactory != null) myChannelFactory.Close();
         }
 
@@ -147,6 +148,7 @@ namespace AppClient
             var myEndpoint = new EndpointAddress(Uri);
             myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
             service = myChannelFactory.CreateChannel();
+            service.open();
             this.UpdateAllAll();
             updateAfterEditPrice();
             loading = false;
