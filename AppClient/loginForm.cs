@@ -9,16 +9,14 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WcfService;
 
 namespace AppClient
 {
     public partial class loginForm : Form
     {
-        private IService service;
+        private Service service;
         public bool accept;
         public string login = "";
-        private ChannelFactory<IService> myChannelFactory = null;
         public loginForm()
         {
             InitializeComponent();
@@ -30,17 +28,11 @@ namespace AppClient
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             service.close();
-            this.myChannelFactory.Close();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            var myBinding = new BasicHttpBinding();
-            var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
-            var myEndpoint = new EndpointAddress(Uri);
-            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
-
-            service = myChannelFactory.CreateChannel();
+            service = new Service();
             service.open();
         }
 

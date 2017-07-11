@@ -16,8 +16,7 @@ namespace AppClient2
 {
     public partial class Form1 : Form
     {
-        private IService service = null;
-        private ChannelFactory<IService> myChannelFactory = null;
+        private Service service = null;
         private List<Contragents> contragents = new List<Contragents>();
         private Contragents SelectedContr;
         private List<Contragents> contragentsTemp = new List<Contragents>();
@@ -37,8 +36,6 @@ namespace AppClient2
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             service.close();
-            if (myChannelFactory != null)
-                this.myChannelFactory.Close();
         }
 
         private void UpdateComboContragents()
@@ -145,13 +142,7 @@ namespace AppClient2
             form.ShowDialog();
             if (form.accept == false) this.Close();
             this.login = form.login;
-
-            var myBinding = new BasicHttpBinding();
-            var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
-            var myEndpoint = new EndpointAddress(Uri);
-            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
-
-            service = myChannelFactory.CreateChannel();
+            service = new Service();
             service.open();
             MessageBox.Show(service.getCount().ToString());
             this.UpdateAllAll();
