@@ -144,7 +144,6 @@ namespace AppClient2
             this.login = form.login;
             service = new Service();
             service.open();
-            MessageBox.Show(service.getCount().ToString());
             this.UpdateAllAll();
             this.allGoods = service.getAllGoods();
             updateAfterEditPrice();
