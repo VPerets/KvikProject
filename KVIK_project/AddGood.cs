@@ -20,9 +20,10 @@ namespace KVIK_project
         public string code;
         public string figure;
         public double buy;
-        private ChannelFactory<IService> myChannelFactory = null;
+      //private ChannelFactory<IService> myChannelFactory = null;
         public bool added = false;
-        private IService service;
+        // private IService service;
+        private Service service;
 
         public AddGood()
         {
@@ -35,22 +36,24 @@ namespace KVIK_project
         private void AddGood_FormClosing1(object sender, FormClosingEventArgs e)
         {
             service.close();
-            myChannelFactory.Close();
+           // myChannelFactory.Close();
         }
 
         private void AddGood_Load(object sender, EventArgs e)
         {
-            var myBinding = new BasicHttpBinding();
-            var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
-            var myEndpoint = new EndpointAddress(Uri);
+            //var myBinding = new BasicHttpBinding();
+            //var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
+            //var myEndpoint = new EndpointAddress(Uri);
 
-            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
-            service = myChannelFactory.CreateChannel();
+            //myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            //service = myChannelFactory.CreateChannel();
+            service = new Service();
             service.open();
         }
 
         private void AddGood_FormClosing(object sender, FormClosingEventArgs e)
         {
+            service.close();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)

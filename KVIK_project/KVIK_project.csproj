@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
     <EmbeddedResource Include="AddGood.resx">
       <DependentUpon>AddGood.cs</DependentUpon>
     </EmbeddedResource>

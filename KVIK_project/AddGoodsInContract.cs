@@ -16,8 +16,9 @@ namespace KVIK_project
 {
     public partial class AddGoodsInContract : Form
     {
-        private IService service = null;
-        private ChannelFactory<IService> myChannelFactory = null;
+        //private IService service = null;
+        private Service service = null;
+        //private ChannelFactory<IService> myChannelFactory = null;
         public bool added = false;
         public int id;
         public AddGoodsInContract()
@@ -30,18 +31,19 @@ namespace KVIK_project
         private void AddGoodsInContract_FormClosing(object sender, FormClosingEventArgs e)
         {
             service.close();
-            myChannelFactory.Close();         
+           // myChannelFactory.Close();         
         }
 
         private void AddGoodsInContract_Load(object sender, EventArgs e)
         {
-            var myBinding = new BasicHttpBinding();
-            var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
-            var myEndpoint = new EndpointAddress(Uri);
+            //var myBinding = new BasicHttpBinding();
+            //var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
+            //var myEndpoint = new EndpointAddress(Uri);
 
-            myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            //myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
 
-            this.service = myChannelFactory.CreateChannel();
+            //this.service = myChannelFactory.CreateChannel();
+            service = new Service();
             service.open();
             this.listView1.View = View.List;
             List<Goods> goods = service.getAllGoods().ToList();
