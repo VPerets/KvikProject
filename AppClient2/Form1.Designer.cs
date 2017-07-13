@@ -46,9 +46,10 @@
             this.tabPagePrice = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttoEditPrice = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttoEditPrice = new System.Windows.Forms.Button();
             this.lvGoodsPrices = new System.Windows.Forms.ListBox();
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
@@ -57,8 +58,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.labelOtgr = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboByContragent = new System.Windows.Forms.ComboBox();
+            this.byRoad = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -67,10 +70,11 @@
             this.tabPagePrice.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tabPageInfo.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -279,6 +283,34 @@
             this.tableLayoutPanel8.Size = new System.Drawing.Size(170, 435);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.buttoEditPrice, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.labelName, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.textBox1, 0, 1);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(164, 128);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // buttoEditPrice
+            // 
+            this.tableLayoutPanel5.SetColumnSpan(this.buttoEditPrice, 2);
+            this.buttoEditPrice.Location = new System.Drawing.Point(3, 83);
+            this.buttoEditPrice.Name = "buttoEditPrice";
+            this.buttoEditPrice.Size = new System.Drawing.Size(100, 23);
+            this.buttoEditPrice.TabIndex = 2;
+            this.buttoEditPrice.Text = "Изменить";
+            this.buttoEditPrice.UseVisualStyleBackColor = true;
+            this.buttoEditPrice.Click += new System.EventHandler(this.buttoEditPrice_Click);
+            // 
             // labelName
             // 
             this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -302,17 +334,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(158, 20);
             this.textBox1.TabIndex = 1;
-            // 
-            // buttoEditPrice
-            // 
-            this.tableLayoutPanel5.SetColumnSpan(this.buttoEditPrice, 2);
-            this.buttoEditPrice.Location = new System.Drawing.Point(3, 83);
-            this.buttoEditPrice.Name = "buttoEditPrice";
-            this.buttoEditPrice.Size = new System.Drawing.Size(100, 23);
-            this.buttoEditPrice.TabIndex = 2;
-            this.buttoEditPrice.Text = "Изменить";
-            this.buttoEditPrice.UseVisualStyleBackColor = true;
-            this.buttoEditPrice.Click += new System.EventHandler(this.buttoEditPrice_Click);
             // 
             // lvGoodsPrices
             // 
@@ -345,13 +366,14 @@
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.21354F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.78646F));
             this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel6, 1, 0);
             this.tableLayoutPanel9.Location = new System.Drawing.Point(32, 22);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 3;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.5641F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.4359F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 316F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(768, 395);
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 341F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(984, 435);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -372,7 +394,7 @@
             this.tableLayoutPanel9.SetRowSpan(this.tableLayoutPanel3, 2);
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(202, 72);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(261, 87);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // labelSum
@@ -381,9 +403,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSum.AutoSize = true;
-            this.labelSum.Location = new System.Drawing.Point(127, 36);
+            this.labelSum.Location = new System.Drawing.Point(163, 43);
             this.labelSum.Name = "labelSum";
-            this.labelSum.Size = new System.Drawing.Size(72, 36);
+            this.labelSum.Size = new System.Drawing.Size(95, 44);
             this.labelSum.TabIndex = 2;
             // 
             // label8
@@ -392,9 +414,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 36);
+            this.label8.Location = new System.Drawing.Point(3, 43);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 36);
+            this.label8.Size = new System.Drawing.Size(154, 44);
             this.label8.TabIndex = 0;
             this.label8.Text = "Всего на сумму";
             // 
@@ -406,7 +428,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(118, 36);
+            this.label9.Size = new System.Drawing.Size(154, 43);
             this.label9.TabIndex = 1;
             this.label9.Text = "Отгрузили";
             // 
@@ -416,27 +438,44 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelOtgr.AutoSize = true;
-            this.labelOtgr.Location = new System.Drawing.Point(127, 0);
+            this.labelOtgr.Location = new System.Drawing.Point(163, 0);
             this.labelOtgr.Name = "labelOtgr";
-            this.labelOtgr.Size = new System.Drawing.Size(72, 36);
+            this.labelOtgr.Size = new System.Drawing.Size(95, 43);
             this.labelOtgr.TabIndex = 3;
             // 
-            // tableLayoutPanel5
+            // tableLayoutPanel6
             // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Controls.Add(this.buttoEditPrice, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.labelName, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.textBox1, 0, 1);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 3;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(164, 128);
-            this.tableLayoutPanel5.TabIndex = 0;
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.40476F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.59524F));
+            this.tableLayoutPanel6.Controls.Add(this.comboByContragent, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.byRoad, 1, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(270, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel9.SetRowSpan(this.tableLayoutPanel6, 2);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(239, 87);
+            this.tableLayoutPanel6.TabIndex = 5;
+            // 
+            // comboByContragent
+            // 
+            this.comboByContragent.FormattingEnabled = true;
+            this.comboByContragent.Location = new System.Drawing.Point(3, 3);
+            this.comboByContragent.Name = "comboByContragent";
+            this.comboByContragent.Size = new System.Drawing.Size(112, 21);
+            this.comboByContragent.TabIndex = 0;
+            this.comboByContragent.SelectedIndexChanged += new System.EventHandler(this.comboByRoad_SelectedIndexChanged);
+            // 
+            // byRoad
+            // 
+            this.byRoad.AutoSize = true;
+            this.byRoad.Location = new System.Drawing.Point(121, 0);
+            this.byRoad.Name = "byRoad";
+            this.byRoad.Size = new System.Drawing.Size(13, 13);
+            this.byRoad.TabIndex = 1;
+            this.byRoad.Text = "_";
             // 
             // Form1
             // 
@@ -455,12 +494,14 @@
             this.tabPagePrice.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tabPageInfo.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -497,6 +538,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceSold;
         private System.Windows.Forms.DataGridViewTextBoxColumn Commentary;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.ComboBox comboByContragent;
+        private System.Windows.Forms.Label byRoad;
     }
 }
 

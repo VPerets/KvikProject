@@ -142,6 +142,7 @@ namespace AppClient2
             goodIn.commentary = comm;
             datacontext.SubmitChanges();
         }
+
         private double getSum()
         {
             if (datacontext != null)
@@ -156,10 +157,29 @@ namespace AppClient2
             return sum;
         }
 
-        public double getTotalSum()
+        private double getSumById(int id)
         {
+            if (datacontext != null)
+            {
+                datacontext.Dispose();
+                datacontext = new DataContext(cn);
+            }
+            else
+                datacontext = new DataContext(cn);
 
-            return getSum();
+            var sum = (from gi in datacontext.GetTable<GoodsInContract>()
+                       from cc in datacontext.GetTable<Contracts>()
+                       where gi.idContract == cc.id && cc.Contragent == id
+                       select new { sum = (gi.Quantity- gi.QuantityLeft) * gi.PriceSold }).Sum(s => s.sum);
+            return sum;
+        }
+
+        public double getTotalSum(int id = 0)
+        {
+            if (id == 0)
+                return getSum();
+            else
+                return getSumById(id);
         }
 
         public double getLeftSum()

@@ -47,6 +47,7 @@ namespace AppClient2
         private void UpdateComboContragents()
         {
             this.contragents = service.GetContragents();
+            this.comboByContragent.Items.AddRange(this.contragents.ToArray());
             if (this.comboBox1.Items.Count != 0) this.comboBox1.Items.Clear();
             this.comboBox1.Items.Add("Все");
             this.comboBox1.Items.AddRange(this.contragents.ToArray());
@@ -188,6 +189,15 @@ namespace AppClient2
             this.textBox1.Text = g.priceBuy.ToString();
             this.labelName.Text = g.name;
             oldPrice = g.priceBuy;
+        }
+
+        private void comboByRoad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox send = sender as ComboBox;
+            if (send.SelectedIndex == -1) return;
+            int contrId = (send.SelectedItem as Contragents).ID;
+            byRoad.Text = service.getTotalSum(contrId).ToString();
+
         }
     }
 }
