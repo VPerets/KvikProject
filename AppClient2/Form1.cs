@@ -31,8 +31,14 @@ namespace AppClient2
            
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
+            this.Resize += Form1_Resize;
         }
 
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.lvGoodsPrices.Height = this.Height - 10;
+            this.lvGoodsPrices.Width = this.Width - 100;
+        }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             service.close();

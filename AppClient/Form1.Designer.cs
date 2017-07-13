@@ -43,11 +43,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPagePrice = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelName = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttoEditPrice = new System.Windows.Forms.Button();
             this.lvGoodsPrices = new System.Windows.Forms.ListBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelName = new System.Windows.Forms.Label();
+            this.buttoEditPrice = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -55,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPagePrice.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -243,8 +245,72 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(666, 448);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(932, 448);
             this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // lvGoodsPrices
+            // 
+            this.lvGoodsPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvGoodsPrices.FormattingEnabled = true;
+            this.lvGoodsPrices.Location = new System.Drawing.Point(168, 3);
+            this.lvGoodsPrices.Name = "lvGoodsPrices";
+            this.lvGoodsPrices.Size = new System.Drawing.Size(761, 433);
+            this.lvGoodsPrices.TabIndex = 2;
+            this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.textBox1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.buttoEditPrice, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.labelName, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(153, 170);
+            this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // labelName
+            // 
+            this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelName.AutoSize = true;
+            this.tableLayoutPanel3.SetColumnSpan(this.labelName, 2);
+            this.labelName.Location = new System.Drawing.Point(3, 0);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(147, 53);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "_";
+            // 
+            // buttoEditPrice
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.buttoEditPrice, 2);
+            this.buttoEditPrice.Location = new System.Drawing.Point(3, 109);
+            this.buttoEditPrice.Name = "buttoEditPrice";
+            this.buttoEditPrice.Size = new System.Drawing.Size(147, 23);
+            this.buttoEditPrice.TabIndex = 2;
+            this.buttoEditPrice.Text = "Изменить";
+            this.buttoEditPrice.UseVisualStyleBackColor = true;
+            this.buttoEditPrice.Click += new System.EventHandler(this.buttoEditPrice_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
+            this.textBox1.Location = new System.Drawing.Point(3, 56);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(147, 20);
+            this.textBox1.TabIndex = 1;
             // 
             // tableLayoutPanel8
             // 
@@ -253,60 +319,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.labelName, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.textBox1, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.buttoEditPrice, 0, 2);
+            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
+            this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(112, 442);
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 266F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(159, 442);
             this.tableLayoutPanel8.TabIndex = 1;
-            // 
-            // labelName
-            // 
-            this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(3, 0);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(106, 176);
-            this.labelName.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 179);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // buttoEditPrice
-            // 
-            this.buttoEditPrice.Location = new System.Drawing.Point(3, 355);
-            this.buttoEditPrice.Name = "buttoEditPrice";
-            this.buttoEditPrice.Size = new System.Drawing.Size(75, 23);
-            this.buttoEditPrice.TabIndex = 2;
-            this.buttoEditPrice.Text = "Изменить";
-            this.buttoEditPrice.UseVisualStyleBackColor = true;
-            this.buttoEditPrice.Click += new System.EventHandler(this.buttoEditPrice_Click);
-            // 
-            // lvGoodsPrices
-            // 
-            this.lvGoodsPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvGoodsPrices.FormattingEnabled = true;
-            this.lvGoodsPrices.Location = new System.Drawing.Point(121, 3);
-            this.lvGoodsPrices.Name = "lvGoodsPrices";
-            this.lvGoodsPrices.Size = new System.Drawing.Size(542, 433);
-            this.lvGoodsPrices.TabIndex = 2;
-            this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
             // 
             // Form1
             // 
@@ -324,8 +344,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPagePrice.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -341,10 +362,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPagePrice;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttoEditPrice;
         private System.Windows.Forms.ListBox lvGoodsPrices;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -352,6 +369,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn left;
         private System.Windows.Forms.DataGridViewTextBoxColumn Commentary;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttoEditPrice;
+        private System.Windows.Forms.Label labelName;
     }
 }
 

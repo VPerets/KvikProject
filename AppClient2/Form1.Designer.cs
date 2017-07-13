@@ -58,6 +58,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.labelOtgr = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -69,6 +70,7 @@
             this.tabPageInfo.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -256,10 +258,9 @@
             this.tableLayoutPanel4.Controls.Add(this.lvGoodsPrices, 1, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(29, 16);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 168F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(666, 386);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(998, 441);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // tableLayoutPanel8
@@ -269,16 +270,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.labelName, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.textBox1, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.buttoEditPrice, 0, 2);
+            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(112, 212);
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.68421F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.31579F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(170, 435);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
             // labelName
@@ -287,26 +285,30 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelName.AutoSize = true;
+            this.tableLayoutPanel5.SetColumnSpan(this.labelName, 2);
             this.labelName.Location = new System.Drawing.Point(3, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(106, 61);
+            this.labelName.Size = new System.Drawing.Size(158, 40);
             this.labelName.TabIndex = 0;
+            this.labelName.Text = "_";
             // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 64);
+            this.tableLayoutPanel5.SetColumnSpan(this.textBox1, 2);
+            this.textBox1.Location = new System.Drawing.Point(3, 43);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(106, 20);
+            this.textBox1.Size = new System.Drawing.Size(158, 20);
             this.textBox1.TabIndex = 1;
             // 
             // buttoEditPrice
             // 
-            this.buttoEditPrice.Location = new System.Drawing.Point(3, 125);
+            this.tableLayoutPanel5.SetColumnSpan(this.buttoEditPrice, 2);
+            this.buttoEditPrice.Location = new System.Drawing.Point(3, 83);
             this.buttoEditPrice.Name = "buttoEditPrice";
-            this.buttoEditPrice.Size = new System.Drawing.Size(75, 23);
+            this.buttoEditPrice.Size = new System.Drawing.Size(100, 23);
             this.buttoEditPrice.TabIndex = 2;
             this.buttoEditPrice.Text = "Изменить";
             this.buttoEditPrice.UseVisualStyleBackColor = true;
@@ -318,9 +320,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvGoodsPrices.FormattingEnabled = true;
-            this.lvGoodsPrices.Location = new System.Drawing.Point(121, 3);
+            this.lvGoodsPrices.Location = new System.Drawing.Point(179, 3);
             this.lvGoodsPrices.Name = "lvGoodsPrices";
-            this.lvGoodsPrices.Size = new System.Drawing.Size(542, 212);
+            this.lvGoodsPrices.Size = new System.Drawing.Size(816, 433);
             this.lvGoodsPrices.TabIndex = 2;
             this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
             // 
@@ -419,6 +421,23 @@
             this.labelOtgr.Size = new System.Drawing.Size(72, 36);
             this.labelOtgr.TabIndex = 3;
             // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.buttoEditPrice, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.labelName, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.textBox1, 0, 1);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(164, 128);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,11 +455,12 @@
             this.tabPagePrice.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
             this.tabPageInfo.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -476,6 +496,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn left;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceSold;
         private System.Windows.Forms.DataGridViewTextBoxColumn Commentary;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
     }
 }
 
