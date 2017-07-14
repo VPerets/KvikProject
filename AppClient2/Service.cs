@@ -152,6 +152,7 @@ namespace AppClient2
             }
             else
                 datacontext = new DataContext(cn);
+
             var sum = (from gi in datacontext.GetTable<GoodsInContract>()
                        select new { sum = gi.Quantity * gi.PriceSold }).Sum(s => s.sum);
             return sum;
@@ -169,7 +170,7 @@ namespace AppClient2
 
             var sum = (from gi in datacontext.GetTable<GoodsInContract>()
                        from cc in datacontext.GetTable<Contracts>()
-                       where gi.idContract == cc.id && cc.Contragent == id
+                       where gi.idContract == cc.id && cc.Contragent == id 
                        select new { sum = (gi.Quantity- gi.QuantityLeft) * gi.PriceSold }).Sum(s => s.sum);
             return sum;
         }
@@ -180,6 +181,23 @@ namespace AppClient2
                 return getSum();
             else
                 return getSumById(id);
+        }
+
+        public double getAllById(int id)
+        {
+            if (datacontext != null)
+            {
+                datacontext.Dispose();
+                datacontext = new DataContext(cn);
+            }
+            else
+                datacontext = new DataContext(cn);
+
+            var sum = (from gi in datacontext.GetTable<GoodsInContract>()
+                       from cc in datacontext.GetTable<Contracts>()
+                       where gi.idContract == cc.id && cc.Contragent == id
+                       select new { sum = gi.Quantity  * gi.PriceSold }).Sum(s => s.sum);
+            return sum;
         }
 
         public double getLeftSum()
@@ -625,7 +643,7 @@ namespace AppClient2
             return sb;
         }
 
-        private bool SendCodeByMail()
+         public bool SendCodeByMail()
         {
             // отправитель - устанавливаем адрес и отображаемое в письме имя
             MailAddress from = new MailAddress("vitaliia.perets@gmail.com");

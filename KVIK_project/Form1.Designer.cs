@@ -77,14 +77,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.labelOtgr = new System.Windows.Forms.Label();
-            this.labelSum = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.good = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelOtgr = new System.Windows.Forms.Label();
+            this.labelSum = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -99,6 +100,7 @@
             this.tabPageInfo.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -650,46 +652,36 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel9.ColumnCount = 3;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 791F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 820F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Controls.Add(this.label8, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.label9, 0, 1);
             this.tableLayoutPanel9.Controls.Add(this.dataGridView2, 2, 0);
-            this.tableLayoutPanel9.Controls.Add(this.labelOtgr, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.labelSum, 1, 0);
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(32, 22);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 3;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.78947F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.21053F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 357F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(984, 395);
+            this.tableLayoutPanel9.RowCount = 2;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.78947F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.21053F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1024, 454);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 24);
+            this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 0;
             this.label8.Text = "Всего на сумму";
             // 
             // label9
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 24);
+            this.label9.Location = new System.Drawing.Point(3, 32);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(97, 13);
+            this.label9.Size = new System.Drawing.Size(60, 13);
             this.label9.TabIndex = 1;
             this.label9.Text = "Отгрузили";
             // 
@@ -708,31 +700,9 @@
             this.Sum});
             this.dataGridView2.Location = new System.Drawing.Point(196, 3);
             this.dataGridView2.Name = "dataGridView2";
-            this.tableLayoutPanel9.SetRowSpan(this.dataGridView2, 3);
-            this.dataGridView2.Size = new System.Drawing.Size(785, 389);
+            this.tableLayoutPanel9.SetRowSpan(this.dataGridView2, 2);
+            this.dataGridView2.Size = new System.Drawing.Size(825, 448);
             this.dataGridView2.TabIndex = 4;
-            // 
-            // labelOtgr
-            // 
-            this.labelOtgr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelOtgr.AutoSize = true;
-            this.labelOtgr.Location = new System.Drawing.Point(106, 24);
-            this.labelOtgr.Name = "labelOtgr";
-            this.labelOtgr.Size = new System.Drawing.Size(84, 13);
-            this.labelOtgr.TabIndex = 3;
-            // 
-            // labelSum
-            // 
-            this.labelSum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSum.AutoSize = true;
-            this.labelSum.Location = new System.Drawing.Point(106, 0);
-            this.labelSum.Name = "labelSum";
-            this.labelSum.Size = new System.Drawing.Size(84, 24);
-            this.labelSum.TabIndex = 2;
             // 
             // contract
             // 
@@ -764,6 +734,42 @@
             this.Sum.Name = "Sum";
             this.Sum.ReadOnly = true;
             // 
+            // labelOtgr
+            // 
+            this.labelOtgr.AutoSize = true;
+            this.labelOtgr.Location = new System.Drawing.Point(96, 32);
+            this.labelOtgr.Name = "labelOtgr";
+            this.labelOtgr.Size = new System.Drawing.Size(13, 13);
+            this.labelOtgr.TabIndex = 3;
+            this.labelOtgr.Text = "_";
+            // 
+            // labelSum
+            // 
+            this.labelSum.AutoSize = true;
+            this.labelSum.Location = new System.Drawing.Point(96, 0);
+            this.labelSum.Name = "labelSum";
+            this.labelSum.Size = new System.Drawing.Size(13, 13);
+            this.labelSum.TabIndex = 2;
+            this.labelSum.Text = "_";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel9.SetColumnSpan(this.tableLayoutPanel4, 2);
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.labelOtgr, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label9, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.labelSum, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(187, 65);
+            this.tableLayoutPanel4.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -789,8 +795,9 @@
             this.tableLayoutPanel10.PerformLayout();
             this.tabPageInfo.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -853,6 +860,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn good;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quant;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sum;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
     }
 }
 

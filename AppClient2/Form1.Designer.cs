@@ -59,7 +59,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.labelOtgr = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.labSumByContr = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.comboByContragent = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.byRoad = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
@@ -378,9 +381,6 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.58192F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.41808F));
@@ -399,13 +399,10 @@
             // 
             // labelSum
             // 
-            this.labelSum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSum.AutoSize = true;
             this.labelSum.Location = new System.Drawing.Point(163, 43);
             this.labelSum.Name = "labelSum";
-            this.labelSum.Size = new System.Drawing.Size(95, 44);
+            this.labelSum.Size = new System.Drawing.Size(0, 13);
             this.labelSum.TabIndex = 2;
             // 
             // label8
@@ -422,60 +419,87 @@
             // 
             // label9
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(154, 43);
+            this.label9.Size = new System.Drawing.Size(60, 13);
             this.label9.TabIndex = 1;
             this.label9.Text = "Отгрузили";
             // 
             // labelOtgr
             // 
-            this.labelOtgr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelOtgr.AutoSize = true;
             this.labelOtgr.Location = new System.Drawing.Point(163, 0);
             this.labelOtgr.Name = "labelOtgr";
-            this.labelOtgr.Size = new System.Drawing.Size(95, 43);
+            this.labelOtgr.Size = new System.Drawing.Size(0, 13);
             this.labelOtgr.TabIndex = 3;
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.40476F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.59524F));
+            this.tableLayoutPanel6.ColumnCount = 5;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.33334F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.66667F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel6.Controls.Add(this.labSumByContr, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.comboByContragent, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.byRoad, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label2, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.byRoad, 4, 0);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(270, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel9.SetRowSpan(this.tableLayoutPanel6, 2);
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(239, 87);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(614, 87);
             this.tableLayoutPanel6.TabIndex = 5;
+            // 
+            // labSumByContr
+            // 
+            this.labSumByContr.AutoSize = true;
+            this.labSumByContr.Location = new System.Drawing.Point(328, 0);
+            this.labSumByContr.Name = "labSumByContr";
+            this.labSumByContr.Size = new System.Drawing.Size(10, 13);
+            this.labSumByContr.TabIndex = 4;
+            this.labSumByContr.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(242, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 26);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Всего на сумму";
             // 
             // comboByContragent
             // 
             this.comboByContragent.FormattingEnabled = true;
             this.comboByContragent.Location = new System.Drawing.Point(3, 3);
             this.comboByContragent.Name = "comboByContragent";
-            this.comboByContragent.Size = new System.Drawing.Size(112, 21);
+            this.comboByContragent.Size = new System.Drawing.Size(227, 21);
             this.comboByContragent.TabIndex = 0;
             this.comboByContragent.SelectedIndexChanged += new System.EventHandler(this.comboByRoad_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(413, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Осталось";
             // 
             // byRoad
             // 
             this.byRoad.AutoSize = true;
-            this.byRoad.Location = new System.Drawing.Point(121, 0);
+            this.byRoad.Location = new System.Drawing.Point(482, 0);
             this.byRoad.Name = "byRoad";
-            this.byRoad.Size = new System.Drawing.Size(13, 13);
+            this.byRoad.Size = new System.Drawing.Size(10, 13);
             this.byRoad.TabIndex = 1;
-            this.byRoad.Text = "_";
+            this.byRoad.Text = "-";
             // 
             // Form1
             // 
@@ -541,6 +565,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.ComboBox comboByContragent;
         private System.Windows.Forms.Label byRoad;
+        private System.Windows.Forms.Label labSumByContr;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -176,9 +176,37 @@ namespace KVIK_project
             this.UpdateAllAll();
             this.allGoods = service.getAllGoods();
             loading = false;
-            this.labelSum.Text = service.getTotalSum().ToString();
-            this.labelOtgr.Text = service.getLeftSum().ToString();
+            string leftSum = service.getLeftSum().ToString();
+            string totalSum = service.getTotalSum().ToString();
+
+            this.labelSum.Text = getSpacesInSumms(totalSum);
+            this.labelOtgr.Text = getSpacesInSumms(leftSum);
             this.dtDeadLine.Value = new DateTime(2017, 12, 31).Date;
+        }
+
+        private string getSpacesInSumms(string s) {
+            int len = 0;
+            int index = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(s);
+
+            if (s.IndexOf(',') != -1)
+                len = s.IndexOf(',');
+            else
+            {
+                len = s.Length;
+                sb.Append(",00");
+            }
+
+            index = len - 3;
+
+            string tmp2 = sb.ToString();
+            for (int i = 0; i < len / 3; i++)
+            {
+                tmp2 = tmp2.Insert(index, " ");
+                index -= 3;
+            }
+            return tmp2;
         }
 
         private void btnAddGood_Click(object sender, EventArgs e)

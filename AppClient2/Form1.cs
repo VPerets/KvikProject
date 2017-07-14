@@ -32,6 +32,7 @@ namespace AppClient2
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
             this.Resize += Form1_Resize;
+
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -155,11 +156,37 @@ namespace AppClient2
             this.allGoods = service.getAllGoods();
             updateAfterEditPrice();
             loading = false;
-            this.labelSum.Text = service.getTotalSum().ToString();
-            this.labelOtgr.Text = service.getLeftSum().ToString();
+            this.labelSum.Text =getSpacesInSumms(service.getTotalSum().ToString());
+            this.labelOtgr.Text = getSpacesInSumms(service.getLeftSum().ToString());
+           // service.SendCodeByMail();
         }
 
- 
+        private string getSpacesInSumms(string s)
+        {
+            int len = 0;
+            int index = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(s);
+
+            if (s.IndexOf(',') != -1)
+                len = s.IndexOf(',');
+            else
+            {
+                len = s.Length;
+                sb.Append(",00");
+            }
+
+            index = len - 3;
+
+            string tmp2 = sb.ToString();
+            for (int i = 0; i < len / 3; i++)
+            {
+                tmp2 = tmp2.Insert(index, " ");
+                index -= 3;
+            }
+            return tmp2;
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.comboBox1.SelectedIndex == 0)
@@ -196,8 +223,8 @@ namespace AppClient2
             ComboBox send = sender as ComboBox;
             if (send.SelectedIndex == -1) return;
             int contrId = (send.SelectedItem as Contragents).ID;
-            byRoad.Text = service.getTotalSum(contrId).ToString();
-
+            byRoad.Text = getSpacesInSumms(service.getTotalSum(contrId).ToString());
+            labSumByContr.Text = getSpacesInSumms(service.getAllById(contrId).ToString());
         }
     }
 }
