@@ -35,6 +35,12 @@ namespace KVIK_project
             this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
+            this.Resize += Form1_Resize;
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+          
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -329,6 +335,11 @@ namespace KVIK_project
             if (b == false) { MessageBox.Show("Фирма с таким именем уже существует");}
             tbOwner.Text = "";
             updateComboTabOwner();        
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            this.FillDataGrid();
         }
     }
 }

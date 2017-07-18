@@ -65,6 +65,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.byRoad = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -134,6 +135,7 @@
             this.tableLayoutPanel2.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonUpdate, 4, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -441,7 +443,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.66667F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel6.Controls.Add(this.labSumByContr, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.comboByContragent, 0, 0);
@@ -459,7 +461,7 @@
             // labSumByContr
             // 
             this.labSumByContr.AutoSize = true;
-            this.labSumByContr.Location = new System.Drawing.Point(328, 0);
+            this.labSumByContr.Location = new System.Drawing.Point(327, 0);
             this.labSumByContr.Name = "labSumByContr";
             this.labSumByContr.Size = new System.Drawing.Size(10, 13);
             this.labSumByContr.TabIndex = 4;
@@ -468,7 +470,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(242, 0);
+            this.label3.Location = new System.Drawing.Point(241, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 26);
             this.label3.TabIndex = 3;
@@ -486,7 +488,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(413, 0);
+            this.label2.Location = new System.Drawing.Point(412, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
@@ -495,11 +497,21 @@
             // byRoad
             // 
             this.byRoad.AutoSize = true;
-            this.byRoad.Location = new System.Drawing.Point(482, 0);
+            this.byRoad.Location = new System.Drawing.Point(481, 0);
             this.byRoad.Name = "byRoad";
             this.byRoad.Size = new System.Drawing.Size(10, 13);
             this.byRoad.TabIndex = 1;
             this.byRoad.Text = "-";
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(819, 3);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 3;
+            this.buttonUpdate.Text = "Обновить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // Form1
             // 
@@ -568,6 +580,7 @@
         private System.Windows.Forms.Label labSumByContr;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }
 

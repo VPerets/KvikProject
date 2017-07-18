@@ -224,5 +224,10 @@ namespace AppClient
             this.labelName.Text = g.name;
             oldPrice = g.priceBuy;
         }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            this.FillDataGrid();
+        }
     }
 }

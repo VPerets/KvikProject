@@ -226,5 +226,10 @@ namespace AppClient2
             byRoad.Text = getSpacesInSumms(service.getTotalSum(contrId).ToString());
             labSumByContr.Text = getSpacesInSumms(service.getAllById(contrId).ToString());
         }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            this.FillDataGrid();
+        }
     }
 }

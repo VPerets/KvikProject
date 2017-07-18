@@ -43,12 +43,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPagePrice = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.lvGoodsPrices = new System.Windows.Forms.ListBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelName = new System.Windows.Forms.Label();
-            this.buttoEditPrice = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttoEditPrice = new System.Windows.Forms.Button();
+            this.labelName = new System.Windows.Forms.Label();
+            this.lvGoodsPrices = new System.Windows.Forms.ListBox();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -56,8 +57,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPagePrice.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -113,6 +114,7 @@
             this.tableLayoutPanel2.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonUpdate, 4, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -248,17 +250,21 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(932, 448);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
-            // lvGoodsPrices
+            // tableLayoutPanel8
             // 
-            this.lvGoodsPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tableLayoutPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvGoodsPrices.FormattingEnabled = true;
-            this.lvGoodsPrices.Location = new System.Drawing.Point(168, 3);
-            this.lvGoodsPrices.Name = "lvGoodsPrices";
-            this.lvGoodsPrices.Size = new System.Drawing.Size(761, 433);
-            this.lvGoodsPrices.TabIndex = 2;
-            this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 266F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(159, 442);
+            this.tableLayoutPanel8.TabIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -277,6 +283,28 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(153, 170);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
+            this.textBox1.Location = new System.Drawing.Point(3, 56);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(147, 20);
+            this.textBox1.TabIndex = 1;
+            // 
+            // buttoEditPrice
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.buttoEditPrice, 2);
+            this.buttoEditPrice.Location = new System.Drawing.Point(3, 109);
+            this.buttoEditPrice.Name = "buttoEditPrice";
+            this.buttoEditPrice.Size = new System.Drawing.Size(147, 23);
+            this.buttoEditPrice.TabIndex = 2;
+            this.buttoEditPrice.Text = "Изменить";
+            this.buttoEditPrice.UseVisualStyleBackColor = true;
+            this.buttoEditPrice.Click += new System.EventHandler(this.buttoEditPrice_Click);
+            // 
             // labelName
             // 
             this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -290,43 +318,27 @@
             this.labelName.TabIndex = 0;
             this.labelName.Text = "_";
             // 
-            // buttoEditPrice
+            // lvGoodsPrices
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.buttoEditPrice, 2);
-            this.buttoEditPrice.Location = new System.Drawing.Point(3, 109);
-            this.buttoEditPrice.Name = "buttoEditPrice";
-            this.buttoEditPrice.Size = new System.Drawing.Size(147, 23);
-            this.buttoEditPrice.TabIndex = 2;
-            this.buttoEditPrice.Text = "Изменить";
-            this.buttoEditPrice.UseVisualStyleBackColor = true;
-            this.buttoEditPrice.Click += new System.EventHandler(this.buttoEditPrice_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvGoodsPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
-            this.textBox1.Location = new System.Drawing.Point(3, 56);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(147, 20);
-            this.textBox1.TabIndex = 1;
+            this.lvGoodsPrices.FormattingEnabled = true;
+            this.lvGoodsPrices.Location = new System.Drawing.Point(168, 3);
+            this.lvGoodsPrices.Name = "lvGoodsPrices";
+            this.lvGoodsPrices.Size = new System.Drawing.Size(761, 433);
+            this.lvGoodsPrices.TabIndex = 2;
+            this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
             // 
-            // tableLayoutPanel8
+            // buttonUpdate
             // 
-            this.tableLayoutPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 266F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(159, 442);
-            this.tableLayoutPanel8.TabIndex = 1;
+            this.buttonUpdate.Location = new System.Drawing.Point(819, 3);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 3;
+            this.buttonUpdate.Text = "Обновить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // Form1
             // 
@@ -344,9 +356,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPagePrice.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -374,6 +386,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttoEditPrice;
         private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }
 
