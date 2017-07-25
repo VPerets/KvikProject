@@ -43,6 +43,7 @@
             this.Commentary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tabPagePrice = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -65,7 +66,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.byRoad = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -244,6 +244,16 @@
             this.label1.Size = new System.Drawing.Size(198, 38);
             this.label1.TabIndex = 2;
             this.label1.Text = "Искать по контрагенту";
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(819, 3);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 3;
+            this.buttonUpdate.Text = "Обновить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // tabPagePrice
             // 
@@ -443,7 +453,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.66667F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutPanel6.Controls.Add(this.labSumByContr, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.comboByContragent, 0, 0);
@@ -461,7 +471,7 @@
             // labSumByContr
             // 
             this.labSumByContr.AutoSize = true;
-            this.labSumByContr.Location = new System.Drawing.Point(327, 0);
+            this.labSumByContr.Location = new System.Drawing.Point(326, 0);
             this.labSumByContr.Name = "labSumByContr";
             this.labSumByContr.Size = new System.Drawing.Size(10, 13);
             this.labSumByContr.TabIndex = 4;
@@ -470,7 +480,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(241, 0);
+            this.label3.Location = new System.Drawing.Point(240, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 26);
             this.label3.TabIndex = 3;
@@ -488,7 +498,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(412, 0);
+            this.label2.Location = new System.Drawing.Point(411, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
@@ -497,21 +507,11 @@
             // byRoad
             // 
             this.byRoad.AutoSize = true;
-            this.byRoad.Location = new System.Drawing.Point(481, 0);
+            this.byRoad.Location = new System.Drawing.Point(480, 0);
             this.byRoad.Name = "byRoad";
             this.byRoad.Size = new System.Drawing.Size(10, 13);
             this.byRoad.TabIndex = 1;
             this.byRoad.Text = "-";
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(819, 3);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 3;
-            this.buttonUpdate.Text = "Обновить";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // Form1
             // 
