@@ -13,14 +13,14 @@ namespace AppClient
     {
         private Service service = null;
         private List<Contragents> contragents = new List<Contragents>();
-        private Contragents SelectedContr;
-        private List<Contragents> contragentsTemp = new List<Contragents>();
+        private List<Contragents> SelectedContr = new List<Contragents>();
         private List<Contragents> AllContragents = new List<Contragents>();
         private string textCommTemp = "";
         private bool loading = true;
         private double oldPrice = 0;
         private string login = "";
-        private ChannelFactory<IService> myChannelFactory = null;
+        private int selectedContrIndex = 0;
+        //       private ChannelFactory<IService> myChannelFactory = null;
 
         public Form1()
         {
@@ -44,10 +44,14 @@ namespace AppClient
         private void UpdateComboContragents()
         {
             this.contragents = service.GetContragents();
+            if (this.SelectedContr.Count>0) this.SelectedContr.Clear();
+            this.SelectedContr.AddRange(this.contragents.ToArray());
             if (this.comboBox1.Items.Count != 0) this.comboBox1.Items.Clear();
             this.comboBox1.Items.Add("Все");
             this.comboBox1.Items.AddRange(this.contragents.ToArray());
-            this.comboBox1.SelectedIndex = 0;
+            this.comboBox1.SelectedIndex = -1;
+            selectedContrIndex = -1;
+
         }
 
         private void updateAfterEditPrice()
@@ -65,7 +69,6 @@ namespace AppClient
         private void UpdateForFill()
         {
             if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
-            if (this.contragentsTemp.Count != 0) this.contragentsTemp.Clear();
         }
 
         private void UpdateAllAll()
@@ -74,26 +77,17 @@ namespace AppClient
             FillDataGrid();
         }
 
-        private void FillDataGrid(int temp = 0)
+        private void FillDataGrid()
         {
-            if (temp != 1)
-            {
-                UpdateForFill();
-                this.contragentsTemp.AddRange(this.contragents.ToArray());
-            }
-            else
-            {
-                UpdateForFill();
-                this.contragentsTemp.Add(SelectedContr);
-            }
 
-            if (this.contragentsTemp.Count == 0 ) return;
+            UpdateForFill();
+
             int rowsCount = 0;
 
-            for (int i = 0; i < contragentsTemp.Count; i++)
+            for (int i = 0; i < SelectedContr.Count; i++)
             {
                 this.dataGridView1.Rows.Add(new DataGridViewRow());
-                this.dataGridView1.Rows[rowsCount].Cells["total"].Value = contragentsTemp[i].Name;
+                this.dataGridView1.Rows[rowsCount].Cells["total"].Value = SelectedContr[i].Name;
                 this.dataGridView1.Rows[rowsCount].Cells["total"].Style.Font
                     = new Font("Arial", 14);
                 for (int c = 0; c < this.dataGridView1.Rows[0].Cells.Count; c++)
@@ -102,7 +96,7 @@ namespace AppClient
                     this.dataGridView1.Rows[rowsCount].Cells[c].ReadOnly = true;
                 }
                 rowsCount++;
-                var contracts = service.GetContractsByContragent(contragentsTemp[i].ID);
+                var contracts = service.GetContractsByContragent(SelectedContr[i].ID);
                 for (int j = 0; j < contracts.Count; j++)
                 {
                     this.dataGridView1.Rows.Add(new DataGridViewRow());
@@ -156,42 +150,23 @@ namespace AppClient
             this.lvGoodsPrices.Height = this.Height;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            return;
-            //    if (e.RowIndex < 0) return;
-            //    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            //    if (e.ColumnIndex != 6 || row.Tag == null || row.Cells["send"].Value == null) return;
-            //    int quant;
-            //    bool b =
-            //        Int32.TryParse(row.Cells["send"].Value.ToString(), out quant);
-            //    if (!b || quant > Int32.Parse(row.Cells["left"].Value.ToString())) return;
-
-            //    int id = (int)row.Tag;
-
-            //    boolInt left = service.addQuantityLeftInGoods(quant, id, this.login);
-            //    if (left.b == false)
-            //    {
-            //        MessageBox.Show("Информация о оставшемся количестве товара обновлена!Введите количество заново");
-            //        row.Cells["left"].Value = left.q;
-            //        row.Cells["send"].Value = null;
-            //        return;
-            //    }
-
-            //    row.Cells["left"].Value = left.q;
-            //    row.Cells["send"].Value = null;
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ComboBox comb = sender as ComboBox;
+            if (selectedContrIndex == comb.SelectedIndex) return;
+            selectedContrIndex = comb.SelectedIndex;
+
+            this.SelectedContr.Clear();
+
             if (this.comboBox1.SelectedIndex == 0)
             {
+                this.SelectedContr.AddRange(this.contragents.ToArray());
                 FillDataGrid();
                 return;
             }
-            ComboBox comb = sender as ComboBox;
-            SelectedContr = comb.SelectedItem as Contragents;
-            this.FillDataGrid(1);
+
+            this.SelectedContr.Add(this.contragents[comb.SelectedIndex - 1]);
+            this.FillDataGrid();
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -227,7 +202,54 @@ namespace AppClient
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            this.FillDataGrid();
+            UpdateAllAll();
+        }
+
+        private void setByRadio(int case_)
+        {
+            if (case_ == 1)
+            {
+                FillDataGrid();
+                return;
+            }
+
+            FillDataGrid();
+            int count = dataGridView1.Rows.Count;
+            bool bool_;
+
+            if (case_ == 0)
+                bool_ = true;
+            else
+                bool_ = false;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (dataGridView1.Rows[i].Cells["left"].Value == null) continue;
+                if ((Int32.Parse(dataGridView1.Rows[i].Cells["left"].Value.ToString()) <= 0) == bool_)
+                {
+                    dataGridView1.Rows.RemoveAt(i);
+                    i--;
+                    count--;
+                }
+            }
+        }
+
+        private void radioAll_Click(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+        
+            switch (rb.Name)
+            {
+                case "radioLeft":
+                    setByRadio(0);
+                    break;
+                case "radioAll":
+                    setByRadio(1);
+                    break;
+                case "radioNoLeft":
+                    setByRadio(2);
+                    break;
+            }
         }
     }
 }

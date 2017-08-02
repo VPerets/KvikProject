@@ -45,7 +45,8 @@ namespace KVIK_project
             if (this.comboBox1.Items.Count != 0) this.comboBox1.Items.Clear();
             this.comboBox1.Items.Add("Все");
             this.comboBox1.Items.AddRange(this.contragents.ToArray());
-            this.comboBox1.SelectedIndex = 0;
+            this.comboBox1.SelectedIndex = -1;
+            selectedContrIndex = -1;
             this.AllContragents = service.GetAllContragents();
             if (this.comboBoxContragents.Items.Count != 0) this.comboBoxContragents.Items.Clear();
             this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
@@ -90,7 +91,6 @@ namespace KVIK_project
 
         private void FillDataGrid()
         {
-
             UpdateForFill();
 
             int rowsCount = 0;

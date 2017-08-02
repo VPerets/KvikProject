@@ -50,6 +50,10 @@
             this.buttoEditPrice = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.lvGoodsPrices = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radioAll = new System.Windows.Forms.RadioButton();
+            this.radioLeft = new System.Windows.Forms.RadioButton();
+            this.radioNoLeft = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -59,6 +63,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -108,13 +113,14 @@
             this.tableLayoutPanel2.ColumnCount = 5;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.34672F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.6141F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonUpdate, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -145,7 +151,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1015, 411);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // code
@@ -201,9 +206,6 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(207, 3);
             this.comboBox1.Name = "comboBox1";
@@ -213,19 +215,18 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(77, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 38);
+            this.label1.Size = new System.Drawing.Size(124, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Искать по контрагенту";
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(819, 3);
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonUpdate.Location = new System.Drawing.Point(943, 3);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 3;
@@ -340,6 +341,52 @@
             this.lvGoodsPrices.TabIndex = 2;
             this.lvGoodsPrices.SelectedValueChanged += new System.EventHandler(this.lvGoodsPrices_SelectedValueChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioNoLeft);
+            this.panel1.Controls.Add(this.radioLeft);
+            this.panel1.Controls.Add(this.radioAll);
+            this.panel1.Location = new System.Drawing.Point(411, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(263, 32);
+            this.panel1.TabIndex = 4;
+            // 
+            // radioAll
+            // 
+            this.radioAll.AutoSize = true;
+            this.radioAll.Location = new System.Drawing.Point(0, 4);
+            this.radioAll.Name = "radioAll";
+            this.radioAll.Size = new System.Drawing.Size(44, 17);
+            this.radioAll.TabIndex = 0;
+            this.radioAll.TabStop = true;
+            this.radioAll.Text = "Все";
+            this.radioAll.UseVisualStyleBackColor = true;
+            this.radioAll.Click += new System.EventHandler(this.radioAll_Click);
+            // 
+            // radioLeft
+            // 
+            this.radioLeft.AutoSize = true;
+            this.radioLeft.Location = new System.Drawing.Point(50, 4);
+            this.radioLeft.Name = "radioLeft";
+            this.radioLeft.Size = new System.Drawing.Size(109, 17);
+            this.radioLeft.TabIndex = 1;
+            this.radioLeft.TabStop = true;
+            this.radioLeft.Text = "Не отгруженные";
+            this.radioLeft.UseVisualStyleBackColor = true;
+            this.radioLeft.Click += new System.EventHandler(this.radioAll_Click);
+            // 
+            // radioNoLeft
+            // 
+            this.radioNoLeft.AutoSize = true;
+            this.radioNoLeft.Location = new System.Drawing.Point(165, 4);
+            this.radioNoLeft.Name = "radioNoLeft";
+            this.radioNoLeft.Size = new System.Drawing.Size(94, 17);
+            this.radioNoLeft.TabIndex = 2;
+            this.radioNoLeft.TabStop = true;
+            this.radioNoLeft.Text = "Отгруженные";
+            this.radioNoLeft.UseVisualStyleBackColor = true;
+            this.radioNoLeft.Click += new System.EventHandler(this.radioAll_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,6 +406,8 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -387,6 +436,10 @@
         private System.Windows.Forms.Button buttoEditPrice;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton radioNoLeft;
+        private System.Windows.Forms.RadioButton radioLeft;
+        private System.Windows.Forms.RadioButton radioAll;
     }
 }
 
