@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabContract = new System.Windows.Forms.TabPage();
@@ -65,7 +64,7 @@
             this.comboByContragent = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.byRoad = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -453,7 +452,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.66667F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
             this.tableLayoutPanel6.Controls.Add(this.labSumByContr, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.comboByContragent, 0, 0);
@@ -471,7 +470,7 @@
             // labSumByContr
             // 
             this.labSumByContr.AutoSize = true;
-            this.labSumByContr.Location = new System.Drawing.Point(326, 0);
+            this.labSumByContr.Location = new System.Drawing.Point(324, 0);
             this.labSumByContr.Name = "labSumByContr";
             this.labSumByContr.Size = new System.Drawing.Size(10, 13);
             this.labSumByContr.TabIndex = 4;
@@ -480,7 +479,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(240, 0);
+            this.label3.Location = new System.Drawing.Point(239, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 26);
             this.label3.TabIndex = 3;
@@ -498,7 +497,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(411, 0);
+            this.label2.Location = new System.Drawing.Point(409, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
@@ -507,7 +506,7 @@
             // byRoad
             // 
             this.byRoad.AutoSize = true;
-            this.byRoad.Location = new System.Drawing.Point(480, 0);
+            this.byRoad.Location = new System.Drawing.Point(478, 0);
             this.byRoad.Name = "byRoad";
             this.byRoad.Size = new System.Drawing.Size(10, 13);
             this.byRoad.TabIndex = 1;

@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WcfService;
 using KvikLibrary;
-using System.ServiceModel;
-using System.Configuration;
 
 
 namespace KVIK_project
@@ -20,14 +13,14 @@ namespace KVIK_project
         private Service service = null;
 //        private ChannelFactory<IService> myChannelFactory = null;
         private List<Contragents> contragents = new List<Contragents>();
-        private Contragents SelectedContr;
-        private List<Contragents> contragentsTemp = new List<Contragents>();
+        private List<Contragents> SelectedContr = new List<Contragents>();
         private List<Contragents> AllContragents = new List<Contragents>();
         private List<owners> allOwners = new List<owners>();
         private List<Goods> allGoods = new List<Goods>();
         private string textCommTemp = "";
         private bool loading = true;
         private string login = "";
+        private int selectedContrIndex = 0;
 
         public Form1()
         {
@@ -35,12 +28,6 @@ namespace KVIK_project
             this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
-            this.Resize += Form1_Resize;
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-          
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -54,6 +41,7 @@ namespace KVIK_project
         private void UpdateComboContragents()
         {
             this.contragents = service.GetContragents();
+            this.SelectedContr.AddRange(this.contragents.ToArray());
             if (this.comboBox1.Items.Count != 0) this.comboBox1.Items.Clear();
             this.comboBox1.Items.Add("Все");
             this.comboBox1.Items.AddRange(this.contragents.ToArray());
@@ -73,7 +61,6 @@ namespace KVIK_project
         private void UpdateForFill()
         {
             if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
-            if (this.contragentsTemp.Count != 0) this.contragentsTemp.Clear();
         }
 
         private void UpdateAllAll()
@@ -101,25 +88,17 @@ namespace KVIK_project
             }
         }
 
-        private void FillDataGrid(int temp = 0)
+        private void FillDataGrid()
         {
-                if (temp != 1)
-                {
-                    UpdateForFill();
-                    this.contragentsTemp.AddRange(this.contragents.ToArray());
-                }
-                else
-                {
-                    UpdateForFill();
-                    this.contragentsTemp.Add(SelectedContr);
-                }
+
+            UpdateForFill();
 
             int rowsCount = 0;
 
-            for (int i = 0; i < contragentsTemp.Count; i++)
+            for (int i = 0; i < SelectedContr.Count; i++)
             {
                 this.dataGridView1.Rows.Add(new DataGridViewRow());
-                this.dataGridView1.Rows[rowsCount].Cells["total"].Value = contragentsTemp[i].Name;
+                this.dataGridView1.Rows[rowsCount].Cells["total"].Value = SelectedContr[i].Name;
                 this.dataGridView1.Rows[rowsCount].Cells["total"].Style.Font
                     = new Font("Arial", 14);
                 for (int c = 0; c < this.dataGridView1.Rows[0].Cells.Count; c++)
@@ -128,7 +107,7 @@ namespace KVIK_project
                     this.dataGridView1.Rows[rowsCount].Cells[c].ReadOnly = true;
                 }
                 rowsCount++;
-                var contracts = service.GetContractsByContragent(contragentsTemp[i].ID);
+                var contracts = service.GetContractsByContragent(SelectedContr[i].ID);
                 for (int j = 0; j < contracts.Count; j++)
                 {
                     this.dataGridView1.Rows.Add(new DataGridViewRow());
@@ -190,7 +169,8 @@ namespace KVIK_project
             this.dtDeadLine.Value = new DateTime(2017, 12, 31).Date;
         }
 
-        private string getSpacesInSumms(string s) {
+        private string getSpacesInSumms(string s)
+        {
             int len = 0;
             int index = 0;
             StringBuilder sb = new StringBuilder();
@@ -258,14 +238,21 @@ namespace KVIK_project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ComboBox comb = sender as ComboBox;          
+            if (selectedContrIndex == comb.SelectedIndex) return;
+            selectedContrIndex = comb.SelectedIndex;
+
+            this.SelectedContr.Clear();
+
             if (this.comboBox1.SelectedIndex == 0)
             {
+                this.SelectedContr.AddRange(this.contragents.ToArray());
                 FillDataGrid();
                 return;
             }
-            ComboBox comb = sender as ComboBox;
-            SelectedContr = comb.SelectedItem as Contragents;
-            this.FillDataGrid(1);
+    
+            this.SelectedContr.Add(this.contragents[comb.SelectedIndex-1]);
+            this.FillDataGrid();
         }
 
         private void buttonAddContract_Click(object sender, EventArgs e)
@@ -339,7 +326,54 @@ namespace KVIK_project
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            this.FillDataGrid();
+            UpdateAllAll();
+        }
+
+        private void setByRadio(int case_)
+        {
+            if (case_ == 1)
+            {
+                FillDataGrid();
+                return;
+            }
+
+            FillDataGrid();
+            int count = dataGridView1.Rows.Count;
+            bool bool_;
+
+            if (case_ == 0)
+                bool_ = true;
+            else
+                bool_ = false;
+         
+            for (int i = 0; i <count; i++)
+            {
+                if (dataGridView1.Rows[i].Cells["left"].Value == null) continue;
+                if ((Int32.Parse(dataGridView1.Rows[i].Cells["left"].Value.ToString()) <= 0) == bool_)
+                {
+                    dataGridView1.Rows.RemoveAt(i);
+                    i--;
+                    count--;
+                }
+            }
+        }
+
+        private void radioLeft_Click(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+        
+            switch (rb.Name)
+            {
+                case "radioLeft":
+                    setByRadio(0);
+                    break;
+                case "radioAll":
+                    setByRadio(1);
+                    break;
+                case "radioNoLeft":
+                    setByRadio(2);
+                    break;
+            }
         }
     }
 }
