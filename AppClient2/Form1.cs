@@ -58,7 +58,9 @@ namespace AppClient2
 
         private void updateAfterEditPrice()
         {
-            var goodPrice = service.getAllGoodPrice();
+            List<goodPrice> goodPrice = service.getAllGoodPrice();
+            SortClass<goodPrice> sorting = new SortClass<goodPrice>();
+            goodPrice.Sort(sorting);
             if (lvGoodsPrices.Items.Count != 0) this.lvGoodsPrices.Items.Clear();
             for (int i = 0; i < goodPrice.Count; i++)
             {

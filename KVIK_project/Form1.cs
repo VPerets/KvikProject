@@ -25,7 +25,7 @@ namespace KVIK_project
         public Form1()
         {
             InitializeComponent();
-            this.Icon = new Icon("./_bmp.ico");
+           // this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
         }

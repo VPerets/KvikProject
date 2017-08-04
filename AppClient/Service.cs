@@ -186,7 +186,9 @@ namespace AppClient
             }
             else
                 datacontext = new DataContext(cn);
+
             var col = from g in datacontext.GetTable<Goods>()
+                      where g.isOur == true
                       select new goodPrice { name = g.Name, priceBuy = g.PriceBuy };
             return col.ToList();
         }
