@@ -40,6 +40,8 @@ namespace KvikLibrary
         public string Figure { get; set; }
         [Column]
         public double PriceBuy { get; set; }
+        [Column]
+        public bool isOur { get; set; }
         public override string ToString()
         {
             return string.Format($"{Name}");

@@ -94,7 +94,7 @@ namespace KVIK_project
             return (from c in datacontext.GetTable<Contracts>()
                     select new contract_ { number = c.Number, name = c.contract_Name, id = c.id }).ToList();
         }
-        public bool addGoodsToDB(string name, string code, string fig, double buy)
+        public bool addGoodsToDB(string name, string code, string fig, double buy, bool isOur)
         {
             if (datacontext != null)
             {
@@ -115,7 +115,8 @@ namespace KVIK_project
                     numberObl = code,
                     Figure = fig,
                     Name = name,
-                    PriceBuy = buy
+                    PriceBuy = buy,
+                    isOur = isOur   
                 };
                 datacontext.GetTable<Goods>().InsertOnSubmit(newGood);
                 datacontext.SubmitChanges();

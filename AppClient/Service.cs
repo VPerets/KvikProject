@@ -436,12 +436,13 @@ namespace AppClient
             }
             else
                 datacontext = new DataContext(cn);
+
             var coll = from g in datacontext.GetTable<Goods>()
                        from c in datacontext.GetTable<Contracts>()
                        from o in datacontext.GetTable<owners>()
                        from ginc in datacontext.GetTable<GoodsInContract>()
                        where ginc.idContract == id && g.ID == ginc.IdGood
-                        && c.owner == o.ID && c.id == id
+                        && c.owner == o.ID && c.id == id && g.isOur == true
                        select new NewClassForDataGrid
                        {
                            countAll = ginc.Quantity,

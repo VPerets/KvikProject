@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnAdd = new System.Windows.Forms.Button();
+            this.checkBoxisOur = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,8 @@
             this.tableLayoutPanel1.Controls.Add(this.tbFigure, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.BtnAdd, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.BtnAdd, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxisOur, 0, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -162,13 +164,25 @@
             // BtnAdd
             // 
             this.BtnAdd.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.BtnAdd.Location = new System.Drawing.Point(3, 149);
+            this.BtnAdd.Location = new System.Drawing.Point(3, 192);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
             this.BtnAdd.TabIndex = 10;
             this.BtnAdd.Text = "Добавить";
             this.BtnAdd.UseVisualStyleBackColor = true;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+            // 
+            // checkBoxisOur
+            // 
+            this.checkBoxisOur.AutoSize = true;
+            this.checkBoxisOur.Checked = true;
+            this.checkBoxisOur.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxisOur.Location = new System.Drawing.Point(3, 149);
+            this.checkBoxisOur.Name = "checkBoxisOur";
+            this.checkBoxisOur.Size = new System.Drawing.Size(128, 17);
+            this.checkBoxisOur.TabIndex = 11;
+            this.checkBoxisOur.Text = "Наше производство";
+            this.checkBoxisOur.UseVisualStyleBackColor = true;
             // 
             // AddGood
             // 
@@ -196,5 +210,6 @@
         public System.Windows.Forms.TextBox tbName;
         public System.Windows.Forms.TextBox tbCode;
         public System.Windows.Forms.TextBox tbFigure;
+        private System.Windows.Forms.CheckBox checkBoxisOur;
     }
 }

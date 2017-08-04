@@ -20,6 +20,7 @@ namespace KVIK_project
         public string code;
         public string figure;
         public double buy;
+        public bool isOur;
       //private ChannelFactory<IService> myChannelFactory = null;
         public bool added = false;
         // private IService service;
@@ -58,6 +59,7 @@ namespace KVIK_project
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            isOur = this.checkBoxisOur.Checked;
             name = this.tbName.Text;
             if (this.tbFigure.Text == "")
                 figure = "";
@@ -73,7 +75,7 @@ namespace KVIK_project
                 return;
             }
 
-            bool bool_ = service.addGoodsToDB(name, code, figure, buy);
+            bool bool_ = service.addGoodsToDB(name, code, figure, buy, isOur);
             if (bool_ == false)
             {
                 MessageBox.Show("Продукт с таким чертежем уже существует");
