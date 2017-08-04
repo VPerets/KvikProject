@@ -605,7 +605,7 @@ namespace KVIK_project
             return sb;
         }
 
-        private bool SendCodeByMail()
+        public bool SendCodeByMail()
         {
             // отправитель - устанавливаем адрес и отображаемое в письме имя
             MailAddress from = new MailAddress("vitaliia.perets@gmail.com");

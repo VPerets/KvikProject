@@ -327,6 +327,7 @@ namespace KVIK_project
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             UpdateAllAll();
+            //service.SendCodeByMail();
         }
 
         private void setByRadio(int case_)
