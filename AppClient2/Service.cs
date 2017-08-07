@@ -70,39 +70,21 @@ namespace AppClient2
         }
         public List<DateSum> getForDataGrid1()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             return (from d in datacontext.GetTable<DateSum>()
                     select d).ToList();
         }
 
         public List<contract_> getAllContracts()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
 
             return (from c in datacontext.GetTable<Contracts>()
                     select new contract_ { number = c.Number, name = c.contract_Name, id = c.id }).ToList();
         }
         public bool addGoodsToDB(string name, string code, string fig, double buy)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             try
             {
                 var NameTemp = from g in datacontext.GetTable<Goods>()
@@ -129,13 +111,7 @@ namespace AppClient2
 
         public void addCommentary(int GinC, string comm)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var goodIn = (from g in datacontext.GetTable<GoodsInContract>()
                           where g.id == GinC
                           select g).First();
@@ -145,13 +121,7 @@ namespace AppClient2
 
         private double getSum()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
 
             var sum = (from gi in datacontext.GetTable<GoodsInContract>()
                        select new { sum = gi.Quantity * gi.PriceSold }).Sum(s => s.sum);
@@ -160,13 +130,7 @@ namespace AppClient2
 
         private double getSumById(int id)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
 
             var sum = (from gi in datacontext.GetTable<GoodsInContract>()
                        from cc in datacontext.GetTable<Contracts>()
@@ -185,13 +149,7 @@ namespace AppClient2
 
         public double getAllById(int id)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
 
             var sum = (from gi in datacontext.GetTable<GoodsInContract>()
                        from cc in datacontext.GetTable<Contracts>()
@@ -202,13 +160,7 @@ namespace AppClient2
 
         public double getLeftSum()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var sum = getSum();
             var sumLeft = (from gi in datacontext.GetTable<GoodsInContract>()
                            select new { sum = gi.QuantityLeft * gi.PriceSold }).Sum(s => s.sum);
@@ -217,13 +169,7 @@ namespace AppClient2
 
         public List<goodPrice> getAllGoodPrice()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var col = from g in datacontext.GetTable<Goods>()
                       select new goodPrice { name = g.Name, priceBuy = g.PriceBuy };
             return col.ToList();
@@ -231,13 +177,7 @@ namespace AppClient2
 
         public void editPriceBuy(string name, double New, double old)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var good = (from g in datacontext.GetTable<Goods>()
                         where g.Name == name
                         select g).First();
@@ -251,13 +191,7 @@ namespace AppClient2
         }
         public bool checkLoginPass(string l, string p)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var col = from s in datacontext.GetTable<staff>()
                       where s.login == l && s.pass == p
                       select s;
@@ -267,13 +201,7 @@ namespace AppClient2
 
         public boolInt addQuantityLeftInGoods(int q, int GinC, string login)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var goodIn = (from g in datacontext.GetTable<GoodsInContract>()
                           where g.id == GinC
                           select g).First();
@@ -355,13 +283,7 @@ namespace AppClient2
 
         public bool addOwner(string name)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var owner = from o in datacontext.GetTable<owners>()
                         where o.Name == name
                         select o;
@@ -374,13 +296,7 @@ namespace AppClient2
 
         private void addToDateSumOtgruz(int q, string num, string good)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             double priceBuy = (from g in datacontext.GetTable<Goods>()
                                where g.Name == ""
                                select g.PriceBuy).First();
@@ -399,13 +315,7 @@ namespace AppClient2
 
         public List<classsAboutGoodsInContract> getGoodsByContract(int id)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var col = from g in datacontext.GetTable<GoodsInContract>()
                       from go in datacontext.GetTable<Goods>()
                       where g.IdGood == go.ID && g.idContract == id
@@ -421,13 +331,7 @@ namespace AppClient2
 
         public void addToGinC(int id, int q, double price, int idGood)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var ginc = new GoodsInContract
             {
                 IdGood = idGood,
@@ -442,38 +346,20 @@ namespace AppClient2
         }
         public List<Goods> getAllGoods()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             return (from g in datacontext.GetTable<Goods>()
                     select g).ToList();
         }
         public List<owners> getAllOwners()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             return (from o in datacontext.GetTable<owners>()
                     select o).ToList();
         }
 
         public List<NewClassForDataGrid> GetClassByContractId(int id)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var coll = from g in datacontext.GetTable<Goods>()
                        from c in datacontext.GetTable<Contracts>()
                        from o in datacontext.GetTable<owners>()
@@ -498,13 +384,7 @@ namespace AppClient2
 
         public List<NewClassForDataGrid2> GetClassByContractId2(int id)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var coll = from g in datacontext.GetTable<Goods>()
                        from c in datacontext.GetTable<Contracts>()
                        from o in datacontext.GetTable<owners>()
@@ -526,13 +406,7 @@ namespace AppClient2
         }
         public List<contract_> GetContractsByContragent(int id)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             return (from c in datacontext.GetTable<Contracts>()
                     where c.Contragent == id
                     select new contract_ { number = c.Number, name = c.contract_Name, id = c.id }).ToList();
@@ -540,26 +414,14 @@ namespace AppClient2
 
         public List<Contragents> GetAllContragents()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             return (from co in datacontext.GetTable<Contragents>()
                     select co).ToList();
         }
 
         public List<Contragents> GetContragents()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             return (from c in datacontext.GetTable<Contracts>()
                     from co in datacontext.GetTable<Contragents>()
                     where c.Contragent == co.ID
@@ -570,13 +432,7 @@ namespace AppClient2
         public bool AddContract(string num, int idContr, DateTime dt, DateTime dline, int owner,
             string comm)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var contract = from c in datacontext.GetTable<Contracts>()
                            where c.Number == num
                            select c;
@@ -598,13 +454,7 @@ namespace AppClient2
 
         public bool AddContragent(string name)
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             var contrag = from c in datacontext.GetTable<Contragents>()
                           where c.Name == name
                           select c;
@@ -619,13 +469,7 @@ namespace AppClient2
 
         private StringBuilder getSummForAWeek()
         {
-            if (datacontext != null)
-            {
-                datacontext.Dispose();
-                datacontext = new DataContext(cn);
-            }
-            else
-                datacontext = new DataContext(cn);
+            updateDatacontext();
             StringBuilder sb = new StringBuilder();
             double sum = 0;
             DateTime dateMinus7 = DateTime.Now.Date.AddDays(-7);
@@ -674,6 +518,17 @@ namespace AppClient2
             {
                 return false;
             }
+        }
+
+        public void updateDatacontext()
+        {
+            if (datacontext != null)
+            {
+                datacontext.Dispose();
+                datacontext = new DataContext(cn);
+            }
+            else
+                datacontext = new DataContext(cn);
         }
     }
     public class SortClass<T> : IComparer<T>

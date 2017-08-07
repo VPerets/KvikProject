@@ -273,7 +273,7 @@ namespace KVIK_project
                 this.comboBoxOwners.SelectedIndex = -1;
             }
             else
-                MessageBox.Show("Возможно такой номер дрговора уже существуетЭ.Попробуйте еще");
+                MessageBox.Show("Возможно такой номер дрговора уже существует.Попробуйте еще");
         }
 
         private void buttonAddContragent_Click(object sender, EventArgs e)
