@@ -114,6 +114,7 @@ namespace KVIK_project
                     this.dataGridView1.Rows[rowsCount].Tag = contracts[j].id;
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Value =
                             "Договор № " + contracts[j].number;
+                    this.dataGridView1.Rows[rowsCount].Cells["code"].ToolTipText = contracts[j].owner;
                     this.dataGridView1.Rows[rowsCount].Cells["name"].Value = contracts[j].name;
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Style.Font
                     = new Font("Arial", 12);
@@ -375,6 +376,11 @@ namespace KVIK_project
                     setByRadio(2);
                     break;
             }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -501,7 +501,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.66667F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
             this.tableLayoutPanel6.Controls.Add(this.labSumByContr, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.comboByContragent, 0, 0);
@@ -519,7 +519,7 @@
             // labSumByContr
             // 
             this.labSumByContr.AutoSize = true;
-            this.labSumByContr.Location = new System.Drawing.Point(322, 0);
+            this.labSumByContr.Location = new System.Drawing.Point(321, 0);
             this.labSumByContr.Name = "labSumByContr";
             this.labSumByContr.Size = new System.Drawing.Size(10, 13);
             this.labSumByContr.TabIndex = 4;
@@ -528,7 +528,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(237, 0);
+            this.label3.Location = new System.Drawing.Point(236, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 26);
             this.label3.TabIndex = 3;
@@ -546,16 +546,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(407, 0);
+            this.label2.Location = new System.Drawing.Point(406, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Осталось";
+            this.label2.Text = "Отгрузили";
             // 
             // byRoad
             // 
             this.byRoad.AutoSize = true;
-            this.byRoad.Location = new System.Drawing.Point(476, 0);
+            this.byRoad.Location = new System.Drawing.Point(475, 0);
             this.byRoad.Name = "byRoad";
             this.byRoad.Size = new System.Drawing.Size(10, 13);
             this.byRoad.TabIndex = 1;

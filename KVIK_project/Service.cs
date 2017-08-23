@@ -45,13 +45,7 @@ namespace KVIK_project
         public void open()
         {
             // count++;
-            datacontext = new DataContext(cn);
-            var t = from g in datacontext.GetTable<Goods>()
-                    where g.Name == "Вставка пантогрфа тип \"Б\""
-                select g;
-            System.Windows.Forms.MessageBox.Show(t.First().Name);
-            t.First().isOur = false;
-            datacontext.SubmitChanges();
+          
         }
         public void close()
         {
@@ -396,8 +390,9 @@ namespace KVIK_project
         {
             updateDatacontext();
             return (from c in datacontext.GetTable<Contracts>()
-                    where c.Contragent == id
-                    select new contract_ { number = c.Number, name = c.contract_Name, id = c.id }).ToList();
+                    from o in datacontext.GetTable<owners>()
+                    where c.Contragent == id && c.owner == o.ID
+                    select new contract_ { number = c.Number, name = c.contract_Name, id = c.id, owner = o.Name }).ToList();
         }
 
         public List<Contragents> GetAllContragents()
@@ -528,7 +523,6 @@ namespace KVIK_project
         }
     }
 
-
     public class goodPrice
     {
 
@@ -571,6 +565,7 @@ namespace KVIK_project
         public string figure { get; set; }
 
         public double priceSold { get; set; }
+
         public override string ToString()
         {
             return string.Format($"{name} {countAll} {countLeft} {deadLine} {commentary}");
@@ -606,6 +601,8 @@ namespace KVIK_project
         public string name { get; set; }
 
         public string number { get; set; }
+
+        public string owner { get; set; }
 
         public int id { get; set; }
         public override string ToString()
