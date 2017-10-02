@@ -12,9 +12,9 @@ namespace KvikLibrary
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         public int id { get; set; }
-        [Column]
-        public Nullable<System.DateTime> Data { get; set; }
-        //    public DateTime Data { get; set; }
+        //[Column]
+        //public Nullable<System.DateTime> Data { get; set; }
+        ////    public DateTime Data { get; set; }
         [Column]
         public double Summa { get; set; }
         [Column]
@@ -27,5 +27,7 @@ namespace KvikLibrary
         public string contract { get; set; }
         [Column]
         public string whoIs { get; set; }
+        [Column]
+        public Nullable<System.DateTime> dateShip { get; set; }
     }
 }

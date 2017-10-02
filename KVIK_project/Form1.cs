@@ -81,7 +81,7 @@ namespace KVIK_project
             {
                 this.dataGridView2.Rows.Add(new DataGridViewRow());
                 this.dataGridView2.Rows[rows].Cells["contract"].Value = item.contract;
-                this.dataGridView2.Rows[rows].Cells["date"].Value = item.Data;
+                this.dataGridView2.Rows[rows].Cells["date"].Value = item.dateShip;
                 this.dataGridView2.Rows[rows].Cells["good"].Value = item.good;
                 this.dataGridView2.Rows[rows].Cells["quant"].Value = item.quant;
                 this.dataGridView2.Rows[rows].Cells["sum"].Value = item.summSold;
@@ -220,7 +220,10 @@ namespace KVIK_project
 
             int id = (int)row.Tag;
 
-            boolInt left = service.addQuantityLeftInGoods(quant, id, this.login);
+            calendar calendForm = new calendar();
+            calendForm.ShowDialog();
+
+            boolInt left = service.addQuantityLeftInGoods(quant, id, this.login, calendForm.dateVal);
 
             if (left.b == false)
             {

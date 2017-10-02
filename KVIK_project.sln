@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KVIK_project", "KVIK_project\KVIK_project.csproj", "{A26B930D-9B3E-4AD6-8BB0-01159A028DD4}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppClient", "AppClient\AppClient.csproj", "{CF23C3FE-AC79-4F81-B32A-ED6D57A54756}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppClient2", "AppClient2\AppClient2.csproj", "{D3014228-A3FF-42D5-956B-EA5A7727AD0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{1E11326D-88AF-4C04-9119-7CDC49A216AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{D3014228-A3FF-42D5-956B-EA5A7727AD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3014228-A3FF-42D5-956B-EA5A7727AD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3014228-A3FF-42D5-956B-EA5A7727AD0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E11326D-88AF-4C04-9119-7CDC49A216AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E11326D-88AF-4C04-9119-7CDC49A216AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E11326D-88AF-4C04-9119-7CDC49A216AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E11326D-88AF-4C04-9119-7CDC49A216AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
