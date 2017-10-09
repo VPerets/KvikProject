@@ -22,14 +22,14 @@ namespace WindowsFormsApplication1
         MySqlConnection connMySql = null;
         static int count = 0;
         string connStr = "";
-
+        string option = "Convert Zero Datetime=True";
         public Service()
         {
             connStr = "server=mysql.zzz.com.ua" +
                 ";user=kvik" +
                 ";database=kvik2006" +
                  ";port=3306" +
-                ";password=Western2233";
+                ";password=Western2233;" + option;
             connMySql = new MySqlConnection(connStr);
             connMySql.Open();
 
@@ -95,14 +95,13 @@ namespace WindowsFormsApplication1
         {
             updateMySql();
             List<DateSum> dates = new List<DateSum>();
-            MySqlCommand cmd = new MySqlCommand("select * from datesum", connMySql);
+            MySqlCommand cmd = new MySqlCommand("select id, summa, summSold, good, quant, contract, whoIs, dateShip as ds from datesum",
+                connMySql);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                DateTime ddt = ((DateTime)reader["Data"]).Date;
-          
                 dates.Add(new DateSum((int)reader["id"], (double)reader["summa"], (double)reader["summSold"], (string)reader["good"], 
-                    (int)reader["quant"], (string)reader["contract"], (string)reader["whoIs"], ddt));
+                    (int)reader["quant"], (string)reader["contract"], (string)reader["whoIs"], (DateTime)reader["ds"]));
             }
             return dates;
         }
@@ -257,23 +256,13 @@ namespace WindowsFormsApplication1
 
         public bool addOwner(string name)
         {
-            //updateDatacontext();
-            //var owner = from o in datacontext.GetTable<owners>()
-            //            where o.Name == name
-            //            select o;
-            //if (owner.Count() > 0) return false;
-            //var ownerNew = new owners { Name = name };
-            //datacontext.GetTable<owners>().InsertOnSubmit(ownerNew);
-            //datacontext.SubmitChanges();
+            updateMySql();
+                     
+            string command = string.Format($" insert into owners ( name ) " +
+               $" values('{name}' )");
 
-            //int maxId = (from c in datacontext.GetTable<owners>()
-            //             select c.ID).Max();
-
-            //string command = string.Format($" insert into owners (id, name ) " +
-            //   $" values({maxId}, '{name}' )");
-
-            //MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
-            //MyCommand.ExecuteNonQuery();
+            MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+            MyCommand.ExecuteNonQuery();
 
             return true;
         }
@@ -313,11 +302,8 @@ namespace WindowsFormsApplication1
         {
           
             updateMySql();
-
-         
-
-         
-            using (MySqlCommand cmd = new MySqlCommand("insert into goodsincontract ( idGood, idContract, PriceSold, Quantity, QuantityLeft ) values(@Parname , @Parname2, @Parname3, @Parname4, @Parname5, @Parname6)", connMySql))
+       
+            using (MySqlCommand cmd = new MySqlCommand("insert into goodsincontract ( idGood, idContract, PriceSold, Quantity, QuantityLeft ) values( @Parname2, @Parname3, @Parname4, @Parname5, @Parname6)", connMySql))
             {
                 // change MySqlDbType.Double to reflect the real data type in the table.
                 cmd.Parameters.Add("@Parname2", MySqlDbType.Int16).Value = idGood;
@@ -361,17 +347,18 @@ namespace WindowsFormsApplication1
             List<NewClassForDataGrid> contrs = new List<NewClassForDataGrid>();
             MySqlCommand cmd = new MySqlCommand("select goods.name as name, goodsincontract.Quantity as quan, " +
             "goodsincontract.QuantityLeft as qleft, goodsincontract.commentary, contracts.Number as num, " +
-            " goodsincontract.PriceSold as pr, goodsincontract.id as id, contracts.deadLine as dl, " +
+            " goodsincontract.PriceSold as pr, goodsincontract.id as id, contracts.deadLine as dl, " + 
             "goods.figure as fig, goods.numberObl as code from goods inner join goodsincontract on " +
             "goods.id = goodsincontract.idGood inner join contracts on contracts.id = goodsincontract.idContract " +
             "where contracts.id = " + id, connMySql);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                DateTime ddt = ((DateTime)reader["dl"]).Date;
+                //  System.Windows.Forms.MessageBox.Show(reader["dl"].ToString());
                 //System.Windows.Forms.MessageBox.Show(ddt.ToString());
+              //  DateTime ddd = DateTime.Parse(reader["dl"].ToString());
                 contrs.Add(new NewClassForDataGrid(reader["name"].ToString(), (int)(reader["quan"]), (int)(reader["qleft"]),
-                    reader["commentary"].ToString(), DateTime.Now,
+                    reader["commentary"].ToString(), (DateTime)reader["dl"],
                     (int)(reader["id"]), reader["code"].ToString(),
                     reader["fig"].ToString(), (double)reader["pr"]));
             }

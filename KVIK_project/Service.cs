@@ -278,7 +278,7 @@ namespace KVIK_project
                 datacontext.SubmitChanges();         
                 int maxId = (from c in datacontext.GetTable<DateSum>()
                              select c.id).Max();
-                updateMySql();
+               
                 command = string.Format($" insert into datesum " +
                 $"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
                 $" VALUES ({maxId},'{dateVal.Date.ToString("yyyy-MM-dd")}', {q}, {summ},'{idContract}', '{classTmp.Good}','{login}', {summ2} ) ;");
@@ -362,6 +362,7 @@ namespace KVIK_project
             }
             else
                 datacontext = new DataContext(cn);
+
             double priceBuy = (from g in datacontext.GetTable<Goods>()
                                where g.Name == ""
                                select g.PriceBuy).First();
