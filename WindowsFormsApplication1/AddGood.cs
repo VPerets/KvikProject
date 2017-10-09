@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.ServiceModel;
+using System.Configuration;
+
+namespace WindowsFormsApplication1
+{
+    public partial class AddGood : Form
+    {
+        public string name;
+        public string code;
+        public string figure;
+        public double buy;
+        public bool isOur;
+      //private ChannelFactory<IService> myChannelFactory = null;
+        public bool added = false;
+        // private IService service;
+        private Service service;
+
+        public AddGood()
+        {
+            InitializeComponent();
+            this.FormClosing += AddGood_FormClosing;
+            this.Load += AddGood_Load;
+            this.FormClosing += AddGood_FormClosing1;
+        }
+
+        private void AddGood_FormClosing1(object sender, FormClosingEventArgs e)
+        {
+            service.close();
+           // myChannelFactory.Close();
+        }
+
+        private void AddGood_Load(object sender, EventArgs e)
+        {
+            //var myBinding = new BasicHttpBinding();
+            //var Uri = new Uri(ConfigurationManager.ConnectionStrings["WcfConnectionString"].ConnectionString);
+            //var myEndpoint = new EndpointAddress(Uri);
+
+            //myChannelFactory = new ChannelFactory<IService>(myBinding, myEndpoint);
+            //service = myChannelFactory.CreateChannel();
+            service = new Service();
+            service.open();
+        }
+
+        private void AddGood_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            service.close();
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            isOur = this.checkBoxisOur.Checked;
+            name = this.tbName.Text;
+            if (this.tbFigure.Text == "")
+                figure = "";
+            else
+                figure = this.tbFigure.Text;
+            code = this.tbCode.Text;
+            double b;
+            if (Double.TryParse(this.tbPriceBuy.Text, out b))
+                buy = b;
+            else
+            {
+                MessageBox.Show("Ввести корректное значение цены покупки");
+                return;
+            }
+
+            bool bool_ = service.addGoodsToDB(name, code, figure, buy, isOur);
+            if (bool_ == false)
+            {
+                MessageBox.Show("Продукт с таким чертежем уже существует");
+                return;
+            }
+            added = true;
+            this.tbName.Text = "";
+            this.tbPriceBuy.Text = "";
+            this.tbCode.Text = "";
+            this.tbFigure.Text = "";
+        }
+    }
+}

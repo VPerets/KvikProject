@@ -201,7 +201,7 @@ namespace AppClient
                 contract = (from c in datacontext.GetTable<Contracts>()
                             where c.id == goodIn.idContract
                             select c.Number).First(),
-                Data = DateTime.Now.Date,
+                dateShip = DateTime.Now.Date,
                 good = classTmp.Good,
                 quant = q,
                 Summa = summ,
@@ -282,7 +282,7 @@ namespace AppClient
             var otgruzka = new DateSum
             {
                 contract = num,
-                Data = DateTime.Now.Date,
+                dateShip = DateTime.Now.Date,
                 good = good,
                 quant = q,
                 Summa = summ
@@ -455,11 +455,11 @@ namespace AppClient
             double sum = 0;
             DateTime dateMinus7 = DateTime.Now.Date.AddDays(-7);
             var collection = from d in datacontext.GetTable<DateSum>()
-                             where d.Data > dateMinus7
+                             where d.dateShip > dateMinus7
                              select d;
             foreach (var item in collection)
             {
-                sb.Append(item.Data.Value.ToShortDateString() + " " + item.good + " "
+                sb.Append(item.dateShip.Value.ToShortDateString() + " " + item.good + " "
                     + item.quant + " " + item.Summa);
                 sb.Append("\n");
                 sum += item.Summa;
