@@ -99,7 +99,10 @@ namespace WindowsFormsApplication1
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                dates.Add(new DateSum((int)reader["id"], (double)reader["summa"], (double)reader["summaSold"], (string)reader["good"], (int)reader["quant"], (string)reader["contract"], (string)reader["whoIs"], (DateTime)reader["Data"]));
+                DateTime ddt = ((DateTime)reader["Data"]).Date;
+          
+                dates.Add(new DateSum((int)reader["id"], (double)reader["summa"], (double)reader["summSold"], (string)reader["good"], 
+                    (int)reader["quant"], (string)reader["contract"], (string)reader["whoIs"], ddt));
             }
             return dates;
         }
@@ -365,8 +368,11 @@ namespace WindowsFormsApplication1
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
+                DateTime ddt = ((DateTime)reader["dl"]).Date;
+                //System.Windows.Forms.MessageBox.Show(ddt.ToString());
                 contrs.Add(new NewClassForDataGrid(reader["name"].ToString(), (int)(reader["quan"]), (int)(reader["qleft"]),
-                    reader["commentary"].ToString(), (DateTime)reader["dl"], (int)(reader["id"]), reader["code"].ToString(),
+                    reader["commentary"].ToString(), DateTime.Now,
+                    (int)(reader["id"]), reader["code"].ToString(),
                     reader["fig"].ToString(), (double)reader["pr"]));
             }
             return contrs;
@@ -374,7 +380,7 @@ namespace WindowsFormsApplication1
 
         //    public List<NewClassForDataGrid2> GetClassByContractId2(int id)
         //    {
-        //        updateDatacontext();
+        //        updateDatacontext
         //        var coll = from g in datacontext.GetTable<Goods>()
         //                   from c in datacontext.GetTable<Contracts>()
         //                   from o in datacontext.GetTable<owners>()
@@ -628,7 +634,7 @@ namespace WindowsFormsApplication1
                 this.countAll = all;
                 this.countLeft = lef;
                 this.commentary = com;
-                this.deadLine = d;
+                this.deadLine = d.Date;
                 this.idGinC = idc;
                 this.code = code;
                 this.figure = fig;

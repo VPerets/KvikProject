@@ -257,12 +257,13 @@ namespace KVIK_project
 
             double summ = classTmp.priceBuy * q;
             double summ2 = classTmp.pricsSold * q;
+            string idContract = (from c in datacontext.GetTable<Contracts>()
+                              where c.id == goodIn.idContract
+                              select c.Number).First();
 
             var otgruzka = new DateSum
             {
-                contract = (from c in datacontext.GetTable<Contracts>()
-                            where c.id == goodIn.idContract
-                            select c.Number).First(),
+                contract = idContract,
                 good = classTmp.Good,
                 quant = q,
                 Summa = summ,
@@ -273,10 +274,18 @@ namespace KVIK_project
             datacontext.GetTable<DateSum>().InsertOnSubmit(otgruzka);
             // datacontext.SubmitChanges();
 
-            try
-            {
-                datacontext.SubmitChanges();
-            }
+            
+                datacontext.SubmitChanges();         
+                int maxId = (from c in datacontext.GetTable<DateSum>()
+                             select c.id).Max();
+                updateMySql();
+                command = string.Format($" insert into datesum " +
+                $"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
+                $" VALUES ({maxId},'{dateVal.Date.ToString("yyyy-MM-dd")}', {q}, {summ},'{idContract}', '{classTmp.Good}','{login}', {summ2} ) ;");
+                MyCommand = new MySqlCommand(command, connMySql);
+                MyCommand.ExecuteReader();
+           try
+            { }
             catch (ChangeConflictException)
             {
                 {
