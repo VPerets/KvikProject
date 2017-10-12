@@ -272,18 +272,17 @@ namespace KVIK_project
                 dateShip = dateVal  
             };
             datacontext.GetTable<DateSum>().InsertOnSubmit(otgruzka);
-            // datacontext.SubmitChanges();
-
+  
+            datacontext.SubmitChanges();  
             
-                datacontext.SubmitChanges();         
-                int maxId = (from c in datacontext.GetTable<DateSum>()
-                             select c.id).Max();
-               
-                command = string.Format($" insert into datesum " +
-                $"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
-                $" VALUES ({maxId},'{dateVal.Date.ToString("yyyy-MM-dd")}', {q}, {summ},'{idContract}', '{classTmp.Good}','{login}', {summ2} ) ;");
-                MyCommand = new MySqlCommand(command, connMySql);
-                MyCommand.ExecuteReader();
+            int maxId = (from c in datacontext.GetTable<DateSum>()
+                            select c.id).Max();
+            updateMySql();
+            command = string.Format($" insert into datesum " +
+            $"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
+            $" VALUES ({maxId},'{dateVal.Date.ToString("yyyy-MM-dd")}', {summ}, {q},'{idContract}', '{classTmp.Good}','{login}', {summ2} ) ;");
+            MyCommand = new MySqlCommand(command, connMySql);
+            MyCommand.ExecuteReader();
            try
             { }
             catch (ChangeConflictException)
