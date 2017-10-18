@@ -37,6 +37,7 @@ namespace KVIK_project
 
             cn = new System.Data.SqlClient.SqlConnection();
             cn.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            cn.Open();
             int hour = DateTime.Now.Hour;
 
 
@@ -56,12 +57,39 @@ namespace KVIK_project
 
         public void open()
         {
+
+          //  updateMySql();
+          //  updateDatacontext();
+          //  //var t = (from g in datacontext.GetTable<Goods>()
+          //  //         where g.Name == "Сідло клапана"
+          //  //         select g).First();
+          //  //System.Windows.Forms.MessageBox.Show(t.Figure);
+          //  //System.Windows.Forms.MessageBox.Show(cn.State.ToString());
+
+          //  var t = (from g in datacontext.GetTable<Contracts>()
+          //           where g.Number == "ПР/НХ-171134/НЮ"
+          //           select g).First();
+          //  //var t = from g in datacontext.GetTable<Contracts>() select g;
+          //  // System.Windows.Forms.MessageBox.Show(t.First().Number);
+          ////  t.Number = "ПР/НХ-171134/НЮ";
+          // // t.Data = new DateTime(2017, 10, 17);
+          //  int idd = t.id;
+
+
+          //  datacontext.SubmitChanges();
+
+          //  string numm = "ПР/НХ-171134/НЮ";
+          //  string command = string.Format($"update contracts set number = '{numm}', data = '{new DateTime(2017, 10, 17).Date.ToString("yyyy-MM-dd")}' where id ={idd}");
+          //  MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+          //  MyCommand.ExecuteNonQuery();
+
+
             //MySqlCommand command = new MySqlCommand();
             //string commandString = "SELECT * FROM owners;";
             //command.CommandText = commandString;
             //command.Connection = connMySql;
             //MySqlDataReader reader;
-            
+
             //   // command.Connection.Open();
             //    reader = command.ExecuteReader();
             //    string str = "";
@@ -100,6 +128,21 @@ namespace KVIK_project
                 SendCodeByMail();
             }
         }
+
+        public void deleteFromDateSum(int id) {
+            updateDatacontext();
+            updateMySql();
+            var ds = (from d in datacontext.GetTable<DateSum>()
+                     where d.id == id
+                     select d).First();
+            datacontext.GetTable<DateSum>().DeleteOnSubmit(ds);
+            datacontext.SubmitChanges();
+
+            string command = string.Format($"delete from datesum where id = {id}");
+            MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+            MyCommand.ExecuteNonQuery();
+        }
+
         public List<DateSum> getForDataGrid1()
         {
             updateDatacontext();
@@ -112,7 +155,7 @@ namespace KVIK_project
             updateDatacontext();
 
             return (from c in datacontext.GetTable<Contracts>()
-                    select new contract_ { number = c.Number, name = c.contract_Name, id = c.id }).ToList();
+                    select new contract_ { number = c.Number, name = c.contract_Name, id = c.id, data = c.Data.Date }).ToList();
         }
         public bool addGoodsToDB(string name, string code, string fig, double buy, bool isOur)
         {
@@ -501,7 +544,7 @@ namespace KVIK_project
             return (from c in datacontext.GetTable<Contracts>()
                     from o in datacontext.GetTable<owners>()
                     where c.Contragent == id && c.owner == o.ID
-                    select new contract_ { number = c.Number, name = c.contract_Name, id = c.id, owner = o.Name }).ToList();
+                    select new contract_ { number = c.Number, name = c.contract_Name, id = c.id, owner = o.Name, data = c.Data.Date }).ToList();
         }
 
         public List<Contragents> GetAllContragents()
@@ -599,6 +642,21 @@ namespace KVIK_project
             }
             sb.Append(sum.ToString());
             return sb;
+        }
+
+        public void editContract(int id, string num,DateTime data) {
+            updateDatacontext();
+            updateMySql();
+            var c = (from co in datacontext.GetTable<Contracts>()
+                    where co.id == id select co).First();
+            c.Number = num;
+            c.Data = data;
+            datacontext.SubmitChanges();
+
+            string command = string.Format($" update contracts set  data = '{data.Date.ToString("yyyy-MM-dd")}', number = '{num}' where id = {id} " );
+            MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+            MyCommand.ExecuteReader();
+
         }
 
         public bool SendCodeByMail()
@@ -748,10 +806,12 @@ namespace KVIK_project
 
         public string owner { get; set; }
 
+        public DateTime data { get; set; }
+
         public int id { get; set; }
         public override string ToString()
         {
-            return string.Format($"{number}");
+            return string.Format($"{number} {data.ToShortDateString()}");
         }
     }
 

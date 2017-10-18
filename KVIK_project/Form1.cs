@@ -85,6 +85,7 @@ namespace KVIK_project
                 this.dataGridView2.Rows[rows].Cells["good"].Value = item.good;
                 this.dataGridView2.Rows[rows].Cells["quant"].Value = item.quant;
                 this.dataGridView2.Rows[rows].Cells["sum"].Value = item.summSold;
+                this.dataGridView2.Rows[rows].Tag = item.id;
                 rows++;
             }
         }
@@ -380,10 +381,13 @@ namespace KVIK_project
                     break;
             }
         }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+ 
+        private void dataGridView2_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
+            if (this.loading == true) return;
 
+            DataGridViewRow row = e.Row;
+            service.deleteFromDateSum((int)row.Tag);
         }
     }
 }

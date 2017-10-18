@@ -39,8 +39,11 @@
             this.comboGoods = new System.Windows.Forms.ComboBox();
             this.tbKol = new System.Windows.Forms.TextBox();
             this.buttonAddGoodsToContract = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -51,7 +54,6 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.73809F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.2619F));
-            this.tableLayoutPanel1.Controls.Add(this.comboBoxContracts, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.buttonAddGoodsToContract, 0, 1);
@@ -72,7 +74,7 @@
             this.comboBoxContracts.FormattingEnabled = true;
             this.comboBoxContracts.Location = new System.Drawing.Point(3, 3);
             this.comboBoxContracts.Name = "comboBoxContracts";
-            this.comboBoxContracts.Size = new System.Drawing.Size(268, 21);
+            this.comboBoxContracts.Size = new System.Drawing.Size(262, 21);
             this.comboBoxContracts.TabIndex = 1;
             this.comboBoxContracts.SelectedIndexChanged += new System.EventHandler(this.comboBoxContracts_SelectedIndexChanged);
             // 
@@ -190,17 +192,43 @@
             this.buttonAddGoodsToContract.UseVisualStyleBackColor = true;
             this.buttonAddGoodsToContract.Click += new System.EventHandler(this.buttonAddGoodsToContract_Click);
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxContracts, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button1, 0, 1);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(15, 12);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(268, 100);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 53);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Изменить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AddGoodsInContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 489);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AddGoodsInContract";
             this.Text = "AddGoodsInContract";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -217,5 +245,7 @@
         private System.Windows.Forms.ComboBox comboGoods;
         private System.Windows.Forms.TextBox tbKol;
         private System.Windows.Forms.Button buttonAddGoodsToContract;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -21,6 +21,8 @@ namespace KVIK_project
         //private ChannelFactory<IService> myChannelFactory = null;
         public bool added = false;
         public int id;
+        public string nameContract = "";
+        public DateTime dt;
         public AddGoodsInContract()
         {
             InitializeComponent();
@@ -94,7 +96,15 @@ namespace KVIK_project
             added = true;
             updateList(id);
         }
-                    
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBoxContracts.SelectedIndex < 0) return;
+            contract_ contr = this.comboBoxContracts.SelectedItem as contract_;
+            editContract editC = new editContract( contr.data, contr.number );
+            editC.ShowDialog();
+            service.editContract(contr.id,editC.num, editC.dt);
+        }
     }
 }
 

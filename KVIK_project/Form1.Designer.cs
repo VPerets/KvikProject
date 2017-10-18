@@ -80,17 +80,17 @@
             this.tabPageInfo = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.good = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelOtgr = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.labelSum = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.good = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabContract.SuspendLayout();
@@ -172,7 +172,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.42857F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1021, 455);
             this.tableLayoutPanel2.TabIndex = 0;
-            this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // dataGridView1
             // 
@@ -724,6 +723,37 @@
             this.tableLayoutPanel9.SetRowSpan(this.dataGridView2, 2);
             this.dataGridView2.Size = new System.Drawing.Size(825, 448);
             this.dataGridView2.TabIndex = 4;
+            this.dataGridView2.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView2_UserDeletingRow);
+            // 
+            // contract
+            // 
+            this.contract.HeaderText = "Договор";
+            this.contract.Name = "contract";
+            this.contract.ReadOnly = true;
+            // 
+            // date
+            // 
+            this.date.HeaderText = "Дата Отгрузки";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            // 
+            // good
+            // 
+            this.good.HeaderText = "Продукт";
+            this.good.Name = "good";
+            this.good.ReadOnly = true;
+            // 
+            // Quant
+            // 
+            this.Quant.HeaderText = "Количество";
+            this.Quant.Name = "Quant";
+            this.Quant.ReadOnly = true;
+            // 
+            // Sum
+            // 
+            this.Sum.HeaderText = "Сумма";
+            this.Sum.Name = "Sum";
+            this.Sum.ReadOnly = true;
             // 
             // tableLayoutPanel4
             // 
@@ -778,36 +808,6 @@
             this.labelSum.Size = new System.Drawing.Size(13, 13);
             this.labelSum.TabIndex = 2;
             this.labelSum.Text = "_";
-            // 
-            // contract
-            // 
-            this.contract.HeaderText = "Договор";
-            this.contract.Name = "contract";
-            this.contract.ReadOnly = true;
-            // 
-            // date
-            // 
-            this.date.HeaderText = "Дата Отгрузки";
-            this.date.Name = "date";
-            this.date.ReadOnly = true;
-            // 
-            // good
-            // 
-            this.good.HeaderText = "Продукт";
-            this.good.Name = "good";
-            this.good.ReadOnly = true;
-            // 
-            // Quant
-            // 
-            this.Quant.HeaderText = "Количество";
-            this.Quant.Name = "Quant";
-            this.Quant.ReadOnly = true;
-            // 
-            // Sum
-            // 
-            this.Sum.HeaderText = "Сумма";
-            this.Sum.Name = "Sum";
-            this.Sum.ReadOnly = true;
             // 
             // Form1
             // 
