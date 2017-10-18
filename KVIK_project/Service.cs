@@ -147,7 +147,7 @@ namespace KVIK_project
         {
             updateDatacontext();
             return (from d in datacontext.GetTable<DateSum>()
-                    select d).ToList();
+                    where d.dateShip >= DateTime.Now.AddDays(-30) select d ).ToList();
         }
 
         public List<contract_> getAllContracts()
