@@ -321,12 +321,28 @@ namespace KVIK_project
             int maxId = (from c in datacontext.GetTable<DateSum>()
                             select c.id).Max();
             updateMySql();
-            command = string.Format($" insert into datesum " +
-            $"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
-            $" VALUES ({maxId},'{dateVal.Date.ToString("yyyy-MM-dd")}', {summ}, {q},'{idContract}', '{classTmp.Good}','{login}', {summ2} ) ;");
-            MyCommand = new MySqlCommand(command, connMySql);
-            MyCommand.ExecuteReader();
-           try
+            //command = string.Format($" insert into datesum " +
+            //$"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
+            //$" VALUES ({maxId},'{dateVal.Date.ToString("yyyy-MM-dd")}', {summ}, {q},'{idContract}', '{classTmp.Good}','{login}', {summ2} ) ;");
+            //MyCommand = new MySqlCommand(command, connMySql);
+            //MyCommand.ExecuteReader();
+
+            using (MySqlCommand cmd = new MySqlCommand(" insert into datesum (id, dateShip, summa, quant, contract,good, whoIS, summSold) values(@Parname , @Parname2, @Parname3, @Parname4, @Parname5, @Parname6, @Parname7, @Parname8)",
+                connMySql))
+            {
+                // change MySqlDbType.Double to reflect the real data type in the table.
+                cmd.Parameters.Add("@Parname", MySqlDbType.Int16).Value = maxId;
+                cmd.Parameters.Add("@Parname2", MySqlDbType.VarChar).Value = dateVal.Date.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add("@Parname3", MySqlDbType.Double).Value = summ;
+                cmd.Parameters.Add("@Parname4", MySqlDbType.Int16).Value = q;
+                cmd.Parameters.Add("@Parname5", MySqlDbType.VarChar).Value = idContract;
+                cmd.Parameters.Add("@Parname6", MySqlDbType.VarChar).Value = classTmp.Good;
+                cmd.Parameters.Add("@Parname7", MySqlDbType.VarChar).Value = login;
+                cmd.Parameters.Add("@Parname8", MySqlDbType.Double).Value = summ2;
+                cmd.ExecuteNonQuery();
+            }
+
+            try
             { }
             catch (ChangeConflictException)
             {
