@@ -22,7 +22,7 @@ namespace KVIK_project
         static Timer timer;
         DbConnection cn;
         MySqlConnection connMySql = null;
-        static int count = 0 ;
+        static int count = 0;
         string connStr = "";
 
         public Service()
@@ -32,7 +32,7 @@ namespace KVIK_project
                 ";database=kvik2006" +
                  ";port=3306" +
                 ";password=Western2233";
-            connMySql  = new MySqlConnection(connStr);
+            connMySql = new MySqlConnection(connStr);
             connMySql.Open();
 
             cn = new System.Data.SqlClient.SqlConnection();
@@ -42,8 +42,8 @@ namespace KVIK_project
 
 
             //    long ticks = (18- hour)*1000*60*60;
-         //   long ticks = (10 - hour) * 1000 * 60 * 60;
-           // timer = new Timer(forTimer, null, 1000, 84000000);
+            //   long ticks = (10 - hour) * 1000 * 60 * 60;
+            // timer = new Timer(forTimer, null, 1000, 84000000);
             //if (count == 0)
             //{
             //    count++;
@@ -58,30 +58,30 @@ namespace KVIK_project
         public void open()
         {
 
-          //  updateMySql();
-          //  updateDatacontext();
-          //  //var t = (from g in datacontext.GetTable<Goods>()
-          //  //         where g.Name == "Сідло клапана"
-          //  //         select g).First();
-          //  //System.Windows.Forms.MessageBox.Show(t.Figure);
-          //  //System.Windows.Forms.MessageBox.Show(cn.State.ToString());
+            //  updateMySql();
+            //  updateDatacontext();
+            //  //var t = (from g in datacontext.GetTable<Goods>()
+            //  //         where g.Name == "Сідло клапана"
+            //  //         select g).First();
+            //  //System.Windows.Forms.MessageBox.Show(t.Figure);
+            //  //System.Windows.Forms.MessageBox.Show(cn.State.ToString());
 
-          //  var t = (from g in datacontext.GetTable<Contracts>()
-          //           where g.Number == "ПР/НХ-171134/НЮ"
-          //           select g).First();
-          //  //var t = from g in datacontext.GetTable<Contracts>() select g;
-          //  // System.Windows.Forms.MessageBox.Show(t.First().Number);
-          ////  t.Number = "ПР/НХ-171134/НЮ";
-          // // t.Data = new DateTime(2017, 10, 17);
-          //  int idd = t.id;
+            //  var t = (from g in datacontext.GetTable<Contracts>()
+            //           where g.Number == "ПР/НХ-171134/НЮ"
+            //           select g).First();
+            //  //var t = from g in datacontext.GetTable<Contracts>() select g;
+            //  // System.Windows.Forms.MessageBox.Show(t.First().Number);
+            ////  t.Number = "ПР/НХ-171134/НЮ";
+            // // t.Data = new DateTime(2017, 10, 17);
+            //  int idd = t.id;
 
 
-          //  datacontext.SubmitChanges();
+            //  datacontext.SubmitChanges();
 
-          //  string numm = "ПР/НХ-171134/НЮ";
-          //  string command = string.Format($"update contracts set number = '{numm}', data = '{new DateTime(2017, 10, 17).Date.ToString("yyyy-MM-dd")}' where id ={idd}");
-          //  MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
-          //  MyCommand.ExecuteNonQuery();
+            //  string numm = "ПР/НХ-171134/НЮ";
+            //  string command = string.Format($"update contracts set number = '{numm}', data = '{new DateTime(2017, 10, 17).Date.ToString("yyyy-MM-dd")}' where id ={idd}");
+            //  MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+            //  MyCommand.ExecuteNonQuery();
 
 
             //MySqlCommand command = new MySqlCommand();
@@ -133,8 +133,8 @@ namespace KVIK_project
             updateDatacontext();
             updateMySql();
             var ds = (from d in datacontext.GetTable<DateSum>()
-                     where d.id == id
-                     select d).First();
+                      where d.id == id
+                      select d).First();
             datacontext.GetTable<DateSum>().DeleteOnSubmit(ds);
             datacontext.SubmitChanges();
 
@@ -147,7 +147,7 @@ namespace KVIK_project
         {
             updateDatacontext();
             return (from d in datacontext.GetTable<DateSum>()
-                    where d.dateShip >= DateTime.Now.AddDays(-30) select d ).ToList();
+                    where d.dateShip >= DateTime.Now.AddDays(-30) select d).ToList();
         }
 
         public List<contract_> getAllContracts()
@@ -161,7 +161,7 @@ namespace KVIK_project
         {
             updateDatacontext();
             updateMySql();
-         
+
             try
             {
                 var NameTemp = from g in datacontext.GetTable<Goods>()
@@ -175,7 +175,7 @@ namespace KVIK_project
                     Figure = fig,
                     Name = name,
                     PriceBuy = buy,
-                    isOur = isOur   
+                    isOur = isOur
                 };
                 datacontext.GetTable<Goods>().InsertOnSubmit(newGood);
                 datacontext.SubmitChanges();
@@ -191,7 +191,7 @@ namespace KVIK_project
                 return true;
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
-        
+
             return false;
         }
 
@@ -211,6 +211,7 @@ namespace KVIK_project
             goodIn.commentary = comm;
             datacontext.SubmitChanges();
         }
+
         private double getSum()
         {
             updateDatacontext();
@@ -301,8 +302,8 @@ namespace KVIK_project
             double summ = classTmp.priceBuy * q;
             double summ2 = classTmp.pricsSold * q;
             string idContract = (from c in datacontext.GetTable<Contracts>()
-                              where c.id == goodIn.idContract
-                              select c.Number).First();
+                                 where c.id == goodIn.idContract
+                                 select c.Number).First();
 
             var otgruzka = new DateSum
             {
@@ -312,14 +313,14 @@ namespace KVIK_project
                 Summa = summ,
                 summSold = summ2,
                 whoIs = login,
-                dateShip = dateVal  
+                dateShip = dateVal
             };
             datacontext.GetTable<DateSum>().InsertOnSubmit(otgruzka);
-  
-            datacontext.SubmitChanges();  
-            
+
+            datacontext.SubmitChanges();
+
             int maxId = (from c in datacontext.GetTable<DateSum>()
-                            select c.id).Max();
+                         select c.id).Max();
             updateMySql();
             //command = string.Format($" insert into datesum " +
             //$"(id, dateShip, summa, quant, contract,good, whoIS, summSold)" +
@@ -386,6 +387,25 @@ namespace KVIK_project
             //}
 
             return new boolInt { q = quant, b = true };
+        }
+
+        public List<classForSearch> search(string n)
+        {
+            updateDatacontext();
+            var col = from gi in datacontext.GetTable<GoodsInContract>()
+                      from g in datacontext.GetTable<Goods>()
+                      from o in datacontext.GetTable<owners>()
+                      from c in datacontext.GetTable<Contracts>()
+                      where gi.idContract == c.id && gi.IdGood == g.ID && g.Name.Contains(n)  && c.owner == o.ID 
+                      select new classForSearch
+                      {
+                         goodName = g.Name,
+                         owner = o.Name,
+                         number = c.Number,
+                         qAll = gi.Quantity, 
+                         qLeft = gi.QuantityLeft 
+                      };
+            return col.ToList();
         }
 
         public bool addOwner(string name)
@@ -478,7 +498,7 @@ namespace KVIK_project
             //     $" values({maxId}, {idGood},{id},{price}, {q}, {q} )");
 
             //  MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
-              //  MyCommand.ExecuteNonQuery();
+            //  MyCommand.ExecuteNonQuery();
             using (MySqlCommand cmd = new MySqlCommand("insert into goodsincontract (id, idGood, idContract, PriceSold, Quantity, QuantityLeft ) values(@Parname , @Parname2, @Parname3, @Parname4, @Parname5, @Parname6)", connMySql))
             {
                 // change MySqlDbType.Double to reflect the real data type in the table.
@@ -492,7 +512,7 @@ namespace KVIK_project
             }
         }
 
-   
+
 
         public List<Goods> getAllGoods()
         {
@@ -631,7 +651,7 @@ namespace KVIK_project
             datacontext.SubmitChanges();
 
             int maxId = (from c in datacontext.GetTable<Contragents>()
-                            select c.ID).Max();
+                         select c.ID).Max();
 
             string command = string.Format($" insert into contragents (id, name) values({maxId},'{name}')");
             MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
@@ -660,16 +680,16 @@ namespace KVIK_project
             return sb;
         }
 
-        public void editContract(int id, string num,DateTime data) {
+        public void editContract(int id, string num, DateTime data) {
             updateDatacontext();
             updateMySql();
             var c = (from co in datacontext.GetTable<Contracts>()
-                    where co.id == id select co).First();
+                     where co.id == id select co).First();
             c.Number = num;
             c.Data = data;
             datacontext.SubmitChanges();
 
-            string command = string.Format($" update contracts set  data = '{data.Date.ToString("yyyy-MM-dd")}', number = '{num}' where id = {id} " );
+            string command = string.Format($" update contracts set  data = '{data.Date.ToString("yyyy-MM-dd")}', number = '{num}' where id = {id} ");
             MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
             MyCommand.ExecuteReader();
 
@@ -790,6 +810,18 @@ namespace KVIK_project
         }
     }
 
+    public class classForSearch
+    {
+        public string goodName { get; set; }
+
+        public string number { get; set; }
+
+        public string owner { get; set; }
+
+        public double qAll { get; set; }
+
+        public double qLeft { get; set; }
+    }
 
     public class NewClassForDataGrid2
     {
@@ -815,7 +847,6 @@ namespace KVIK_project
 
     public class contract_
     {
-
         public string name { get; set; }
 
         public string number { get; set; }
@@ -833,7 +864,6 @@ namespace KVIK_project
 
     public class classsAboutGoodsInContract
     {
-
         public string name { get; set; }
 
         public int countAll { get; set; }

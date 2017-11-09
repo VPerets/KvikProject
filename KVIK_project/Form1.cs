@@ -11,7 +11,7 @@ namespace KVIK_project
     public partial class Form1 : Form
     {
         private Service service = null;
-//        private ChannelFactory<IService> myChannelFactory = null;
+        //        private ChannelFactory<IService> myChannelFactory = null;
         private List<Contragents> contragents = new List<Contragents>();
         private List<Contragents> SelectedContr = new List<Contragents>();
         private List<Contragents> AllContragents = new List<Contragents>();
@@ -21,19 +21,21 @@ namespace KVIK_project
         private bool loading = true;
         private string login = "";
         private int selectedContrIndex = 0;
+        private string search = "";
+        bool isSearch = false;
 
         public Form1()
         {
             InitializeComponent();
-           // this.Icon = new Icon("./_bmp.ico");
+            // this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (service!=null)
-            service.close();
+            if (service != null)
+                service.close();
             //if (myChannelFactory != null)
             //this.myChannelFactory.Close();
         }
@@ -52,7 +54,7 @@ namespace KVIK_project
             this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
         }
 
-      
+
         private void updateComboTabOwner()
         {
             this.allOwners = service.getAllOwners();
@@ -90,8 +92,9 @@ namespace KVIK_project
             }
         }
 
-        private void FillDataGrid()
+        private void FillDataGrid(int x = 0)
         {
+            if (x == 0)
             UpdateForFill();
 
             int rowsCount = 0;
@@ -210,14 +213,14 @@ namespace KVIK_project
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             if (e.ColumnIndex != 6 || row.Tag == null || row.Cells["send"].Value == null) return;
             int quant;
             bool b =
                 Int32.TryParse(row.Cells["send"].Value.ToString(), out quant);
             if (!b || quant > Int32.Parse(row.Cells["left"].Value.ToString()) ||
                Int32.Parse(row.Cells["total"].Value.ToString()) < (quant - Int32.Parse(row.Cells["left"].Value.ToString())))
-               return;
+                return;
 
             int id = (int)row.Tag;
 
@@ -243,7 +246,7 @@ namespace KVIK_project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox comb = sender as ComboBox;          
+            ComboBox comb = sender as ComboBox;
             if (selectedContrIndex == comb.SelectedIndex) return;
             selectedContrIndex = comb.SelectedIndex;
 
@@ -255,8 +258,8 @@ namespace KVIK_project
                 FillDataGrid();
                 return;
             }
-    
-            this.SelectedContr.Add(this.contragents[comb.SelectedIndex-1]);
+
+            this.SelectedContr.Add(this.contragents[comb.SelectedIndex - 1]);
             this.FillDataGrid();
         }
 
@@ -324,9 +327,9 @@ namespace KVIK_project
         {
             if (tbOwner.Text == "") return;
             bool b = service.addOwner(tbOwner.Text);
-            if (b == false) { MessageBox.Show("Фирма с таким именем уже существует");}
+            if (b == false) { MessageBox.Show("Фирма с таким именем уже существует"); }
             tbOwner.Text = "";
-            updateComboTabOwner();        
+            updateComboTabOwner();
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
@@ -351,8 +354,8 @@ namespace KVIK_project
                 bool_ = true;
             else
                 bool_ = false;
-         
-            for (int i = 0; i <count; i++)
+
+            for (int i = 0; i < count; i++)
             {
                 if (dataGridView1.Rows[i].Cells["left"].Value == null) continue;
                 if ((Int32.Parse(dataGridView1.Rows[i].Cells["left"].Value.ToString()) <= 0) == bool_)
@@ -367,7 +370,7 @@ namespace KVIK_project
         private void radioLeft_Click(object sender, EventArgs e)
         {
             RadioButton rb = sender as RadioButton;
-        
+
             switch (rb.Name)
             {
                 case "radioLeft":
@@ -381,13 +384,53 @@ namespace KVIK_project
                     break;
             }
         }
- 
+
         private void dataGridView2_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             if (this.loading == true) return;
 
             DataGridViewRow row = e.Row;
             service.deleteFromDateSum((int)row.Tag);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (search == this.tbSearch.Text )
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.tbSearch.Text) && isSearch == true)
+            {
+                this.FillDataGrid(1);
+                search = this.tbSearch.Text;
+                return;
+            }
+
+            search = this.tbSearch.Text;
+            isSearch = true;
+
+            var coll = service.search(search);
+            this.dataGridView1.Rows.Clear();
+            int rowsCount = 0;
+
+            this.dataGridView1.Columns[9].Visible = false;
+            this.dataGridView1.Columns[5].Visible = false;
+            this.dataGridView1.Columns[6].Visible = false;
+            this.dataGridView1.Columns[7].Visible = false;
+            this.dataGridView1.Columns[8].Visible = false;
+
+            for (int i = 0; i < coll.Count; i++)
+            {
+                this.dataGridView1.Rows.Add(new DataGridViewRow());
+                this.dataGridView1.Rows[rowsCount].Cells["code"].Value = coll[i].number;
+                this.dataGridView1.Rows[rowsCount].Cells["name"].Value = coll[i].owner;
+                this.dataGridView1.Rows[rowsCount].Cells["figure"].Value = coll[i].goodName;
+                this.dataGridView1.Rows[rowsCount].Cells["Total"].Value = coll[i].qAll;
+                this.dataGridView1.Rows[rowsCount].Cells["left"].Value = coll[i].qLeft;
+              
+                rowsCount++;
+            }
         }
     }
 }
