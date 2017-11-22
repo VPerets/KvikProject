@@ -94,10 +94,16 @@ namespace KVIK_project
 
         private void FillDataGrid(int x = 0)
         {
-            if (x == 0)
+      
             UpdateForFill();
 
             int rowsCount = 0;
+
+            this.dataGridView1.Columns[9].Visible = true;
+            this.dataGridView1.Columns[5].Visible = true;
+            this.dataGridView1.Columns[6].Visible = true;
+            this.dataGridView1.Columns[7].Visible = true;
+            this.dataGridView1.Columns[8].Visible = true;
 
             for (int i = 0; i < SelectedContr.Count; i++)
             {
@@ -418,7 +424,6 @@ namespace KVIK_project
             this.dataGridView1.Columns[5].Visible = false;
             this.dataGridView1.Columns[6].Visible = false;
             this.dataGridView1.Columns[7].Visible = false;
-            this.dataGridView1.Columns[8].Visible = false;
 
             for (int i = 0; i < coll.Count; i++)
             {
@@ -428,7 +433,8 @@ namespace KVIK_project
                 this.dataGridView1.Rows[rowsCount].Cells["figure"].Value = coll[i].goodName;
                 this.dataGridView1.Rows[rowsCount].Cells["Total"].Value = coll[i].qAll;
                 this.dataGridView1.Rows[rowsCount].Cells["left"].Value = coll[i].qLeft;
-              
+                this.dataGridView1.Rows[rowsCount].Cells["priceSold"].Value = coll[i].price;
+
                 rowsCount++;
             }
         }

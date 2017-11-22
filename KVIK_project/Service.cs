@@ -58,8 +58,23 @@ namespace KVIK_project
         public void open()
         {
 
-            //  updateMySql();
-            //  updateDatacontext();
+            //updateMySql();
+            //updateDatacontext();
+
+            //var t = from g in datacontext.GetTable<GoodsInContract>()
+            //        from c in datacontext.GetTable<Contracts>()
+            //        from go in datacontext.GetTable<Goods>()
+            //        from con in datacontext.GetTable<Contragents>()
+            //        where go.Name == "Ротор 6ТК" &&
+            //        go.ID == g.IdGood && g.idContract == c.id && c.Contragent == con.ID && con.Name == "Придніпровська Залізниця"
+            //        select g;
+
+            ////datacontext.GetTable<GoodsInContract>().DeleteOnSubmit(t.First());
+            //t.First().PriceSold = 213840;
+            //datacontext.SubmitChanges();
+
+
+           //  System.Windows.Forms.MessageBox.Show(t.First().PriceSold.ToString());
             //  //var t = (from g in datacontext.GetTable<Goods>()
             //  //         where g.Name == "Сідло клапана"
             //  //         select g).First();
@@ -403,7 +418,8 @@ namespace KVIK_project
                          owner = o.Name,
                          number = c.Number,
                          qAll = gi.Quantity, 
-                         qLeft = gi.QuantityLeft 
+                         qLeft = gi.QuantityLeft, 
+                         price = gi.PriceSold   
                       };
             return col.ToList();
         }
@@ -821,6 +837,8 @@ namespace KVIK_project
         public double qAll { get; set; }
 
         public double qLeft { get; set; }
+
+        public double price { get; set; }
     }
 
     public class NewClassForDataGrid2
