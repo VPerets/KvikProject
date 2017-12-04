@@ -55,26 +55,123 @@ namespace KVIK_project
         }
         public int getCount() { return count; }
 
+        public void editPriceSold(int idGinC, double price)
+        {
+            updateMySql();
+            updateDatacontext();
+
+            string command = string.Format("update goodsincontract set priceSold = " + price + " where id =  " + idGinC);
+            using (MySqlCommand cmd = new MySqlCommand("update goodsincontract set PriceSold = @Parname where id = @Parname2", connMySql))
+            {
+                // change MySqlDbType.Double to reflect the real data type in the table.
+                cmd.Parameters.Add("@Parname", MySqlDbType.Double).Value = price;
+                cmd.Parameters.Add("@Parname2", MySqlDbType.Int16).Value = idGinC;
+                cmd.ExecuteNonQuery();
+            }
+
+            var t = from g in datacontext.GetTable<GoodsInContract>() where g.id == idGinC select g;
+            t.First().PriceSold = price;
+            datacontext.SubmitChanges();
+
+        }
         public void open()
         {
 
             //updateMySql();
             //updateDatacontext();
 
-            //var t = from g in datacontext.GetTable<GoodsInContract>()
-            //        from c in datacontext.GetTable<Contracts>()
-            //        from go in datacontext.GetTable<Goods>()
-            //        from con in datacontext.GetTable<Contragents>()
-            //        where go.Name == "Ротор 6ТК" &&
-            //        go.ID == g.IdGood && g.idContract == c.id && c.Contragent == con.ID && con.Name == "Придніпровська Залізниця"
-            //        select g;
+
+            //int contract = 0, own = 0;
+            //MySqlCommand cmd = new MySqlCommand("select contracts.id as ID from contracts where Number like '%171717%' and Number like '%ПЗ/%' ", connMySql);
+            //MySqlDataReader reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    contract = (int)reader["ID"];
+            //}
+
+            //updateMySql();
+            //cmd = new MySqlCommand("select owners.ID as ID from owners where name like '%ТД%'  ", connMySql);
+            // reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    own = (int)reader["ID"];
+            //}
+            //updateMySql();
+
+            ////string command = string.Format("update contracts set Owner = " + own + " where id =  " + contract);
+            ////MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+            ////MyCommand.ExecuteNonQuery();
+
+            ////System.Windows.Forms.MessageBox.Show(own.ToString());
+            ////System.Windows.Forms.MessageBox.Show(contract.ToString());
+
+            //////var t = from g in datacontext.GetTable<GoodsInContract>()
+            //////        from c in datacontext.GetTable<Contracts>()
+            //////        from go in datacontext.GetTable<Goods>()
+            //////        from con in datacontext.GetTable<Contragents>()
+            //////        where go.Name == "Трубка форсуночна ліва" &&
+            //////        go.ID == g.IdGood && g.idContract == c.id && c.Contragent == con.ID && c.Number == "П/НХ-17502/НЮ"
+            //////        select g;
+
+            ////var t = from c in datacontext.GetTable<owners>()
+            ////        where c.Name.Contains("тд")
+            ////        select c;
+
+            ////System.Windows.Forms.MessageBox.Show(t.First().ID.ToString());
+
+            //var t = from g in datacontext.GetTable<Contracts>() where g.id == contract select g;
+            //t.First().owner = own;
+            //datacontext.SubmitChanges();
+
+            //var idgood = from go in datacontext.GetTable<Goods>()
+            //             where go.Name == "Трубка форсуночна права"
+            //             select go;
+            //t.First().IdGood = idgood.First().ID;
+            //datacontext.SubmitChanges();
+
+            //var idcon = from go in datacontext.GetTable<Contracts>()
+            //             where go.Number == "П/НХ-17502/НЮ"
+            //            select go;
+            //System.Windows.Forms.MessageBox.Show(t.First().id.ToString());
+            ////var ginc = new GoodsInContract
+            //{
+            //    IdGood = idgood.First().ID,
+            //    idContract = idcon.First().id,
+            //    PriceSold = 292.00,
+            //    Quantity = 53,
+            //    QuantityLeft = 0
+            //};
 
             ////datacontext.GetTable<GoodsInContract>().DeleteOnSubmit(t.First());
-            //t.First().PriceSold = 213840;
+            //datacontext.GetTable<GoodsInContract>().InsertOnSubmit(ginc);
+            //datacontext.SubmitChanges();
+
+            //int maxId = (from c in datacontext.GetTable<GoodsInContract>()
+            //             select c.id).Max();
+
+
+            ////   string command = string.Format($" insert into goodsincontract (id, idGood, idContract, PriceSold, Quantity, QuantityLeft ) " +
+            //     $" values({maxId}, {idGood},{id},{price}, {q}, {q} )");
+
+            //  MySqlCommand MyCommand = new MySqlCommand(command, connMySql);
+            //  MyCommand.ExecuteNonQuery();
+            //using (MySqlCommand cmd = new MySqlCommand("insert into goodsincontract (id, idGood, idContract, PriceSold, Quantity, QuantityLeft ) values(@Parname , @Parname2, @Parname3, @Parname4, @Parname5, @Parname6)", connMySql))
+            //{
+            //    // change MySqlDbType.Double to reflect the real data type in the table.
+            //    cmd.Parameters.Add("@Parname", MySqlDbType.Int16).Value = maxId;
+            //    cmd.Parameters.Add("@Parname2", MySqlDbType.Int16).Value = idgood.First().ID;
+            //    cmd.Parameters.Add("@Parname3", MySqlDbType.Int16).Value = idcon.First().id;
+            //    cmd.Parameters.Add("@Parname4", MySqlDbType.Double).Value = 292.00;
+            //    cmd.Parameters.Add("@Parname5", MySqlDbType.Int16).Value = 53;
+            //    cmd.Parameters.Add("@Parname6", MySqlDbType.Int16).Value = 0;
+            //    cmd.ExecuteNonQuery();
+            //}
+
+            // t.First().PriceSold = 292;
             //datacontext.SubmitChanges();
 
 
-           //  System.Windows.Forms.MessageBox.Show(t.First().PriceSold.ToString());
+            //System.Windows.Forms.MessageBox.Show(t.First().PriceSold.ToString());
             //  //var t = (from g in datacontext.GetTable<Goods>()
             //  //         where g.Name == "Сідло клапана"
             //  //         select g).First();

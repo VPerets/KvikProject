@@ -30,6 +30,21 @@ namespace KVIK_project
             // this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
+            this.dataGridView1.CellContentDoubleClick += DataGridView1_CellContentDoubleClick;   
+        }
+
+        private void DataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            if (e.ColumnIndex != 8 || row.Tag == null) return;
+            //    MessageBox.Show(row.Tag.ToString()); 
+            int id = Int32.Parse(row.Tag.ToString());
+            // row.Cells[e.ColumnIndex].ReadOnly = false;
+            double newPrice = double.Parse(row.Cells[e.ColumnIndex].Value.ToString());
+            editPriceSold form = new editPriceSold(newPrice);
+            form.ShowDialog();
+            service.editPriceSold(id, form.newPrice);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
