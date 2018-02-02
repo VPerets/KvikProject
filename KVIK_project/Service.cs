@@ -77,9 +77,15 @@ namespace KVIK_project
         public void open()
         {
 
-            //updateMySql();
-            //updateDatacontext();
+            //var tt = datacontext.GetTable<contract_)
 
+            //  updateMySql();
+            //  updateDatacontext();
+
+            
+            //  datacontext.GetTable<Contracts>().DeleteOnSubmit(t);
+            // datacontext.GetTable<GoodsInContract>().InsertOnSubmit(ginc);
+            //  datacontext.SubmitChanges();
 
             //int contract = 0, own = 0;
             //MySqlCommand cmd = new MySqlCommand("select contracts.id as ID from contracts where Number like '%171717%' and Number like '%ПЗ/%' ", connMySql);
@@ -133,18 +139,7 @@ namespace KVIK_project
             //             where go.Number == "П/НХ-17502/НЮ"
             //            select go;
             //System.Windows.Forms.MessageBox.Show(t.First().id.ToString());
-            ////var ginc = new GoodsInContract
-            //{
-            //    IdGood = idgood.First().ID,
-            //    idContract = idcon.First().id,
-            //    PriceSold = 292.00,
-            //    Quantity = 53,
-            //    QuantityLeft = 0
-            //};
 
-            ////datacontext.GetTable<GoodsInContract>().DeleteOnSubmit(t.First());
-            //datacontext.GetTable<GoodsInContract>().InsertOnSubmit(ginc);
-            //datacontext.SubmitChanges();
 
             //int maxId = (from c in datacontext.GetTable<GoodsInContract>()
             //             select c.id).Max();

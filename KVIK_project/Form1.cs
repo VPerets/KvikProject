@@ -4,14 +4,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using KvikLibrary;
-
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace KVIK_project
 {
     public partial class Form1 : Form
     {
         private Service service = null;
-        //        private ChannelFactory<IService> myChannelFactory = null;
+        // private ChannelFactory<IService> myChannelFactory = null;
         private List<Contragents> contragents = new List<Contragents>();
         private List<Contragents> SelectedContr = new List<Contragents>();
         private List<Contragents> AllContragents = new List<Contragents>();
@@ -23,6 +23,7 @@ namespace KVIK_project
         private int selectedContrIndex = 0;
         private string search = "";
         bool isSearch = false;
+        private delegate void Help(Excel.Worksheet ws,int i, int j, String s);
 
         public Form1()
         {
@@ -30,7 +31,7 @@ namespace KVIK_project
             // this.Icon = new Icon("./_bmp.ico");
             this.Load += Form1_Load;
             this.FormClosing += Form1_FormClosing;
-            this.dataGridView1.CellContentDoubleClick += DataGridView1_CellContentDoubleClick;   
+            this.dataGridView1.CellContentDoubleClick += DataGridView1_CellContentDoubleClick;
         }
 
         private void DataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -58,6 +59,7 @@ namespace KVIK_project
         private void UpdateComboContragents()
         {
             this.contragents = service.GetContragents();
+            if (this.SelectedContr.Count!=0) this.SelectedContr.Clear();
             this.SelectedContr.AddRange(this.contragents.ToArray());
             if (this.comboBox1.Items.Count != 0) this.comboBox1.Items.Clear();
             this.comboBox1.Items.Add("Все");
@@ -69,13 +71,13 @@ namespace KVIK_project
             this.comboBoxContragents.Items.AddRange(this.AllContragents.ToArray());
         }
 
-
         private void updateComboTabOwner()
         {
             this.allOwners = service.getAllOwners();
             if (this.comboBoxOwners.Items.Count != 0) this.comboBoxOwners.Items.Clear();
             this.comboBoxOwners.Items.AddRange(this.allOwners.ToArray());
         }
+
         private void UpdateForFill()
         {
             if (dataGridView1.Rows.Count != 0) this.dataGridView1.Rows.Clear();
@@ -140,6 +142,7 @@ namespace KVIK_project
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Value =
                             "Договор № " + contracts[j].number;
                     this.dataGridView1.Rows[rowsCount].Cells["code"].ToolTipText = contracts[j].owner;
+                    this.dataGridView1.Rows[rowsCount].Cells["code"].Tag = contracts[j].owner;
                     this.dataGridView1.Rows[rowsCount].Cells["name"].Value = contracts[j].name;
                     this.dataGridView1.Rows[rowsCount].Cells["code"].Style.Font
                     = new Font("Arial", 12);
@@ -343,7 +346,6 @@ namespace KVIK_project
             service.addCommentary(id, textCommTemp);
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (tbOwner.Text == "") return;
@@ -355,8 +357,58 @@ namespace KVIK_project
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            UpdateAllAll();
+          //  UpdateAllAll();
             //service.SendCodeByMail();
+        }
+
+        private void helpMethod(Excel.Worksheet ws, int i, int j, String s) {
+          
+        }
+
+        private void addToExcel_Click(object sender, EventArgs e) {
+            Excel.Application xlApp = new Excel.Application();
+
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Help help = this.helpMethod;
+            int row = 1, col = 1;
+            String s = "";
+            for (int i = 0; i < dataGridView1.Rows.Count; i++) {
+                if (row == 1) {
+                    xlWorkSheet.Cells[1, 2] = "Название";
+                    xlWorkSheet.Cells[1, 3] = "Чертёж";
+                    xlWorkSheet.Cells[1, 4] = "Всего кол-во";
+                    xlWorkSheet.Cells[1, 5] = "Осталось";
+                }
+                for (int j = 0; j < dataGridView1.Rows[i].Cells.Count; j++) {
+
+                    if (dataGridView1.Rows[i].Cells[j].Value == null || j == 6 || j == 7) 
+                        continue;
+                    s = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                    xlWorkSheet.Cells[row, col] = s;
+                    col++;
+                    if (s.Contains("Зал"))
+                            row++;
+                    if (s.Contains("Договор")) {
+                        xlWorkSheet.Cells[row, 3] = dataGridView1.Rows[i].Cells["Code"].Tag.ToString();
+                        Excel.Range line = (Excel.Range)xlWorkSheet.Rows[row];
+                        line.Insert();
+                        row++;
+                    }
+                }
+                col = 1;
+                row++;
+            }
+
+            string path = System.IO.Directory.GetCurrentDirectory() + "\\XXX.xls";
+
+            xlWorkBook.SaveAs(path, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
         }
 
         private void setByRadio(int case_)
